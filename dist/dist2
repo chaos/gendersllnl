@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.2 2003-05-14 23:30:13 achu Exp $
+#  $Id: dist2,v 1.3 2003-07-01 00:11:32 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2002 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -97,7 +97,7 @@ if (!getopts("o:c:Fvinlw:g:f:")) {
 # initialize Genders with proper genders file (use the one in /var/dist)
 if ($main::opt_c) {
 	$main::local_cluster = $main::opt_c;
-	$gendobj = Genders->new(sprintf($main::path_genders, $main::local_cluster));
+	$gendobj = Gendersllnl->new(sprintf($main::path_genders, $main::local_cluster));
 } else {
         $main::local_cluster = $gendobj->get_cluster();
 	if ($main::local_cluster eq "") {
@@ -105,10 +105,10 @@ if ($main::opt_c) {
                 exit(1);
         } 
 
-	$gendobj = Genders->new(sprintf($main::path_genders, $main::local_cluster));
+	$gendobj = Gendersllnl->new(sprintf($main::path_genders, $main::local_cluster));
         if (!defined $gendobj) {
                 # Fall back to default if /var/dist perhaps isn't mounted
-		$gendobj = Genders->new($main::path_genders_fallback);
+		$gendobj = Gendersllnl->new($main::path_genders_fallback);
 	}
 }
 
