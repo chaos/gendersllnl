@@ -1,1 +1,9 @@
-No news to report ..
+This file describes changes in recent versions of gendersllnl. It
+primarily documents those changes that are of interest to users and
+admins.
+
+Changes in gendersllnl-1.0-1
+===========================
+ -- Fixed bug regarding timestamps in inst.  (gnats/214)
+
+$Id: NEWS,v 1.2 2003-08-05 21:57:56 achu Exp $
