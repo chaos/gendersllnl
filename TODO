@@ -11,3 +11,4 @@
 - Why doesn't distcheck work?
 - GNU style code
 - fix perl maker stuff
+- #if fixes everywhere
