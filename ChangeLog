@@ -1,7 +1,8 @@
 2004-12-14  Albert Chu  <chu11@llnl.gov>
 
         * gendersllnl.spec.in, src/Gendersllnl/Makefile.am,
-	src/Libgendersllnl/Makefile.am: Fix 64bit build issue.
+	src/Libgendersllnl/Makefile.am, compat/Makefile.am: Fix 64bit
+	build issue.
 
 	* META: Updated for new release.
 
