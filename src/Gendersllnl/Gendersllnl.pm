@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.11 2003-07-02 00:15:00 achu Exp $
+# $Id: Gendersllnl.pm,v 1.12 2003-08-04 23:58:24 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -342,6 +342,10 @@ all Genders functionality is also included in this package.
 Creates a Gendersllnl object and load genders data from the specified
 file.  If the genders file is not specified, the default genders file
 will be used.  Returns undef if file cannot be read.
+
+=item B<$obj-E<gt>get_cluster()>
+
+Returns the name of the current cluster.
 
 =item B<$obj-E<gt>getaltnodes([$attr, [$val]])>
 
