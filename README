@@ -1,23 +1,39 @@
-libgendersllnl - LLNL site specific genders C API
+Gendersllnl is a package of libraries and tools written around genders
+for use at Lawrence Livermore National Laboratories.  A number of
+these libraries and tools may or may not be useful.  Some of them may
+need to be modified for use on your particular systems.  (This is why
+it is called the GendersLLNL, duh! :-).
 
-Libgendersllnl - Perl extensions interface to libgendersllnl
+This package includes:
 
-Gendersllnl - Perl interface to libgendersllnl
+* libgendersllnl    
+  - A C library which can be linked with -lgendersllnl.  Includes a
+    number of library functions particularly useful for LLNL code.
+    See libgendersllnl(3).
 
-subpackage dist
+* Libgendersllnl.pm
+  - A Perl module developed with Perl Extensions that accesses
+    the C library.  Perl extensions is limited and provides
+    a very strange Perl API.  It is therefore recommended most users
+    use Gendersllnl.pm.  See Libgendersllnl(3).
 
-dist2           wrapper for USC rdist which expands special macros
-                into node lists from /etc/genders and operates on a
-                localization "repository" in /var/dist - see dist2(1)
+* Gendersllnl.pm
+  - A Perl module that interfaces with Libgendersllnl.pm, hiding away
+    the yuckiness of Libgendersllnl.pm.  See Gendersllnl(3).
 
-dist_all        dist2 wrapper to rdist repository to cluster
-                see dist_all(1)
+* dist2
+  - Wrapper for USC rdist which expands special macros into node lists
+    from /etc/genders and operators on a localization "repository" in
+    /var/dist.  See dist2(1).
 
-dist_local      dist2 wrapper to rdist repository to local host
-                see dist_local(1)
+* dist_all, dist_local, dist_cmp, dist_bootstrap
+  - Wrappers arond dist2, see manpages for details.
 
-dist_cmp        filter to compress output of dist2 - see dist_cmp(1)
+* inst
+  - Similar to gnu fileutils install -C, tuned for dist2 needs.
 
-dist_bootstrap  install /etc/genders and /etc/clusters from /var/dist
+Comments, patches, fixes, suggestions are always welcome.
 
-inst            similar to gnu fileutils install -C
+Albert Chu
+chu11@llnl.gov
+Lawrence Livermore National Laboratories    
