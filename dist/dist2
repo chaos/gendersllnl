@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.19 2004-12-20 17:18:28 achu Exp $
+#  $Id: dist2,v 1.20 2004-12-20 17:40:17 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -236,6 +236,9 @@ sub emit_definition
 	# Special case, change the local node to the string "localhost"
 	if ($main::opt_l) {
 		$hname = $gendobj->getnodename();
+                if (! $main::opt_i) {
+                        $hname = $gendobj->to_altname_preserve($hname);
+                }
 		foreach $node (@node_list) {
 			if ($node eq $hname) {
 				push(@localhostnodes, "localhost");
