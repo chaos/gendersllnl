@@ -30,7 +30,7 @@ DESTDIR="$RPM_BUILD_ROOT" make install
 
 %files
 %defattr(-,root,root)
-%doc README ChangeLog COPYING
+%doc README ChangeLog COPYING NEWS
 /usr/man/man3/
 /usr/share/man/man3/
 /usr/include/gendersllnl.h
