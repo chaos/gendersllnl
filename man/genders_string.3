@@ -1,0 +1,99 @@
+\."#################################################################
+\."$Id: genders_string.3,v 1.1.1.1 2003-05-13 01:20:50 achu Exp $
+\."by Albert Chu <chu11@llnl.gov>
+\."#################################################################
+.\"
+.TH GENDERS_TO_GENDNAME 3 "Release 1.1" "LLNL" "LIBGENDERSLLNL"
+.SH NAME
+genders_string_to_gendnames, genders_string_to_gendnames_preserve,
+genders_string_to_altnames, genders_string_to_altnames_preserve - convert
+between genders node names and alternate node names
+.SH SYNOPSIS
+.B #include <gendersllnl.h>
+.sp
+.BI "int genders_string_to_gendnames(genders_t handle, const char *str, char *buf, int buflen);"
+.sp
+.BI "int genders_string_to_gendnames_preserve(genders_t handle, const char *str, char *buf, int buflen);"
+.sp
+.BI "int genders_string_to_altnames(genders_t handle, const char *str, char *buf, int buflen);"
+.sp
+.BI "int genders_string_to_altnames_preseve(genders_t handle, const char *str, char *buf, int buflen);"
+.br
+.SH DESCRIPTION
+\fBgenders_string_to_gendname()\fR, and
+\fBgenders_string_to_gendname_preserve()\fR convert a ranged string of
+alternate nodenames \fIstr\fR into a ranged string of genders
+nodenames.  The resulting ranged string is stored in the buffer
+pointed to by \fIbuf\fR.  \fIbuflen\fR should indicate the length of
+the buffer.
+
+\fBgenders_string_to_altname()\fR, and
+\fBgenders_string_to_altname_preserve()\fR convert a ranged string of
+genders nodenames \fIstr\fR into a ranged string of alternate
+nodename.  The resulting ranged string is stored in the buffer pointed
+to by \fIbuf\fR.  \fIbuflen\fR should indicate the length of the
+buffer.
+
+The difference between the 'preserve' and 'non-preserve' conversion
+functions depends on whether a nodename listed in the ranged string is
+listed in the genders file.  If a nodename is not found in the genders
+file, \fBgenders_string_to_gendname()\fR and
+\fBgenders_string_to_altname()\fR will return an error.  However,
+\fBgenders_string_to_gendname_preserve()\fR and
+\fBgenders_string_to_altname_preserve()\fR will store the nodename
+into the rseulting ranged string.
+.br
+.SH RETURN VALUES
+On success, \fBgenders_string_to_gendname()\fR,
+\fBgenders_string_to_gendname_preserve()\fR,
+\fBgenders_string_to_altname()\fR, and
+\fBgenders_string_to_altname_preserve()\fR return 0.  On error, -1 is
+returned, and an error code is returned in \fIhandle\fR.  The error
+code can be retrieved via
+.BR genders_errnum (3)
+, and a description of the error code can be retrieved via
+.BR genders_strerror (3).  
+Error codes are defined in genders.h.
+.br
+.SH ERRORS
+.TP
+.B GENDERS_ERR_NULLHANDLE
+The \fIhandle\fR parameter is NULL.  The genders handle must be
+created with
+.BR genders_handle_create (3).
+.TP
+.B GENDERS_ERR_NOTLOADED
+.BR genders_load_data (3)
+has not been called to load genders data.  
+.TP
+.B GENDERS_ERR_OVERFLOW
+The buffer pointed to by \fIbuf\fR is not large enough to store the
+resulting ranged string.
+.TP
+.B GENDERS_ERR_PARAMETERS
+An incorrect parameter has been passed in.  
+.TP
+.B GENDERS_ERR_NULLPTR
+A null pointer has been found in the list passed in.
+.TP
+.B GENDERS_ERR_NOTFOUND
+A nodename passed in cannot be found in the genders file.  
+.TP
+.B GENDERS_ERR_OUTMEM
+.BR malloc (3)
+has failed internally, system is out of memory.
+.TP
+.B GENDERS_ERR_MAGIC 
+\fIhandle\fR has an incorrect magic number.  \fIhandle\fR does not
+point to a genders handle or \fIhandle\fR has been destroyed by
+.BR genders_handle_destroy (3).
+.TP
+.B GENDERS_ERR_INTERNAL
+An internal system error has occurred.  
+.br
+.SH FILES
+/usr/include/genders.h
+/usr/include/gendersllnl.h
+.SH SEE ALSO
+libgenders(3), libgendersllnl(3), genders_handle_create(3),
+genders_load_data(3), genders_errnum(3), genders_strerror(3)

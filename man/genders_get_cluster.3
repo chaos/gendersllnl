@@ -1,0 +1,67 @@
+\."#################################################################
+\."$Id: genders_get_cluster.3,v 1.1.1.1 2003-05-13 01:20:50 achu Exp $
+\."by Albert Chu <chu11@llnl.gov>
+\."#################################################################
+.\"
+.TH GENDERS_GET_CLUSTER 3 "Release 1.1" "LLNL" "LIBGENDERSLLNL"
+.SH NAME
+genders_get_cluster \- get the current node name
+.SH SYNOPSIS
+.B #include <gendersllnl.h>
+.sp
+.BI "int genders_get_cluster(genders_t handle, const char *node, char *buf, int buflen);"
+.br
+.SH DESCRIPTION
+\fBgenders_get_cluster()\fR retrieves the cluster of the specified
+node.  If \fInode\fR is NULL the cluster of the current node is
+retrieved.  The cluster name is stored in the buffer pointed to be
+\fIbuf\fR.  \fIbuflen\fR should indicate the length of the buffer.
+
+To avoid passing in a buffer that is not large enough to store the
+cluster name,
+.BR genders_getmaxvallen (3)
+should be used to determine the minimum buffer size that should be used. 
+.br
+.SH RETURN VALUES
+On success, 0 is returned.  On error, -1 is returned, and an error code
+is returned in \fIhandle\fR.  The error code can be retrieved
+via
+.BR genders_errnum (3)
+, and a description of the error code can be retrieved via 
+.BR genders_strerror (3).  
+Error codes are defined in genders.h.
+.br
+.SH ERRORS
+.TP
+.B GENDERS_ERR_NULLHANDLE
+The \fIhandle\fR parameter is NULL.  The genders handle must be
+created with
+.BR genders_handle_create (3).
+.TP
+.B GENDERS_ERR_NOTLOADED
+.BR genders_load_data (3)
+has not been called to load genders data.
+.TP
+.B GENDERS_ERR_OVERFLOW
+The buffer pointed to by \fIbuf\fR is not large enough to store the
+cluster name.
+.TP
+.B GENDERS_ERR_PARAMETERS
+An incorrect parameter has been passed in.  
+.TP
+.B GENDERS_ERR_NOTFOUND
+The node pointed to bey \fInode\fR cannot be found in the genders
+file.
+.TP
+.B GENDERS_ERR_MAGIC 
+\fIhandle\fR has an incorrect magic number.  \fIhandle\fR does not
+point to a genders handle or \fIhandle\fR has been destroyed by
+.BR genders_handle_destroy (3).
+.br
+.SH FILES
+/usr/include/genders.h
+/usr/include/gendersllnl.h
+.SH SEE ALSO
+libgenders(3), libgendersllnl(3), genders_handle_create(3),
+genders_load_data(3), genders_testattr(3), genders_getmaxvallen(3),
+genders_errnum(3), genders_strerror(3)

@@ -1,0 +1,87 @@
+\."#################################################################
+\."$Id: genders_getaltnodes.3,v 1.1.1.1 2003-05-13 01:20:50 achu Exp $
+\."by Albert Chu <chu11@llnl.gov>
+\."#################################################################
+.\"
+.TH GENDERS_GETALTNODES 3 "Release 1.1" "LLNL" "LIBGENDERSLLNL"
+.SH NAME
+genders_getaltnodes, genders_getaltnodes_preserve \- get alternate
+node names from the genders file
+.SH SYNOPSIS
+.B #include <gendersllnl.h>
+.sp
+.BI "int genders_getaltnodes(genders_t handle, char *altnodes[], int len, cosnt char *attr, const char *val);"
+.sp
+.BI "int genders_getaltnodes_preserve(genders_t handle, char *altnodes[], int len, cosnt char *attr, const char *val);"
+.br
+.SH DESCRIPTION
+\fBgenders_getaltnodes()\fR and \fBgenders_getaltnodes_preserve()\fR
+get the alternate names of nodes in the genders file that have the
+attribute specified by \fIattr\fR and the value specified by
+\fIval\fR.  The node alternate names are stored in the list pointed to
+by \fIaltnodes\fR.  \fIlen\fR indicates the number of alternate node
+names that can be stored in the list.  If \fIattr\fR is NULL,
+\fBgenders_getaltnodes()\fR returns all the alternate names of nodes
+listed in the genders file.  If \fIval\fR is NULL, attribute values
+are ignored.  The alternate node names returned in \fIaltnodes\fR are
+returned in the order they are listed in the genders file.
+
+The difference between \fBgenders_getaltnodes()\fR and
+\fBgenders_getaltnodes_preserve()\fR is whether or not an alternate
+node name is listed in the genders file for a node.  If an alternate
+node name is not listed, \fBgenders_getaltnodes()\fR will return an
+error.  However, \fBgenders_getaltnodes_preserve()\fR will return the
+name of the original genders node.
+
+To avoid passing in a list that is not large enough to store all the
+nodes,
+.BR genders_altnodelist_create (3) 
+should be used to create a list that is guaranteed to be large enough
+to store all alternate names of the nodes.
+.br
+.SH RETURN VALUES
+On success, the number of alternate node names stored in
+\fIaltnodes\fR is returned.  On error, -1 is returned, and an error
+code is returned in \fIhandle\fR.  The error code can be retrieved via
+.BR genders_errnum (3)
+, and a description of the error code can be retrieved via 
+.BR genders_strerror (3).  
+Error codes are defined in genders.h.
+.br
+.SH ERRORS
+.TP
+.B GENDERS_ERR_NULLHANDLE
+The \fIhandle\fR parameter is NULL.  The genders handle must be
+created with
+.BR genders_handle_create (3).
+.TP
+.B GENDERS_ERR_NOTLOADED
+.BR genders_load_data (3)
+has not been called to load genders data.
+.TP
+.B GENDERS_ERR_OVERFLOW
+The list pointed to by \fIaltnodes\fR is not large enough to store all
+the alternate node names.
+.TP
+.B GENDERS_ERR_PARAMETERS
+An incorrect parameter has been passed in.  
+.TP
+.B GENDERS_ERR_NULLPTR
+A null pointer has been found in the list passed in.
+.TP
+.B GENDERS_ERR_OUTMEM
+.BR malloc (3) 
+has failed internally, system is out of memory.
+.TP
+.B GENDERS_ERR_MAGIC 
+\fIhandle\fR has an incorrect magic number.  \fIhandle\fR does not
+point to a genders handle or \fIhandle\fR has been destroyed by
+.BR genders_handle_destroy (3).
+.br
+.SH FILES
+/usr/include/genders.h
+/usr/include/gendersllnl.h
+.SH SEE ALSO
+libgenders(3), libgendersllnl(3), genders_handle_create(3),
+genders_load_data(3), genders_getnodes(3),
+genders_altnodelist_create(3), genders_errnum(3), genders_strerror(3)

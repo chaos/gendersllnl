@@ -1,0 +1,81 @@
+\."#################################################################
+\."$Id: genders_altnodelist.3,v 1.1.1.1 2003-05-13 01:20:50 achu Exp $
+\."by Albert Chu <chu11@llnl.gov>
+\."#################################################################
+.\"
+.TH GENDERS_ALTNODELIST_CREATE 3 "Release 1.1" "LLNL" "LIBGENDERSLLNL"
+.SH NAME
+genders_altnodelist_create, genders_altnodelist_clear,
+genders_altnodelist_destroy - create, clear, and destroy lists
+.SH SYNOPSIS
+.B #include <gendersllnl.h>
+.sp
+.BI "int genders_altnodelist_create(genders_t handle, char ***altnodelist);"
+.sp
+.BI "int genders_altnodelist_clear(genders_t handle, char **altnodelist);"
+.sp
+.BI "int genders_altnodelist_destroy(genders_t handle, char **altnodelist);"
+.br
+.SH DESCRIPTION
+\fBgenders_altnodelist_create()\fR, \fBgenders_altnodelist_clear()\fR,
+\fBgenders_altnodelist_destroy()\fR, are used to create, clear, and
+destroy lists (arrays of strings) for use with
+.BR genders_getaltnodes (3).  
+
+\fBgenders_altnodelist_create()\fR creates a list with minimum size to
+store alternate node names.  \fIaltnodelist\fR is set to point to the
+created list.
+
+\fBgenders_altnodelist_clear()\fR clear any information stored in the
+list pointed to by \fIaltnodelist\fR.  This does not have be called
+after \fBgenders_altnodelist_create()\fR .  It only has to be called after
+it is used in
+.BR genders_getaltnodes (3)
+and the programmer wishes to re-use the list.  
+
+\fBgenders_altnodelist_destroy()\fR destroys the list pointed to by
+\fIaltnodelist\fR.  
+.br
+.SH RETURN VALUES
+On success, \fBgenders_altnodelist_create()\fR returns the number of
+elements the created list can store.  On success,
+\fBgenders_altnodelist_clear()\fR and \fBgenders_altnodelist_destroy()\fR
+return 0.  On error, -1 is returned, and an error code is returned in
+\fIhandle\fR.  The error code can be retrieved via
+.BR genders_errnum (3)
+, and a description of the error code can be retrieved via 
+.BR genders_strerror (3).  
+Error codes are defined in genders.h.
+.br
+.SH ERRORS
+.TP
+.B GENDERS_ERR_NULLHANDLE
+The \fIhandle\fR parameter is NULL.  The genders handle must be created
+with
+.BR genders_handle_create (3).
+.TP
+.B GENDERS_ERR_NOTLOADED
+.BR genders_load_data (3)
+has not been called to load genders data.  
+.TP
+.B GENDERS_ERR_PARAMETERS
+An incorrect parameter has been passed in.  
+.TP
+.B GENDERS_ERR_NULLPTR
+A null pointer has been found in the list passed in.
+.TP
+.B GENDERS_ERR_OUTMEM
+.BR malloc (3)
+has failed internally, system is out of memory.
+.TP
+.B GENDERS_ERR_MAGIC 
+\fIhandle\fR has an incorrect magic number.  \fIhandle\fR does not
+point to a genders handle or \fIhandle\fR has been destroyed by
+.BR genders_handle_destroy (3).
+.br
+.SH FILES
+/usr/include/genders.h
+/usr/include/gendersllnl.h
+.SH SEE ALSO
+libgenders(3), libgendersllnl(3), genders_handle_create(3), genders_load_data(3),
+genders_getaltnodes(3), genders_errnum(3), genders_strerror(3)

@@ -1,0 +1,70 @@
+\."#################################################################
+\."$Id: libgendersllnl.3,v 1.1.1.1 2003-05-13 01:20:50 achu Exp $
+\."by Albert Chu <chu11@llnl.gov>
+\."#################################################################
+.\"
+.TH LIBGENDERSLLNL 3 "Release 1.1" "LLNL" "LIBGENDERSLLNL"
+.SH NAME
+libgendersllnl \- a library of LLNL site specific genders functions 
+.SH SYNOPSIS
+.B #include <gendersllnl.h>
+.sp
+.BI "int genders_get_cluster(genders_t handle, const char *node, char *buf, int buflen);"
+.sp
+.BI "int genders_altnodelist_create(genders_t handle, char ***altnodelist);"
+.sp
+.BI "int genders_altnodelist_clear(genders_t handle, char **altnodelist);"
+.sp
+.BI "int genders_altnodelist_destroy(genders_t handle, char **altnodelist);"
+.sp
+.BI "int genders_getaltnodes(genders_t handle, char *altnodes[], int len, const char *attr, const char *val);"
+.sp
+.BI "int genders_getaltnodes_preserve(genders_t handle, char *altnodes[], int len, const char *attr, const char *val);"
+.sp
+.BI "int genders_isaltnode(genders_t handle, const char *altnode);"
+.sp
+.BI "int genders_isnode_or_altnode(genders_t handle, const char *node);"
+.sp
+.BI "int genders_to_gendname(genders_t handle, const char *altnode, char *buf, int buflen);"
+.sp
+.BI "int genders_to_gendname_preserve(genders_t handle, const char *altnode, char *buf, int buflen);"
+.sp
+.BI "int genders_to_altname(genders_t handle, const char *node, char *buf, int buflen);"
+.sp
+.BI "int genders_to_altname_preserve(genders_t handle, const char *node, char *buf, int buflen);"
+.sp
+.BI "int genders_string_to_gendnames(genders_t handle, const char *str, char *buf, int buflen);"
+.sp
+.BI "int genders_string_to_gendnames_preserve(genders_t handle, const char *str, char *buf, int buflen);"
+.sp
+.BI "int genders_string_to_altnames(genders_t handle, const char *str, char *buf, int buflen);"
+.sp
+.BI "int genders_string_to_altnames_preserve(genders_t handle, const char *str, char *buf, int buflen);"
+.br
+.SH DESCRIPTION
+The gendersllnl library functions are an additional set of genders
+parsing functions that are specific to LLNL.  The API works similarly
+to the 
+.BR libgenders (3)
+API and requires that a genders handle be created, genders data be
+loaded, and the genders handle passed to individual functions.
+
+For instructions on each of the above functions, please see the
+individual manpages or read the comments written in
+/usr/include/gendersllnl.h.
+.br
+.SH FILES
+/usr/include/gendersllnl.h
+.sp
+/etc/genders
+.SH SEE ALSO
+Libgendersllnl(3), Gendersllnl(3), libgenders(3),
+genders_get_cluster(3), genders_altnodelist_create(3),
+genders_altnodelist_clear(3), genders_altnodelist_destroy(3),
+genders_getaltnodes(3), genders_getaltnodes_preserve(3),
+genders_isaltnode(3), genders_isnode_or_altnode(3),
+genders_to_gendname(3), genders_to_gendname_preserve(3),
+genders_to_altname(3), genders_to_altname_preserve(3),
+genders_string_to_gendnames(3),
+genders_string_to_gendnames_preserve(3),
+genders_string_to_altnames(3), genders_string_to_altnames_preserve(3)
