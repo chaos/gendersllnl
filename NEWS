@@ -2,6 +2,10 @@ This file describes changes in recent versions of gendersllnl. It
 primarily documents those changes that are of interest to users and
 admins.
 
+Changes in gendersllnl-1.5-1
+============================
+  -- Allow hyphen '-' characters in hostnames with Hostlist.pm module.
+
 Changes in gendersllnl-1.4-1
 ============================
   -- Modified dist_all to use pdsh -A option instead of -a.
@@ -38,4 +42,4 @@ Changes in gendersllnl-1.0-1
 ============================
  -- Fixed bug regarding timestamps in inst.  (gnats/214)
 
-$Id: NEWS,v 1.13 2004-03-10 23:04:59 achu Exp $
+$Id: NEWS,v 1.14 2004-12-01 00:14:10 achu Exp $
