@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.c,v 1.9 2003-05-27 23:52:53 achu Exp $
+ * $Id: gendersllnl.c,v 1.10 2003-05-28 15:10:37 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.c,v $
  */
 
@@ -482,7 +482,8 @@ int genders_string_common(genders_t handle,
   int maxvallen, ret;
   char *node = NULL;
   char *strbuf = NULL;
-  hostlist_t src = NULL, dest = NULL;
+  hostlist_t src = NULL;
+  hostlist_t dest = NULL;
   hostlist_iterator_t iter = NULL;
 
   if (str == NULL || buf == NULL || buflen <= 0) {
