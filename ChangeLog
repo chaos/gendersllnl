@@ -3,6 +3,9 @@
 	* compat/Hostlist.pm (expand) : Don't attempt to expand regular
 	  hostnames that happen to have the `-' character.
 
+	* compat/Hostlist.pm (expand) : Allow a suffix after the brackets
+	  when expanding a quadrics-style range (e.g. foo[0-5]-eth1).
+
 2004-11-16  Albert Chu  <chu11@llnl.gov>
 
 	* gendersllnl.spec.in: Remove copyright, add license.

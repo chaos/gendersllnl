@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Hostlist.pm,v 1.11 2004-11-30 21:29:44 grondo Exp $
+#  $Id: Hostlist.pm,v 1.12 2004-11-30 23:49:47 grondo Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -200,11 +200,11 @@ sub expand
 sub expand_quadrics_range 
 {
         my ($list) = @_;
-        my ($pfx, $ranges) = split(/[\[\]]/, $list);
+        my ($pfx, $ranges, $suffix) = split(/[\[\]]/, $list);
 
         return $list if (!defined $ranges);
 
-        return map {"$pfx$_"} 
+        return map {"$pfx$_$suffix"} 
                    map { s/(\d+)-(\d+)/"$1".."$2"/; eval } 
                        split(/,|:/, $ranges);
 }
