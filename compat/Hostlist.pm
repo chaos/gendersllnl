@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Hostlist.pm,v 1.4 2003-08-13 23:04:48 achu Exp $
+#  $Id: Hostlist.pm,v 1.5 2003-09-27 00:50:06 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2002 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -35,6 +35,8 @@ use strict;
 use Carp;
 
 use Gendersllnl;
+
+our $VERSION = "1.2";
 
 require Exporter;
 our @ISA = qw(Exporter);

@@ -1,3 +1,7 @@
+2003-09-26  Albert Chu  <chu11@llnl.gov>
+
+	* compat/Hostlist.pm: Added $VERSION to avoid warnings.
+
 2003-09-19  Albert Chu  <chu11@llnl.gov>
 
 	* dist/dist2: Added error messages when genders files cannot be
