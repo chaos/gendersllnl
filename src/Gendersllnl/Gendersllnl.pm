@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.6 2003-05-16 00:17:57 achu Exp $
+# $Id: Gendersllnl.pm,v 1.7 2003-05-16 00:24:39 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -9,8 +9,6 @@ use strict;
 use Genders;
 use Libgendersllnl;
 our $VERSION = "2.0";
-
-our @ISA = qw(Genders);
 
 require Exporter;
 
@@ -25,9 +23,9 @@ our %EXPORT_TAGS = ( 'all' => [ qw(GENDERS_ALTNAME_ATTRIBUTE
                                    GENDERS_CLUSTER_ATTRIBUTE 
                                    GENDERS_ALL_ALLTRIBUTE) ] );
 
-GENDERS_ALTNAME_ATTRIBUTE = Libgendersllnl->GENDERS_ALTNAME_ATTRIBUTE;
-GENDERS_CLUSTER_ATTRIBUTE = Libgendersllnl->GENDERS_CLUSTER_ATTRIBUTE;
-GENDERS_ALL_ATTRIBUTE = Libgendersllnl->GENDERS_ALL_ATTRIBUTE;
+our $GENDERS_ALTNAME_ATTRIBUTE = Libgendersllnl->GENDERS_ALTNAME_ATTRIBUTE;
+our $GENDERS_CLUSTER_ATTRIBUTE = Libgendersllnl->GENDERS_CLUSTER_ATTRIBUTE;
+our $GENDERS_ALL_ATTRIBUTE = Libgendersllnl->GENDERS_ALL_ATTRIBUTE;
 
 # need to bless into Libgendersllnl, therefore cannot use Genders'
 # new.  Technically could use SUPER to call Gender's new and reduce
