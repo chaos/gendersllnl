@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.1 2003-05-14 23:27:53 achu Exp $
+#  $Id: dist2,v 1.2 2003-05-14 23:30:13 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2002 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -257,7 +257,7 @@ sub getnodes
                 # Unique to LLNL, convert node names to 
                 # "alternate" node names.
 
-		@allnodes = $gendobj->to_altnames(@allnodes);
+		@allnodes = $gendobj->to_altnames_preserve(@allnodes);
 	}
 	foreach $node (@allnodes) {
 		if (grep(/^$node$/, @main::limit_nodes)){
@@ -441,7 +441,7 @@ sub participating_nodes
 	}
 
 	if (! $main::opt_i) {
-		@nodes = $gendobj->to_altnames(@nodes);
+		@nodes = $gendobj->to_altnames_preserve(@nodes);
 	}
 	return @nodes;
 }
