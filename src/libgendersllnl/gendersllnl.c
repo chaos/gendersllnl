@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.c,v 1.3 2003-05-22 00:44:41 achu Exp $
+ * $Id: gendersllnl.c,v 1.4 2003-05-22 17:55:44 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.c,v $
  */
 
@@ -72,7 +72,7 @@ int genders_get_cluster(genders_t handle,
 
   /* cluster attribute not found */ 
   if (ret == 0) {
-    genders_set_errnum(GENDERS_ERR_INTERNAL);
+    genders_set_errnum(handle, GENDERS_ERR_INTERNAL);
     ret = -1;
   }
 
@@ -95,7 +95,7 @@ int genders_altnodelist_create(genders_t handle, char ***altnodelist) {
   if (numnodes > 0) {
     temp = (char **)malloc(sizeof(char *) * numnodes);
     if (temp == NULL) {
-      genders_set_errnum(GENDERS_ERR_OUTMEM);
+      genders_set_errnum(handle, GENDERS_ERR_OUTMEM);
       return -1;
     }
     
@@ -107,7 +107,7 @@ int genders_altnodelist_create(genders_t handle, char ***altnodelist) {
           free(temp[j]);
         free(temp);
         
-        genders_set_errnum(GENDERS_ERR_OUTMEM);
+        genders_set_errnum(handle, GENDERS_ERR_OUTMEM);
         return -1;
       }
       memset(temp[i], '\0', maxvallen+1);
