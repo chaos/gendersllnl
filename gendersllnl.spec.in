@@ -14,7 +14,7 @@ A LLNL genders site specific library
 %package dist
 Summary: gendersllnl dist 
 Group: System Environment/Base
-Requires: pdsh >= 1.7
+Requires: pdsh >= 2.0-0.pre16
 %description dist
 file distribution tool
 
