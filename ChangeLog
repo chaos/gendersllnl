@@ -1,3 +1,8 @@
+2003-08-15  Albert Chu  <chu11@llnl.gov>
+
+	* src/Gendersllnl/Gendersllnl.pm: Explicitly import the only
+	required symbols from the Genders module.
+	
 2003-08-14  Albert Chu  <chu11@llnl.gov>
 
 	* src/Gendersllnl/Gendersllnl.pm (get_cluster); Added optional

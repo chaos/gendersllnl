@@ -1,12 +1,12 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.14 2003-08-14 23:56:42 achu Exp $
+# $Id: Gendersllnl.pm,v 1.15 2003-08-15 23:18:54 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
 package Gendersllnl;
 
 use strict;
-use Genders;
+use Genders qw(_errormsg $handlekey $debugkey);
 use Libgendersllnl;
 our $VERSION = "2.0";
 
