@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.5 2004-05-19 22:15:28 achu Exp $
+## $Id: Makefile.am,v 1.6 2004-06-08 15:38:53 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -21,7 +21,7 @@ rev     = 0
 age     = 0
 
 if WITH_GNU_LD
-VERSION_SCRIPT = gendersllnl.map
+VERSION_SCRIPT = $(srcdir)/gendersllnl.map
 OTHER_FLAGS = -Wl,--version-script=$(VERSION_SCRIPT)
 endif
 
