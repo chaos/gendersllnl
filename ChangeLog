@@ -1,8 +1,7 @@
 2005-01-10  Albert Chu  <chu11@llnl.gov>
 
-	* src/libgendersllnl/hostlist.h, src/libgendersllnl/hostlist.c,
-	src/nodeattr/hostlist.h, src/nodeattr/hostlist.c: Updated
-	libraries.
+	* src/libgendersllnl/hostlist.h, src/libgendersllnl/hostlist.c:
+	Updated libraries.
 
         * src/Libgendersllnl/Makefile.am, src/Gendersllnl/Makefile.am: Cleanup.
 
