@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.4 2003-05-14 23:09:04 achu Exp $
+# $Id: Gendersllnl.pm,v 1.5 2003-05-14 23:37:27 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -355,8 +355,8 @@ Gendersllnl - LLNL site specific Perl library for querying genders file
 =head1 DESCRIPTION
 
 This package provides a LLNL site specific perl interface for querying
-a genders file.  This package inherits from the Genders package, so all.
-Genders functionality is also included in this package.
+a genders file.  This package inherits from the Genders package, so
+all Genders functionality is also included in this package.
 
 =over 4
 
