@@ -1,9 +1,9 @@
 ##
-# $Id: META,v 1.15 2004-01-09 17:46:41 achu Exp $
+# $Id: META,v 1.16 2004-02-11 22:21:59 achu Exp $
 ##
 # Metadata for RPM/TAR makefile targets
 ##
   Meta:		1
   Name:		gendersllnl
   Version:	1.2
-  Release:	0.pre4
+  Release:	1
