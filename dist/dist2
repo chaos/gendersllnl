@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.13 2004-02-12 22:23:46 achu Exp $
+#  $Id: dist2,v 1.14 2004-02-12 23:37:59 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -63,7 +63,7 @@ $path_openfile =	"/var/dist/VAR_DIST_OPEN_VERSION";
 $havePSSP =             (-d "/usr/lpp/ssp");
 $path_whatsup       =   "/usr/bin/whatsup";
 $path_whatsup_pssp  =   "/admin/scripts/whatsup";
-$equal_sign_key     =   "__!!__"
+$equal_sign_key     =   "__!!__";
 
 $gendobj =              undef;
 
@@ -255,8 +255,7 @@ sub construct_definition
 	my (@node_list);
 
 	# construct LHS
-
-	$attr =~ s/(\w+)=(\w+)/$1$main::equal_sign_key$2/;
+	# $attr =~ s/(\w+)=(\w+)/$1$main::equal_sign_key$2/;
 	if ($cluster) {
 		${$variable} = sprintf("%s!attr_%s", $cluster, $attr);
 	} else {
@@ -278,7 +277,7 @@ sub getnodes
 	my ($attr) = @_;
 	my ($node, @allnodes, @nodes);
 
-	if ($attr =~ /(\w+)_(\w+)/) {
+	if ($attr =~ /(\w+)$main::equal_sign_key(\w+)/) {
 	        @allnodes = $gendobj->getnodes($1, $2);
 	}
 	else {
@@ -386,6 +385,9 @@ sub find_attrs_in_file
 			}
 			while (s/\$\{attr_(\w+)\}//) {       # attr_xyz
 				${$attrs}{$1}++;
+			}
+			while (s/\$\{attr_(\w+)=(\w+)\}//) { # attr_X=Y
+				${$attrs}{"$1$main::equal_sign_key$2"}++;
 			}
 		}
 		close(FILE);
