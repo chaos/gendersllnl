@@ -1,7 +1,7 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.1.1.1 2003-05-13 01:20:50 achu Exp $
+## $Id: Makefile.am,v 1.2 2003-05-14 00:30:21 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
 
-SUBDIRS = libgendersllnl
+SUBDIRS = libgendersllnl Libgendersllnl Gendersllnl
