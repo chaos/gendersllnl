@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.16 2004-12-20 16:45:43 achu Exp $
+## $Id: configure.ac,v 1.17 2005-01-10 23:42:25 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -19,6 +19,32 @@ AC_CANONICAL_SYSTEM
 AM_INIT_AUTOMAKE($PROJECT, $VERSION)
 AM_CONFIG_HEADER([config/config.h])
 AM_MAINTAINER_MODE
+
+# Update this information before a public release only!
+ 
+# libgendersllnl versioning
+#
+# If library source code has changed at all increment rev
+# (current:rev:age) = (current:rev+1:age)
+#
+# If any interfaces have been added,removed, or changed increment current
+#  and set rev = 0;
+#
+# If any interfaces have been added increment age
+#
+# If any interfaces have been removed, set age = 0
+#
+LIBGENDERSLLNL_CURRENT=0
+LIBGENDERSLLNL_REVISION=0
+LIBGENDERSLLNL_AGE=0
+LIBGENDERSLLNL_VERSION_INFO=$LIBGENDERSLLNL_CURRENT:$LIBGENDERSLLNL_REVISION:$LIBGENDERSLLNL_AGE
+AC_SUBST([LIBGENDERSLLNL_VERSION_INFO])
+ 
+# Libgendersllnl and Gendersllnl versioning
+PERLGENDERSLLNL_MAJOR=0
+PERLGENDERSLLNL_MINOR=01
+PERLGENDERSLLNL_VERSION=$PERLGENDERSLLNL_MAJOR.$PERLGENDERSLLNL_MINOR
+AC_SUBST([PERLGENDERSLLNL_VERSION])
 
 # Perl Install Destdir
 # - Used almost exclusively so perl install works with rpm builds
@@ -113,6 +139,8 @@ AC_CONFIG_FILES( \
   compat/Makefile \
   man/Makefile \
   man/dist/Makefile \
+  src/Libgendersllnl/Libgendersllnl.pm \
+  src/Gendersllnl/Gendersllnl.pm \
 )
 AC_OUTPUT
 

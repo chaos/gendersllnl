@@ -1,3 +1,25 @@
+2005-01-10  Albert Chu  <chu11@llnl.gov>
+
+	* src/libgendersllnl/hostlist.h, src/libgendersllnl/hostlist.c,
+	src/nodeattr/hostlist.h, src/nodeattr/hostlist.c: Updated
+	libraries.
+
+        * src/Libgendersllnl/Makefile.am, src/Gendersllnl/Makefile.am: Cleanup.
+
+        * gendersllnl.spec.in: Fix a Perl Extensions packaging problem for
+	multilib systems.
+
+        * src/libgendersllnl/Makefile.am, configure.ac: Move versioning
+	info into configure.ac.
+
+        * configure.ac: Added Perl versioning.
+
+        * src/Libgendersllnl/Libgendersllnl.pm: Renamed to
+	Libgendersllnl.pm.in and added versioning.
+
+        * src/Gendersllnl/Gendersllnl.pm: Renamed to Gendersllnl.pm.in and
+	added versioning.
+	
 2005-01-05  Albert Chu  <chu11@llnl.gov>
 
 	* dist/dist2 (emit_definition, participating_nodes, usage): Revert
