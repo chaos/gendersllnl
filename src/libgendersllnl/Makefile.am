@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.3 2004-02-11 22:04:01 achu Exp $
+## $Id: Makefile.am,v 1.4 2004-04-27 18:01:14 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -22,8 +22,13 @@ age     = 0
 
 AM_CPPFLAGS               = -D_REENTRANT
 
+if WITH_GNU_LD
+VERSION_SCRIPT = gendersllnl.map
+OTHER_FLAGS = -Wl,--version-script=$(VERSION_SCRIPT)
+endif
+
 include_HEADERS           = gendersllnl.h
 lib_LTLIBRARIES           = libgendersllnl.la
 libgendersllnl_la_SOURCES = gendersllnl.c hostlist.c
-libgendersllnl_la_LDFLAGS = -version-info $(current):$(rev):$(age)
+libgendersllnl_la_LDFLAGS = -version-info $(current):$(rev):$(age) $(OTHER_FLAGS)
 
