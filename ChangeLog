@@ -1,8 +1,11 @@
-2003-07-15 Albert Chu <chu11@llnl.gov>
-     * Fixed bug in inst
-     * tagged gendersllnl-1-0-1
+2003-07-15  Albert Chu  <chu11@llnl.gov>
+
+	* dist/inst.c: Fixed bug gnats/214. 
+
+	* Tagged gendersllnl-1-0-1.
 	
-2003-05-15 Albert Chu <chu11@llnl.gov>
-     * initial entry
-     * library of LLNL genders specific functions and tools
-     * tagged gendersllnl-1-0-1pre
+2003-05-15  Albert Chu  <chu11@llnl.gov>
+
+	* Initial Entry.
+
+	* Tagged gendersllnl-1-0-1pre.
