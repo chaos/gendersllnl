@@ -1,19 +1,13 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.4 2003-05-19 17:05:04 achu Exp $
+## $Id: Makefile.am,v 1.5 2003-11-04 00:12:24 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
 
-# This is a hack to get autoconf, automake, and ExtUtils::MakeMaker
-# to work together.  
-#
-# Currently, it only supports the common MakeMaker options of
-#
-# make install
-# make pure_install
-# make test
+# Use Perl's ExtUtils::MakeMaker to get autoconf/automake to install
+# into the correct location
 
-XS_PREFIX = @XS_PREFIX@
+PERL_INSTALL_PREFIX = @PERL_INSTALL_PREFIX@
 
 all: Makefile.xs
 	$(MAKE) -f Makefile.xs
@@ -23,7 +17,7 @@ Makefile.xs: Makefile.PL Libgendersllnl.xs Libgendersllnl.pm
 	cp ../libgendersllnl/gendersllnl.h .
 	cp ../libgendersllnl/hostlist.c .
 	cp ../libgendersllnl/hostlist.h .
-	$(PERL) Makefile.PL PREFIX=$(XS_PREFIX) MAKEFILE=Makefile.xs FIRST_MAKEFILE=Makefile.xs
+	$(PERL) Makefile.PL PREFIX=$(PERL_INSTALL_PREFIX) MAKEFILE=Makefile.xs FIRST_MAKEFILE=Makefile.xs
 
 test: Makefile.xs 
 	$(MAKE) -f Makefile.xs test

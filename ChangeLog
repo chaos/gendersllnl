@@ -1,3 +1,25 @@
+2003-11-03  Albert Chu  <chu11@llnl.gov>
+
+	* configure.ac: Replaced --with-xs-prefix, --with-compat-prefix,
+	and --with-gendersllnl-pm-prefix options with
+	--with-perl-install-prefix option.
+
+	* src/Libgendersllnl/Makefile.am, src/Gendersllnl/Makefile.am,
+	compat/Makefile.am: Modified for above changes to configure.ac.
+
+	* src/libgendersllnl/gendersllnl.c (genders_get_cluster,
+	_getaltnodes, genders_isnode_or_altnode, genders_to_gendname,
+	genders_to_gendname_preserve, genders_to_altname,
+	genders_to_altname_preserve, _string_to): Fixed functions to
+	return proper error code.
+
+	* src/libgendersllnl/gendersllnl.c (genders_altnodelist_create,
+	genders_altnodelist_clear, genders_altnodelist_destroy):
+	Re-ordered error code return priorities.
+
+	* src/libgendersllnl/gendersllnl.h,
+	src/libgendersllnl/gendersllnl.c: Cleaned up code through files.
+	
 2003-09-26  Albert Chu  <chu11@llnl.gov>
 
 	* compat/Hostlist.pm: Added $VERSION to avoid warnings.

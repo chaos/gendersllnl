@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.11 2003-09-11 16:03:25 achu Exp $
+## $Id: configure.ac,v 1.12 2003-11-04 00:12:24 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -20,71 +20,28 @@ AM_INIT_AUTOMAKE($PROJECT, $VERSION)
 AM_CONFIG_HEADER([config/config.h])
 AM_MAINTAINER_MODE
 
-# Libgenders install location
-AC_MSG_CHECKING(for --with-xs-prefix )
-AC_ARG_WITH(xs-prefix,
-    AC_HELP_STRING([--with-xs-prefix=path], [define perl xs prefix dir]),
+# Perl Install Prefix
+# - Used almost exclusively so perl install works with rpm builds
+AC_MSG_CHECKING(for --with-perl-install-prefix )
+AC_ARG_WITH(perl-install-prefix,
+    AC_HELP_STRING([--with-perl-install-prefix=path], [define perl modules install prefix]),
     [ case "$withval" in
     yes)
-        withxsprefix=yes
+        withperllinstallprefix=yes
         ;;
     no)
         ;;
     *)
-        withxsprefix=yes
-        XS_PREFIX="\"$withval\""
+        withperllinstallprefix=yes
+        PERL_INSTALL_PREFIX="$withval"
         ;;
     esac ]
 )
-AC_MSG_RESULT(${withxsprefix=no})
-if test -z "$XS_PREFIX"; then
-   XS_PREFIX='${prefix}'
+AC_MSG_RESULT(${withperllinstallprefix=no})
+if test -z "$PERL_INSTALL_PREFIX"; then
+   PERL_INSTALL_PREFIX='${prefix}'
 fi
-AC_SUBST(XS_PREFIX)
-
-# Gendersllnl.pm install location
-AC_MSG_CHECKING(for --with-gendersllnl-pm-prefix )
-AC_ARG_WITH(gendersllnl-pm-prefix,
-    AC_HELP_STRING([--with-gendersllnl-pm-prefix=path], [define gendersllnl.pm prefix dir]),
-    [ case "$withval" in
-    yes)
-        withgendersllnlpm=yes
-        ;;
-    no)
-        ;;
-    *)
-        withgendersllnlpm=yes
-        GENDERSLLNL_PM_PREFIX="\"$withval\""
-        ;;
-    esac ]
-)
-AC_MSG_RESULT(${withgendersllnlpm=no})
-if test -z "$GENDERSLLNL_PM_PREFIX"; then
-   GENDERSLLNL_PM_PREFIX='${prefix}'
-fi
-AC_SUBST(GENDERSLLNL_PM_PREFIX)
-
-# compat install location
-AC_MSG_CHECKING(for --with-compat-prefix )
-AC_ARG_WITH(compat-prefix,
-    AC_HELP_STRING([--with-compat-prefix=path], [define compat subpackage prefix]),
-    [ case "$withval" in
-    yes)
-        withcompatprefix=yes
-        ;;
-    no)
-        ;;
-    *)
-        withcompatprefix=yes
-        COMPAT_PREFIX="\"$withval\""
-        ;;
-    esac ]
-)
-AC_MSG_RESULT(${withcompatprefix=no})
-if test -z "$COMPAT_PREFIX"; then
-   COMPAT_PREFIX='${prefix}'
-fi
-AC_SUBST(COMPAT_PREFIX)
+AC_SUBST(PERL_INSTALL_PREFIX)
 
 ##
 # Checks for programs.
