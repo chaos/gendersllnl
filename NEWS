@@ -2,22 +2,18 @@ This file describes changes in recent versions of gendersllnl. It
 primarily documents those changes that are of interest to users and
 admins.
 
-Changes in gendersllnl-1.3-1
+Changes in gendersllnl-1.2-1
 ============================
+ -- Added ability for Gendersllnl perl module's get_cluster() to work 
+    if you are not on a node in the genders database.
+ -- Added exportable symbols to Hostlist perl module.
+ -- Added Hostlist perl module manpage.
  -- Fixed bug in Gendersllnl that caused warnings to output. 
  -- Fixed bugs in libgendersllnl in which improper error codes were 
     returned. 
  -- Re-ordered error return code priority within some API functions.
     For example, when an array of length 0 is specified,
     GENDERS_ERR_OVERFLOW may be returned instead of GENDERS_ERR_PARAMETERS.
- -- Export numerous Hostlist.pm functions.
-
-Changes in gendersllnl-1.2-1
-============================
- -- Added ability for Gendersllnl perl module's get_cluster() to work 
-    if you are not on a node in the genders database.
- -- Added exportable symbols to Hoslist perl module.
- -- Added Hostlist perl module manpage.
 
 Changes in gendersllnl-1.1-1
 ============================
@@ -28,4 +24,4 @@ Changes in gendersllnl-1.0-1
 ============================
  -- Fixed bug regarding timestamps in inst.  (gnats/214)
 
-$Id: NEWS,v 1.8 2003-11-04 00:13:56 achu Exp $
+$Id: NEWS,v 1.9 2003-11-04 02:05:40 achu Exp $
