@@ -23,7 +23,7 @@ file distribution tool
 
 %build
 ./bootstrap
-./configure --prefix=/usr --with-xs-prefix="$RPM_BUILD_ROOT/usr" --with-gendersllnl-pm-prefix="$RPM_BUILD_ROOT/usr" --with-compat-prefix="$RPM_BUILD_ROOT/usr"
+./configure --prefix=/usr --with-perl-install-prefix="$RPM_BUILD_ROOT/usr"
 make 
 
 %install
