@@ -1,3 +1,10 @@
+2004-12-20  Albert Chu  <chu11@llnl.gov>
+
+	* dist/dist2 (emit_definition, usage, participating_nodes): Added
+	-L option.
+
+	* man/dist/dist2: Documented -L option.
+	
 2004-12-18  Albert Chu  <chu11@llnl.gov>
 
 	* gendersllnl.spec.in, configure.ac, compat/Makefile.am,

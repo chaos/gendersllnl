@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.20 2004-12-20 17:40:17 achu Exp $
+#  $Id: dist2,v 1.21 2004-12-20 23:38:53 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -97,7 +97,7 @@ if ($< != 0) {
 }
 
 # read arguments from command line
-if (!getopts("o:c:FdVinlw:x:g:f:v")) { 		
+if (!getopts("o:c:FdVinlL:w:x:g:f:v")) { 		
 	usage();
 }					
 
@@ -137,6 +137,11 @@ if (defined($main::opt_l) + defined($main::opt_w) + defined($main::opt_g)
     + defined($main::opt_F) > 1) {
 	usage();
 }
+
+if (defined($main::opt_L) + !defined($main::opt_l)) {
+        usage();
+}
+
 if ($main::opt_f && @ARGV) {
 	usage();
 }
@@ -235,7 +240,12 @@ sub emit_definition
 
 	# Special case, change the local node to the string "localhost"
 	if ($main::opt_l) {
-		$hname = $gendobj->getnodename();
+		if ($main::opt_L) {
+			$hname = $main::opt_L;
+		}
+		else {
+			$hname = $gendobj->getnodename();
+		}
                 if (! $main::opt_i) {
                         $hname = $gendobj->to_altname_preserve($hname);
                 }
@@ -471,7 +481,7 @@ sub cat_file
 
 sub usage
 {
-	print STDERR ("Usage: dist2 [-o rdist_opts] [-c cluster] [-v [-n]] [-i] [-F | -l | -w host,host,host | -g attr] [pkg.[fs]] ...\n");
+	print STDERR ("Usage: dist2 [-o rdist_opts] [-c cluster] [-v [-n]] [-i] [-F | -l [-L altlocalhost] | -w host,host,host | -g attr] [pkg.[fs]] ...\n");
 	exit(1);
 }
 
@@ -481,7 +491,12 @@ sub participating_nodes
         my ($myframe, $hname, $node);
 
         if (defined($main::opt_l)) {
-                $hname = $gendobj->getnodename();
+		if ($main::opt_L) {
+			$hname = $main::opt_L;
+		}
+		else {
+			$hname = $gendobj->getnodename();
+		}
                 @allnodes = ($hname);
         } elsif (defined($main::opt_w)) {
                 @allnodes = Hostlist::expand($main::opt_w);

@@ -1,5 +1,5 @@
 \."##########################################################################
-\."  $Id: dist2.1,v 1.5 2004-02-13 00:35:55 achu Exp $
+\."  $Id: dist2.1,v 1.6 2004-12-20 23:38:53 achu Exp $
 \."##########################################################################
 \."  Copyright (C) 2001-2003 The Regents of the University of California.
 \."  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -99,7 +99,7 @@ command.
 similarly selects the set of nodes that have the specified genders attribute.
 .LP
 .I -l
-selects the local node.  
+selects the local hostname (through genders).  
 .LP
 When the
 .I -l
@@ -123,6 +123,14 @@ option.  If
 is not installed, the 
 .I -v 
 option will fail.
+.LP
+When the -l option is specified, each occurrence of the local hostname
+in the Distfiles is replaced with the string "localhost".  If this is
+not desired, the
+.I -w 
+option should be used to manually select the local hostname.  If a
+different node should be replaced with the "localhost" string, the -L
+option can be used to specify an alternate hostname to replace.
 .LP
 .I -i
 selects canonical hostnames (the left hand side of a genders file entry).
