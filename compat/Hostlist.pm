@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Hostlist.pm,v 1.5 2003-09-27 00:50:06 achu Exp $
+#  $Id: Hostlist.pm,v 1.6 2003-12-11 16:47:14 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2002 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -40,11 +40,11 @@ our $VERSION = "1.2";
 
 require Exporter;
 our @ISA = qw(Exporter);
-@EXPORT_OK = qw(mk_file mk_gend mk_cmdline to_initial to_reliable
+our @EXPORT_OK = qw(mk_file mk_gend mk_cmdline to_initial to_reliable
                 detect_metachar expand compress intersect union diff
                 xor within same);
 
-%EXPORT_TAGS = (
+our %EXPORT_TAGS = (
                 all => [ qw(mk_file mk_gend mk_cmdline to_initial to_reliable
                             detect_metachar expand compress intersect union diff
                             xor within same) ],

@@ -1,3 +1,10 @@
+2003-12-11  Albert Chu  <chu11@llnl.gov>
+
+	* compat/Hostlist.pm: Fixed declarations of EXPORT_OK and
+	EXPORT_TAGS.
+
+	* tagged gendersllnl-1-2-0-pre3
+	
 2003-11-07  Albert Chu  <chu11@llnl.gov>
 
 	* src/Libgendersllnl/Makefile.am, src/Gendersllnl/Makefile.am,
