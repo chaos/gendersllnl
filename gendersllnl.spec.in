@@ -4,9 +4,9 @@ Release: @RELEASE@
 Summary: LLNL site specific genders library
 Copyright: none
 Group: System Environment/Base
-Source0:
+Source: %{name}-%{version}-%{release}.tgz:
 Requires: genders >= 1.2
-BuildRoot: %{_tmppath}/%{name}-%{version}
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 A LLNL genders site specific library 
@@ -19,10 +19,9 @@ Requires: pdsh >= 2.0-0.pre18
 file distribution tool
 
 %prep
-%setup  -q -n %{name}-%{version}
+%setup  -q -n %{name}-%{version}-%{release}
 
 %build
-./bootstrap
 %configure --program-prefix=%{?_program_prefix:%{_program_prefix}} --with-perl-install-prefix="$RPM_BUILD_ROOT/usr"
 make 
 

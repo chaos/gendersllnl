@@ -1,3 +1,9 @@
+2004-10-26  Albert Chu  <chu11@llnl.gov>
+
+	* config/Make-rpm.mk: updated script
+
+	* gendersllnl.spec.in: Fix for port issues.
+	
 2004-06-21  Albert Chu  <chu11@llnl.gov>
 
 	* src/Libgendersllnl/Makefile.am, src/Gendersllnl/Makefile.am,
