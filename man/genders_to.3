@@ -1,5 +1,5 @@
 \."#################################################################
-\."$Id: genders_to.3,v 1.2 2003-05-15 16:05:28 achu Exp $
+\."$Id: genders_to.3,v 1.3 2003-05-16 16:08:24 achu Exp $
 \."by Albert Chu <chu11@llnl.gov>
 \."#################################################################
 .\"
@@ -43,7 +43,12 @@ node name,
 .BR genders_getmaxnodelen (3)
 and
 .BR genders_getmaxvallen (3)
-should be used to determine the minimum buffer size that should be used. 
+should be used to determine the minimum buffer size that should be used for
+.BR genders_to_gendname()
+and
+.BR genders_to_altname()
+respectively.  The buffer should also be large enough to store the node
+passed in for the respective 'preserve' functions.
 .br
 .SH RETURN VALUES
 On success, \fBgenders_to_gendname()\fR,
