@@ -38,5 +38,6 @@ DESTDIR="$RPM_BUILD_ROOT" make install
 
 %files dist
 %defattr(-,root,root)
+%doc dist/TUTORIAL dist/Distfile.sample
 /usr/man/man1/*
 /usr/bin/
