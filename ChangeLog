@@ -1,3 +1,9 @@
+2004-03-10  Albert Chu  <chu11@llnl.gov>
+
+	* dist/dist2 (find_attrs_in_file, cat_file, getnodes,
+	post_process_attrs): Added support for attributes and values with
+	hyphens ('-') or periods ('.').
+	
 2004-03-09  Albert Chu  <chu11@llnl.gov>
 
 	* config/ac_debug.m4: New file.

@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.17 2004-02-13 00:35:55 achu Exp $
+#  $Id: dist2,v 1.18 2004-03-10 23:04:59 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -278,7 +278,7 @@ sub getnodes
 	my ($attr) = @_;
 	my ($node, @allnodes, @nodes);
 
-	if ($attr =~ /(\w+)$main::equal_sign_key(\w+)/) {
+	if ($attr =~ /(\w[\w\-\.]*)$main::equal_sign_key(\w[\w\-\.]*)/) {
 	        @allnodes = $gendobj->getnodes($1, $2);
 	}
 	else {
@@ -353,11 +353,11 @@ sub post_process_attrs
 {
 	my ($attrs) = @_;
 
-	# For every local_cluster!attr_attr, add an attr_attr.
-	# The next step will be to expand only attr_attr, and define
+	# For every local_cluster!attr_X, add an attr_X.
+	# The next step will be to expand only attr_X, and define
 	# this_cluster!attr_attr in terms of attr_attr.
 	foreach $attrpair (keys %{$attrs}) {
-		if ($attrpair =~ /^(\w+):$main::local_cluster$/) {
+		if ($attrpair =~ /^(\w[\w\-\.]*):$main::local_cluster$/) {
 			${$attrs}{$1}++;
 		}
 	}
@@ -381,16 +381,16 @@ sub find_attrs_in_file
 			if (/^\s*(\w+):/) {	# label
 				${$labels}{$1}++;
 			}
-			while (s/\$\{(\w+)!attr_(\w+)\}//) { #c!attr_xyz
+			while (s/\$\{(\w+)!attr_(\w[\w\-\.]*)\}//) { #c!attr_xyz
 				${$attrs}{"$2:$1"}++;
 			}
-			while (s/\$\{attr_(\w+)\}//) {       # attr_xyz
+			while (s/\$\{attr_(\w[\w\-\.]*)\}//) {       # attr_xyz
 				${$attrs}{$1}++;
 			}
-			while (s/\$\{(\w+)!attr_(\w+)=(\w+)\}//) { #c!attr_X=Y
+			while (s/\$\{(\w+)!attr_(\w[\w\-\.]*)=(\w[\w\-\.]*)\}//) { #c!attr_X=Y
 				${$attrs}{"$2$main::equal_sign_key$3:$1"}++;
 			}
-			while (s/\$\{attr_(\w+)=(\w+)\}//) { # attr_X=Y
+			while (s/\$\{attr_(\w[\w\-\.]*)=(\w[\w\-\.]*)\}//) { # attr_X=Y
 				${$attrs}{"$1$main::equal_sign_key$2"}++;
 			}
 		}
@@ -442,7 +442,7 @@ sub cat_file
 	if (open(FILE, "< $file")) {
 		xprintf($fh, "# begin %s\n", $file);
 		while (<FILE>) {
-		        while (s/(\w+)=(\w+)/$1$main::equal_sign_key$2/) {
+		        while (s/(\w[\w\-\.]*)=(\w[\w\-\.]*)/$1$main::equal_sign_key$2/) {
 			        # do nothing
 			}
 			xprint($fh, $_);
