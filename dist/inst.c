@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: inst.c,v 1.4 2004-02-04 22:44:52 achu Exp $
+ *  $Id: inst.c,v 1.5 2004-02-18 02:33:39 achu Exp $
  *****************************************************************************
  *  Copyright (C) 2001-2003 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -63,6 +63,7 @@
 
 #define _PATH_DIFF	"/usr/bin/diff"
 #define _PATH_CMP	"/usr/bin/cmp"
+#define _PATH_DEV_NULL  "/dev/null"
 
 #define USAGE "\
 inst -s file -d dstdir [-m mode] [-o owner] [-g group] [-c|-C] [-f] [-q]"
@@ -88,15 +89,15 @@ int main(int argc, char *argv[])
     char *dst_dir = NULL;
     char dst_file[MAXPATHLEN];
     mode_t dst_mode = NONE;
-    uid_t dst_uid = NONE;
-    gid_t dst_gid = NONE;
+    uid_t in_uid, dst_uid = NONE;
+    gid_t in_gid, dst_gid = NONE;
     int opt_c = 0, opt_C = 0, opt_f = 0, opt_q = 0;
     int do_copy, do_chmod, do_chown;
     pid_t pid;
     int st, rv;
-    char *why;
+    char *why, *ptr;
     struct timeval times[2];
-    int dst_fd, src_fd;
+    int dst_fd, src_fd, dev_null_fd;
     unsigned char buf[BUFSIZ];
 
     while ((c = getopt(argc, argv, "s:d:m:o:g:cCfq")) != EOF) {
@@ -132,8 +133,11 @@ int main(int argc, char *argv[])
             break;
         case 'o':
             pw = getpwnam(optarg);
-            if (!pw)
-                pw = getpwuid(atoi(optarg));
+            if (!pw) {
+                in_uid = strtoul(optarg, &ptr, 10);
+                if (ptr == (optarg + strlen(optarg)))
+                    pw = getpwuid(in_uid);
+            }
             if (!pw) {
                 fprintf(stderr, "bad owner: %s\n", optarg);
                 exit(1);
@@ -142,8 +146,11 @@ int main(int argc, char *argv[])
             break;
         case 'g':
             gr = getgrnam(optarg);
-            if (!gr)
-                gr = getgrgid(atoi(optarg));
+            if (!gr) {
+                in_gid = strtoul(optarg, &ptr, 10);
+                if (ptr == (optarg + strlen(optarg)))
+                    gr = getgrgid(in_gid);
+            }
             if (!gr) {
                 fprintf(stderr, "bad group: %s\n", optarg);
                 exit(1);
@@ -209,10 +216,17 @@ int main(int argc, char *argv[])
                     perror("fork");
                     exit(1);
                 case 0:
-                    close(1);
-                    close(2);
-                    execl(_PATH_CMP, "cmp", src_file, dst_file, 0);
-                    perror(_PATH_CMP);
+                    /* cannot close stdout, cmp will fail if it cannot
+                     * write to stdout.  We must redirect instead.  
+                     */
+                    if ((dev_null_fd = open(_PATH_DEV_NULL, O_RDWR)) < 0) { 
+                        perror("open");
+                        exit(1);
+                    }
+                    dup2(dev_null_fd, 1);
+                    dup2(dev_null_fd, 2);
+                    if (execl(_PATH_CMP, "cmp", src_file, dst_file, 0) < 0)
+                        exit(1);
                 default:
                     rv = waitpid(pid, &st, 0);
                     break;
@@ -230,10 +244,17 @@ int main(int argc, char *argv[])
                     perror("fork");
                     exit(1);
                 case 0:
-                    close(1);
-                    close(2);
-                    execl(_PATH_DIFF, "diff", "-b", src_file, dst_file, 0);
-                    perror(_PATH_DIFF);
+                    /* cannot close stdout, diff will fail if it cannot
+                     * write to stdout.  We must redirect instead.
+                     */
+                    if ((dev_null_fd = open(_PATH_DEV_NULL, O_RDWR)) < 0) { 
+                        perror("open");
+                        exit(1);
+                    }
+                    dup2(dev_null_fd, 1);
+                    dup2(dev_null_fd, 2);
+                    if (execl(_PATH_DIFF, "diff", "-b", src_file, dst_file, 0) < 0)
+                        exit(1);
                 default:
                     rv = waitpid(pid, &st, 0);
                     break;

@@ -1,3 +1,9 @@
+2004-02-17  Albert Chu  <chu11@llnl.gov>
+
+	* dist/inst.c (main): Fixed several bugs found by Py Watson.  Use
+	strtoul() instead of atoi with 'o' and 'g' options.  Redirect to
+	/dev/null on 'c' and 'C' options.
+	
 2004-02-12  Albert Chu  <chu11@llnl.gov>
 
 	* dist/dist2: Support equal sign for attr=val in distfiles.
