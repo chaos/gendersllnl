@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.7 2003-05-16 00:24:39 achu Exp $
+# $Id: Gendersllnl.pm,v 1.8 2003-05-22 16:21:24 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -10,26 +10,10 @@ use Genders;
 use Libgendersllnl;
 our $VERSION = "2.0";
 
-require Exporter;
-
-our @ISA = qw(Exporter Genders);
-our @EXPORT = qw(GENDERS_ALTNAME_ATTRIBUTE 
-                 GENDERS_CLUSTER_ATTRIBUTE 
-                 GENDERS_ALL_ALLTRIBUTE);
-our @EXPORT_OK = qw(GENDERS_ALTNAME_ATTRIBUTE 
-                    GENDERS_CLUSTER_ATTRIBUTE 
-                    GENDERS_ALL_ALLTRIBUTE);
-our %EXPORT_TAGS = ( 'all' => [ qw(GENDERS_ALTNAME_ATTRIBUTE 
-                                   GENDERS_CLUSTER_ATTRIBUTE 
-                                   GENDERS_ALL_ALLTRIBUTE) ] );
-
-our $GENDERS_ALTNAME_ATTRIBUTE = Libgendersllnl->GENDERS_ALTNAME_ATTRIBUTE;
-our $GENDERS_CLUSTER_ATTRIBUTE = Libgendersllnl->GENDERS_CLUSTER_ATTRIBUTE;
-our $GENDERS_ALL_ATTRIBUTE = Libgendersllnl->GENDERS_ALL_ATTRIBUTE;
+our @ISA = qw(Genders);
 
 # need to bless into Libgendersllnl, therefore cannot use Genders'
-# new.  Technically could use SUPER to call Gender's new and reduce
-# code, but will duplicate some code in order to add efficiency
+# new.
 sub new {
     my $proto = shift;
     my $class = ref($proto) || $proto;
@@ -38,7 +22,7 @@ sub new {
     my $handle;
     my $ret;
     
-    $self->{"_DEBUG"} = 0;
+    $self->{$debugkey} = 0;
     
     $handle = Libgendersllnl->genders_handle_create();
     if (!defined($handle)) {
@@ -46,9 +30,9 @@ sub new {
         return undef;
     }
 
-    $self->{"_HANDLE"} = $handle;
+    $self->{$handlekey} = $handle;
 
-    $ret = $self->{"_HANDLE"}->genders_load_data($filename);
+    $ret = $self->{$handlekey}->genders_load_data($filename);
     if ($ret == -1) {
         _errormsg($self, "genders_load_data()");
         Libgenders::genders_handle_destroy($handle);
@@ -64,7 +48,7 @@ sub get_cluster {
     my $cluster;
 
     if (ref($self)) {
-        $cluster = $self->{"_HANDLE"}->genders_get_cluster();
+        $cluster = $self->{$handlekey}->genders_get_cluster();
         if (!defined($cluster)) {
             _errormsg($self, "genders_get_cluster()");
             return "";
@@ -83,12 +67,11 @@ sub getaltnodes {
     my $altnodes;
 
     if (ref($self)) {
-        $altnodes = $self->{"_HANDLE"}->genders_getaltnodes($attr, $val);
+        $altnodes = $self->{$handlekey}->genders_getaltnodes($attr, $val);
         if (!defined($altnodes)) {
             _errormsg($self, "genders_getaltnodes()");
             return ();
         }
-        
         return @$altnodes;
     }
     else {
@@ -103,7 +86,7 @@ sub getaltnodes_preserve {
     my $altnodes;
 
     if (ref($self)) {
-        $altnodes = $self->{"_HANDLE"}->genders_getaltnodes_preserve($attr, $val);
+        $altnodes = $self->{$handlekey}->genders_getaltnodes_preserve($attr, $val);
         if (!defined($altnodes)) {
             _errormsg($self, "genders_getaltnodes_preserve()");
             return ();
@@ -122,7 +105,7 @@ sub isaltnode {
     my $retval;
 
     if (ref($self)) {
-        $retval = $self->{"_HANDLE"}->genders_isaltnode($node);
+        $retval = $self->{$handlekey}->genders_isaltnode($node);
         if ($retval == -1) {
             _errormsg($self, "genders_isaltnode()");
             return 0;
@@ -140,7 +123,7 @@ sub isnode_or_altnode {
     my $retval;
 
     if (ref($self)) {
-        $retval = $self->{"_HANDLE"}->genders_isnode_or_altnode($node);
+        $retval = $self->{$handlekey}->genders_isnode_or_altnode($node);
         if ($retval == -1) {
             _errormsg($self, "genders_isnode_or_altnode()");
             return 0;
@@ -158,7 +141,7 @@ sub to_gendname {
     my $gendname;
 
     if (ref($self)) {
-        $gendname = $self->{"_HANDLE"}->genders_to_gendname($altnode);
+        $gendname = $self->{$handlekey}->genders_to_gendname($altnode);
         if (!defined $gendname) {
             _errormsg($self, "genders_to_gendname()");
             return "";
@@ -176,7 +159,7 @@ sub to_gendname_preserve {
     my $gendname;
 
     if (ref($self)) {
-        $gendname = $self->{"_HANDLE"}->genders_to_gendname_preserve($altnode);
+        $gendname = $self->{$handlekey}->genders_to_gendname_preserve($altnode);
         if (!defined $gendname) {
             _errormsg($self, "genders_to_gendname_preserve()");
             return "";
@@ -194,7 +177,7 @@ sub to_altname {
     my $altname;
 
     if (ref($self)) {
-        $altname = $self->{"_HANDLE"}->genders_to_altname($node);
+        $altname = $self->{$handlekey}->genders_to_altname($node);
         if (!defined $altname) {
             _errormsg($self, "genders_to_altname()");
             return "";
@@ -212,7 +195,7 @@ sub to_altname_preserve {
     my $altname;
 
     if (ref($self)) {
-        $altname = $self->{"_HANDLE"}->genders_to_altname_preserve($node);
+        $altname = $self->{$handlekey}->genders_to_altname_preserve($node);
         if (!defined $altname) {
             _errormsg($self, "genders_to_altname_preserve()");
             return "";
@@ -232,7 +215,7 @@ sub to_gendnames {
 
     if (ref($self)) {
         foreach (@altnames) {
-            $gendname = $self->{"_HANDLE"}->genders_to_gendname($_);
+            $gendname = $self->{$handlekey}->genders_to_gendname($_);
             if (!defined $gendname) {
                 _errormsg($self, "genders_to_gendname()");
                 return ();
@@ -254,7 +237,7 @@ sub to_gendnames_preserve {
 
     if (ref($self)) {
         foreach (@altnames) {
-            $gendname = $self->{"_HANDLE"}->genders_to_gendname_preserve($_);
+            $gendname = $self->{$handlekey}->genders_to_gendname_preserve($_);
             if (!defined $gendname) {
                 _errormsg($self, "genders_to_gendname_preserve()");
                 return ();
@@ -276,7 +259,7 @@ sub to_altnames {
 
     if (ref($self)) {
         foreach (@nodes) {
-            $altname = $self->{"_HANDLE"}->genders_to_altname($_);
+            $altname = $self->{$handlekey}->genders_to_altname($_);
             if (!defined $altname) {
                 _errormsg($self, "genders_to_altname()");
                 return ();
@@ -298,7 +281,7 @@ sub to_altnames_preserve {
 
     if (ref($self)) {
         foreach (@nodes) {
-            $altname = $self->{"_HANDLE"}->genders_to_altname_preserve($_);
+            $altname = $self->{$handlekey}->genders_to_altname_preserve($_);
             if (!defined $altname) {
                 _errormsg($self, "genders_to_altname_preserve()");
                 return ();
@@ -325,10 +308,6 @@ Gendersllnl - LLNL site specific Perl library for querying genders file
 =head1 SYNOPSIS
 
  use Gendersllnl;
-
- $Gendersllnl::GENDERS_ALTNAME_ATTRIBUTE
- $Gendersllnl::GENDERS_CLUSTER_ATTRIBUTE
- $Gendersllnl::GENDERS_ALL_ATTRIBUTE
 
  $obj = Gendersllnl->new([$filename])
 
@@ -358,19 +337,7 @@ all Genders functionality is also included in this package.
 
 =over 4
 
-=item B<$Gendersllnl::GENDERS_ALTNAME_ATTRIBUTE>
-
-Genders alternate node name attribute.
-
-=item B<$Gendersllnl::GENDERS_CLUSTER_ATTRIBUTE>
-
-Genders cluster name attribute.
-
-=item B<$Gendersllnl::GENDERS_ALL_ATTRIBUTE>
-
-Genders all attribute.
-
-=item B<Genders->new([$filename])>
+=item B<Genders-E<gt>new([$filename])>
 
 Creates a Gendersllnl object and load genders data from the specified
 file.  If the genders file is not specified, the default genders file
