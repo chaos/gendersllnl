@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.13 2003-08-14 23:45:55 achu Exp $
+# $Id: Gendersllnl.pm,v 1.14 2003-08-14 23:56:42 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -312,7 +312,7 @@ Gendersllnl - LLNL site specific Perl library for querying genders file
 
  $obj = Gendersllnl->new([$filename])
 
- $obj->get_cluster()
+ $obj->get_cluster([$node])
 
  $obj->getaltnodes([$attr, [$val]])
  $obj->getaltnodes_preserve([$attr, [$val]])
@@ -344,9 +344,10 @@ Creates a Gendersllnl object and load genders data from the specified
 file.  If the genders file is not specified, the default genders file
 will be used.  Returns undef if file cannot be read.
 
-=item B<$obj-E<gt>get_cluster()>
+=item B<$obj-E<gt>get_cluster([$node])>
 
-Returns the name of the current cluster.
+Returns the name of the specified node's cluster.  If a node is not
+specified, the current node is assumed.
 
 =item B<$obj-E<gt>getaltnodes([$attr, [$val]])>
 
