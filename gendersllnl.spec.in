@@ -32,12 +32,12 @@ DESTDIR="$RPM_BUILD_ROOT" make install
 %files
 %defattr(-,root,root)
 %doc README ChangeLog COPYING NEWS DISCLAIMER
-/usr/share/man/man3/
-/usr/include/gendersllnl.h
-%{_libdir}
+%{_mandir}/man3/*
+%{_includedir}/*
+%{_libdir}/*
 
 %files dist
 %defattr(-,root,root)
 %doc dist/TUTORIAL dist/Distfile.sample
-/usr/share/man/man1/*
-/usr/bin/
+%{_mandir}/man1/*
+%{_bindir}/*
