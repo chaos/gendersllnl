@@ -1,3 +1,7 @@
+2004-04-27  Albert Chu  <chu11@llnl.gov>
+
+	* gendersllnl.spec.in: Use %configure macro.
+
 2004-03-10  Albert Chu  <chu11@llnl.gov>
 
 	* dist/dist2 (find_attrs_in_file, cat_file, getnodes,
