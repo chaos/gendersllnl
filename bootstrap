@@ -1,6 +1,6 @@
 #!/bin/sh
 ##
-# $Id: bootstrap,v 1.2 2003-07-02 17:48:13 achu Exp $
+# $Id: bootstrap,v 1.3 2003-08-19 23:07:58 achu Exp $
 ##
 
 echo "running aclocal ... "
@@ -13,4 +13,4 @@ echo "running automake ... "
 automake --copy --add-missing 
 echo "running autoconf ... "
 autoconf
-echo "now run ./configure to configure pdsh for your environment."
+echo "now run ./configure to configure gendersllnl for your environment."
