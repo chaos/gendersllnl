@@ -1,3 +1,6 @@
+2003-07-15 Albert Chu <chu11@llnl.gov>
+     * Fixed bug in inst
+	
 2003-05-15 Albert Chu <chu11@llnl.gov>
      * initial entry
      * library of LLNL genders specific functions and tools
