@@ -1,5 +1,5 @@
 \."#################################################################
-\."$Id: genders_to.3,v 1.3 2003-05-16 16:08:24 achu Exp $
+\."$Id: genders_to.3,v 1.4 2003-05-22 00:36:02 achu Exp $
 \."by Albert Chu <chu11@llnl.gov>
 \."#################################################################
 .\"
@@ -23,12 +23,15 @@ alternate node names
 \fBgenders_to_gendname()\fR, and \fBgenders_to_gendname_preserve()\fR
 convert an alternate nodename \fIaltnode\fR into a genders nodename.
 The genders nodename is stored in the buffer pointed to by \fIbuf\fR.
-\fIbuflen\fR should indicate the length of the buffer.
+\fIbuflen\fR should indicate the length of the buffer.  If \fIaltnode\fR
+is already a genders nodename, it will be copied into \fIbuf\fR.
 
 \fBgenders_to_altname()\fR, and \fBgenders_to_altname_preserve()\fR
 convert an genders nodename \fInode\fR into the node's alternate
 nodename.  The alternate nodename is stored in the buffer pointed to
 by \fIbuf\fR.  \fIbuflen\fR should indicate the length of the buffer.
+If \fInode\fR is already an alternate nodename, it will be copied into
+\fIbuf\fR.
 
 The difference between the 'preserve' and 'non-preserve' conversion
 functions depends on whether the nodename passed in is listed in the
