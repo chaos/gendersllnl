@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.7 2004-01-16 17:33:09 achu Exp $
+## $Id: Makefile.am,v 1.7.2.1 2004-10-27 02:17:48 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -17,6 +17,19 @@ Makefile.xs: Makefile.PL Libgendersllnl.xs Libgendersllnl.pm
 	cp ../libgendersllnl/gendersllnl.h .
 	cp ../libgendersllnl/hostlist.c .
 	cp ../libgendersllnl/hostlist.h .
+# Hacks to make distcheck work
+	if ! test -a Makefile.PL; then \
+		cp $(srcdir)/Makefile.PL .; \
+	fi
+	if ! test -a typemap; then \
+		cp $(srcdir)/typemap .; \
+	fi
+	if ! test -a Libgendersllnl.pm; then \
+		cp $(srcdir)/Libgendersllnl.pm .; \
+	fi
+	if ! test -a Libgendersllnl.xs; then \
+		cp $(srcdir)/Libgendersllnl.xs .; \
+	fi
 	$(PERL) Makefile.PL PREFIX=$(PERL_INSTALL_PREFIX) MAKEFILE=Makefile.xs FIRST_MAKEFILE=Makefile.xs
 
 test: Makefile.xs 
@@ -38,5 +51,6 @@ clean:
 	rm -f Makefile.xs
 	rm -f Makefile.xs.old
 
+EXTRA_DIST = Libgendersllnl.pm Libgendersllnl.xs Makefile.PL typemap
 
 

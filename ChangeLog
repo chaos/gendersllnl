@@ -1,3 +1,14 @@
+2004-10-26  Albert Chu  <chu11@llnl.gov>
+
+	* config/Make-rpm.mk: Updated for porting issues.
+
+	* gendersllnl.spec.in: Fix for porting issues.
+
+	* Makefile.am, dist/Makefile.am, man/Makefile.am,
+	man/dist/Makefile.am, compat/Makefile.am,
+	src/Gendersllnl/Makefile.am, src/Libgendersllnl/Makefile.am,
+	src/libgendersllnl/Makefile.am: Fixes for distcheck.
+
 2004-04-30  Albert Chu  <chu11@llnl.gov>
 
 	* dist/dist_all: Fix bug in which -v option should be used with
