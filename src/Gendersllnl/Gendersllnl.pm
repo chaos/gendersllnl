@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.12 2003-08-04 23:58:24 achu Exp $
+# $Id: Gendersllnl.pm,v 1.13 2003-08-14 23:45:55 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -44,10 +44,11 @@ sub new {
 
 sub get_cluster {
     my $self = shift;
+    my $node = shift;
     my $cluster;
 
     if (ref($self)) {
-        $cluster = $self->{$handlekey}->genders_get_cluster();
+        $cluster = $self->{$handlekey}->genders_get_cluster($node);
         if (!defined($cluster)) {
             _errormsg($self, "genders_get_cluster()");
             return "";
