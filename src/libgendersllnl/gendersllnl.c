@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.c,v 1.1.1.1 2003-05-13 01:20:50 achu Exp $
+ * $Id: gendersllnl.c,v 1.2 2003-05-16 21:43:03 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.c,v $
  */
 
@@ -558,6 +558,8 @@ int genders_string_common(genders_t handle,
   }
   nodename = NULL;
   
+  hostlist_sort(dest);
+
   if (hostlist_ranged_string(dest, buflen, buf) == -1) {
     genders_set_errnum(handle, GENDERS_ERR_OVERFLOW);
     goto cleanup;
