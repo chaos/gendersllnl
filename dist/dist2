@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.10 2004-02-11 00:12:58 achu Exp $
+#  $Id: dist2,v 1.11 2004-02-11 00:15:22 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -448,7 +448,7 @@ sub usage
 sub participating_nodes
 {
         my (@allnodes, @selectednodes, @removenodes, @upnodes, @nodes);
-        my ($myframe, $hname);
+        my ($myframe, $hname, $node);
 
         if (defined($main::opt_l)) {
                 $hname = $gendobj->getnodename();
@@ -473,7 +473,7 @@ sub participating_nodes
         if (!defined($main::opt_l) && defined($main::opt_x)) {
                 @removenodes = Hostlist::expand($main::opt_x);
                 
-                /* First check if the nodes are legit */
+                # First check if the nodes are legit 
                 foreach $node (@removenodes) {
                         if (grep(/^$node$/, @allnodes)) {
                             print STDERR "Invalid argument to -x: $node\n";
@@ -481,7 +481,7 @@ sub participating_nodes
                         }
                 }    
 
-                /* Remove nodes */
+                # Remove nodes 
                 foreach $node (@allnodes) {
                         if (!grep(/^$node$/, @removenodes)) {
                                 push(@selectednodes, $node);
@@ -516,7 +516,7 @@ sub get_upnodes
 {
         my (@upnodes, $upstr);
     
-	if ($havePSSP) {
+	if ($main::havePSSP) {
 	        if (!(-x $main::path_whatsup_pssp)) {
 		        print STDERR "-v not available on this machine\n";
 			exit(1);
