@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.c,v 1.4 2003-05-22 17:55:44 achu Exp $
+ * $Id: gendersllnl.c,v 1.5 2003-05-23 15:14:22 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.c,v $
  */
 
@@ -93,15 +93,13 @@ int genders_altnodelist_create(genders_t handle, char ***altnodelist) {
     return -1;
 
   if (numnodes > 0) {
-    temp = (char **)malloc(sizeof(char *) * numnodes);
-    if (temp == NULL) {
+    if ((temp = (char **)malloc(sizeof(char *) * numnodes)) == NULL) {
       genders_set_errnum(handle, GENDERS_ERR_OUTMEM);
       return -1;
     }
     
     for (i = 0; i < numnodes; i++) {
-      temp[i] = (char *)malloc(maxvallen+1);
-      if (temp[i] == NULL) {
+      if ((temp[i] = (char *)malloc(maxvallen+1)) == NULL) {
         
         for (j = 0; j < i; j++)
           free(temp[j]);
