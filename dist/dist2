@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.9 2004-02-10 20:09:58 achu Exp $
+#  $Id: dist2,v 1.10 2004-02-11 00:12:58 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -145,10 +145,10 @@ if ($main::opt_n) {
 if ($main::opt_o && $main::opt_V) {
 	$main::rdist_passthru_opts = "-o verify,$main::opt_o";
 }
-elif ($main::opt_o) {
+elsif ($main::opt_o) {
         $main::rdist_passthru_opts = "-o $main::opt_o";
 }
-elif ($main::opt_V) {
+elsif ($main::opt_V) {
         $main::rdist_passthru_opts = "-o verify";
 }
 
