@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.c,v 1.2 2003-05-16 21:43:03 achu Exp $
+ * $Id: gendersllnl.c,v 1.3 2003-05-22 00:44:41 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.c,v $
  */
 
@@ -21,6 +21,43 @@
 #define MAXHOSTNAMELEN 64
 #endif
 
+/* handle common code between genders_getaltnodes() and
+ * genders_getaltnodes_preserve()
+ */
+int genders_getaltnodes_common(genders_t handle,
+                               char *altnodes[],
+                               int len,
+                               const char *attr,
+                               const char *val,
+                               int which);
+
+/* handle common code between genders_to_gendname() and
+ * genders_to_gendname_preserve().  If 'altnode' not found returns 0
+ */
+int genders_to_gendname_common(genders_t handle,
+                               const char *altnode,
+                               char *buf,
+                               int buflen);
+
+/* handle common code between genders_to_altname() and
+ * genders_to_altname_preserve().  If 'node' not found returns 0
+ */
+int genders_to_altname_common(genders_t handle,
+                              const char *node,
+                              char *buf,
+                              int buflen);
+
+/* handle common code between genders_string_to_gendnames(),
+ * genders_string_to_gendnames_preserve(),
+ * genders_string_to_altnames(), and
+ * genders_string_to_altnames_preserve()
+ */
+int genders_string_common(genders_t handle,
+                          const char *str,
+                          char *buf,
+                          int buflen,
+                          int which);
+
 int genders_get_cluster(genders_t handle,
                         const char *node,
                         char *buf,
@@ -32,6 +69,12 @@ int genders_get_cluster(genders_t handle,
                          GENDERS_CLUSTER_ATTRIBUTE,
                          buf,
                          buflen);
+
+  /* cluster attribute not found */ 
+  if (ret == 0) {
+    genders_set_errnum(GENDERS_ERR_INTERNAL);
+    ret = -1;
+  }
 
   if (ret == 1)
     ret = 0;
@@ -235,7 +278,7 @@ int genders_isnode_or_altnode(genders_t handle, const char *nodename) {
   if ((ret = genders_isnode(handle, nodename)) == -1)
     return -1;
 
-  if (ret != 1)
+  if (ret == 0)
     ret = genders_isaltnode(handle, nodename);
 
   return ret;
@@ -279,13 +322,8 @@ int genders_to_gendname_common(genders_t handle,
                               &nodebuf,
                               1,
                               GENDERS_ALTNAME_ATTRIBUTE,
-                              altnode)) == -1) {
-    if (genders_errnum(handle) == GENDERS_ERR_OVERFLOW) {
-      genders_set_errnum(handle, GENDERS_ERR_PARSE);
-      goto cleanup;
-    }
+                              altnode)) == -1)
     goto cleanup;
-  }
 
   if (ret > 1) {
     genders_set_errnum(handle, GENDERS_ERR_INTERNAL);
@@ -306,7 +344,6 @@ int genders_to_gendname_common(genders_t handle,
  cleanup:
 
   free(nodebuf);
-
   return -1;
 }
 
@@ -404,7 +441,7 @@ int genders_to_altname_common(genders_t handle,
                               maxvallen + 1)) == -1)
     goto cleanup;
   
-  /* check for possibility there is no alternate name value */
+  /* check for possibility the attribute has no value */
   if (ret == 1 && strlen(altnodebuf) == 0)
     ret = 0; 
 
@@ -474,8 +511,7 @@ int genders_string_common(genders_t handle,
                           char *buf,
                           int buflen,
                           int which) {
-
-  int maxlen;
+  int maxvallen, maxlen;
   char *nodename = NULL;
   char *nodebuf = NULL;
   hostlist_t src = NULL;
@@ -487,7 +523,10 @@ int genders_string_common(genders_t handle,
     goto cleanup;
   }
 
-  maxlen = MAXHOSTNAMELEN;
+  if ((maxvallen = genders_getmaxvallen(handle)) == -1) 
+    goto cleanup;
+
+  maxlen = (MAXHOSTNAMELEN > maxvallen) ? MAXHOSTNAMELEN : maxvallen;
 
   if ((nodebuf = (char *)malloc(maxlen+1)) == NULL) {
     genders_set_errnum(handle, GENDERS_ERR_OUTMEM);

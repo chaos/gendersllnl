@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.h,v 1.1.1.1 2003-05-13 01:20:50 achu Exp $
+ * $Id: gendersllnl.h,v 1.2 2003-05-22 00:44:41 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.h,v $
  */
 
@@ -7,7 +7,6 @@
 #define _GENDERSLLNL_H
 
 #include <genders.h>
-#include <stdio.h>
 
 /******************
  * defines        *
@@ -86,6 +85,7 @@ int genders_isaltnode(genders_t handle, const char *altnode);
 int genders_isnode_or_altnode(genders_t handle, const char *nodename);
 
 /* Convert an altnode into a genders node.  
+ * Copies 'altnode' into 'buf' if altnode is already a genders node
  * If alternate name is not found, will return failure.
  * Returns: 0 on success, -1 on failure
  */ 
@@ -95,7 +95,8 @@ int genders_to_gendname(genders_t handle,
                         int buflen);
 
 /* Convert an altnode into a genders node.  
- * If alternate name is not found, will return parameter pointed to by
+ * Copies 'altnode' into 'buf' if altnode is already a genders node
+ * If alternate name is not found, will return parameter pointed to by 
  * 'altnode'
  * Returns: 0 on success, -1 on failure
  */ 
@@ -104,7 +105,8 @@ int genders_to_gendname_preserve(genders_t handle,
                                  char *buf, 
                                  int buflen);
 
-/* Convert an node into a altnode.  
+/* Convert a node into a altnode.  
+ * Copies 'node' into 'buf' if node is already an alternate node
  * If alternate name is not found, will return failure.
  * Returns: 0 on success, -1 on failure
  */ 
@@ -113,8 +115,9 @@ int genders_to_altname(genders_t handle,
                        char *buf, 
                        int buflen);
 
-/* Convert an node into an altnode
- * If alternate name is not found, will return parameter pointed to be
+/* Convert a node into an altnode
+ * Copies 'node' into 'buf' if node is already an alternate node
+ * If alternate name is not found, will return parameter pointed to by
  * 'node'
  * Returns: 0 on success, -1 on failure
  */ 
@@ -142,7 +145,7 @@ int genders_string_to_gendnames_preserve(genders_t handle,
                                          int buflen);
 
 /* Convert ranged string of altnodes to genders nodes
- * Will fail if any node is not an altnode
+ * Will fail if any node is not an genders node
  * Returns: 0 on success, -1 on failure
  */ 
 int genders_string_to_altnames(genders_t handle,
@@ -151,7 +154,7 @@ int genders_string_to_altnames(genders_t handle,
                                int buflen);
 
 /* Convert ranged string of nodes to altnodes
- * Will preserve node names if altnode is not found
+ * Will preserve node names if node is not found
  * Returns: 0 on success, -1 on failure
  */ 
 int genders_string_to_altnames_preserve(genders_t handle,
