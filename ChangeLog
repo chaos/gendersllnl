@@ -19,6 +19,8 @@
 
 	* src/libgendersllnl/gendersllnl.h,
 	src/libgendersllnl/gendersllnl.c: Cleaned up code through files.
+
+	* tagged gendersllnl-1-2-0-pre2
 	
 2003-09-26  Albert Chu  <chu11@llnl.gov>
 

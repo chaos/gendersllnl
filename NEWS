@@ -10,6 +10,7 @@ Changes in gendersllnl-1.3-1
  -- Re-ordered error return code priority within some API functions.
     For example, when an array of length 0 is specified,
     GENDERS_ERR_OVERFLOW may be returned instead of GENDERS_ERR_PARAMETERS.
+ -- Export numerous Hostlist.pm functions.
 
 Changes in gendersllnl-1.2-1
 ============================
@@ -27,4 +28,4 @@ Changes in gendersllnl-1.0-1
 ============================
  -- Fixed bug regarding timestamps in inst.  (gnats/214)
 
-$Id: NEWS,v 1.7 2003-11-04 00:12:24 achu Exp $
+$Id: NEWS,v 1.8 2003-11-04 00:13:56 achu Exp $
