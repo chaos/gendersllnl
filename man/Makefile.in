@@ -13,9 +13,6 @@
 # PARTICULAR PURPOSE.
 
 @SET_MAKE@
-
-# We will cheat and use ExtUtils::MakeMaker to install this
-# Perl Module instead of doing some whacked out autoconf
 SHELL = @SHELL@
 
 srcdir = @srcdir@
@@ -39,7 +36,7 @@ oldincludedir = /usr/include
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
-top_builddir = ../..
+top_builddir = ..
 
 ACLOCAL = @ACLOCAL@
 AUTOCONF = @AUTOCONF@
@@ -79,7 +76,6 @@ CC = @CC@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 ECHO = @ECHO@
-
 GENDERSLLNL_PM_PREFIX = @GENDERSLLNL_PM_PREFIX@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 LIBTOOL = @LIBTOOL@
@@ -95,18 +91,45 @@ XS_PREFIX = @XS_PREFIX@
 am__include = @am__include@
 am__quote = @am__quote@
 install_sh = @install_sh@
-subdir = src/Gendersllnl
+
+man3_MANS = \
+	genders_altnodelist.3 \
+	genders_altnodelist_clear.3 \
+	genders_altnodelist_create.3 \
+	genders_altnodelist_destroy.3 \
+	genders_get_cluster.3 \
+	genders_getaltnodes.3 \
+	genders_getaltnodes_preserve.3 \
+	genders_isaltnode.3 \
+	genders_isnode_or_altnode.3 \
+	genders_string.3 \
+	genders_string_to_altnames.3 \
+	genders_string_to_altnames_preserve.3 \
+	genders_string_to_gendnames.3 \
+	genders_string_to_gendnames_preserve.3 \
+	genders_to.3 \
+	genders_to_altname.3 \
+	genders_to_altname_preserve.3 \
+	genders_to_gendname.3 \
+	genders_to_gendname_preserve.3 \
+	gendersllnl.3 \
+	libgendersllnl.3
+
+subdir = man
 mkinstalldirs = $(SHELL) $(top_srcdir)/config/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config/config.h
 CONFIG_CLEAN_FILES =
 DIST_SOURCES =
+
+NROFF = nroff
+MANS = $(man3_MANS)
 DIST_COMMON = Makefile.am Makefile.in
 all: all-am
 
 .SUFFIXES:
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.ac $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  src/Gendersllnl/Makefile
+	  $(AUTOMAKE) --gnu  man/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -119,12 +142,55 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
+
+man3dir = $(mandir)/man3
+install-man3: $(man3_MANS) $(man_MANS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(man3dir)
+	@list='$(man3_MANS) $(dist_man3_MANS) $(nodist_man3_MANS)'; \
+	l2='$(man_MANS) $(dist_man_MANS) $(nodist_man_MANS)'; \
+	for i in $$l2; do \
+	  case "$$i" in \
+	    *.3*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  if test -f $(srcdir)/$$i; then file=$(srcdir)/$$i; \
+	  else file=$$i; fi; \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  case "$$ext" in \
+	    3*) ;; \
+	    *) ext='3' ;; \
+	  esac; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed -e 's/^.*\///'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " $(INSTALL_DATA) $$file $(DESTDIR)$(man3dir)/$$inst"; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(man3dir)/$$inst; \
+	done
+uninstall-man3:
+	@$(NORMAL_UNINSTALL)
+	@list='$(man3_MANS) $(dist_man3_MANS) $(nodist_man3_MANS)'; \
+	l2='$(man_MANS) $(dist_man_MANS) $(nodist_man_MANS)'; \
+	for i in $$l2; do \
+	  case "$$i" in \
+	    *.3*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed -e 's/^.*\///'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " rm -f $(DESTDIR)$(man3dir)/$$inst"; \
+	  rm -f $(DESTDIR)$(man3dir)/$$inst; \
+	done
 tags: TAGS
 TAGS:
 
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 
-top_distdir = ../..
+top_distdir = ..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
 
 distdir: $(DISTFILES)
@@ -150,9 +216,12 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile
+all-am: Makefile $(MANS)
 
 installdirs:
+	$(mkinstalldirs) $(DESTDIR)$(man3dir)
+
+install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
 uninstall: uninstall-am
@@ -192,13 +261,13 @@ info: info-am
 
 info-am:
 
-install-data-am: install-data-local
+install-data-am: install-man
 
 install-exec-am:
 
 install-info: install-info-am
 
-install-man:
+install-man: install-man3
 
 installcheck-am:
 
@@ -210,37 +279,20 @@ mostlyclean: mostlyclean-am
 
 mostlyclean-am: mostlyclean-generic mostlyclean-libtool
 
-uninstall-am: uninstall-info-am
+uninstall-am: uninstall-info-am uninstall-man
+
+uninstall-man: uninstall-man3
 
 .PHONY: all all-am check check-am clean clean-generic clean-libtool \
 	distclean distclean-generic distclean-libtool distdir dvi \
 	dvi-am info info-am install install-am install-data \
-	install-data-am install-data-local install-exec install-exec-am \
-	install-info install-info-am install-man install-strip \
+	install-data-am install-exec install-exec-am install-info \
+	install-info-am install-man install-man3 install-strip \
 	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool uninstall uninstall-am uninstall-info-am
+	mostlyclean-libtool uninstall uninstall-am uninstall-info-am \
+	uninstall-man uninstall-man3
 
-
-all: Makefile.pm
-	$(MAKE) -f Makefile.pm
-
-Makefile.pm: Makefile.PL
-	$(PERL) Makefile.PL PREFIX=$(GENDERSLLNL_PM_PREFIX) MAKEFILE=Makefile.pm FIRST_MAKEFILE=\Makefile.pm
-
-install: Makefile.pm
-	$(MAKE) -f Makefile.pm pure_install
-
-pure_install: Makefile.pm
-	$(MAKE) -f Makefile.pm pure_install
-
-install-data-local:
-	$(MAKE) -f Makefile.pm pure_install
-
-clean:
-	$(MAKE) -f Makefile.pm clean
-	rm -f Makefile.pm
-	rm -f Makefile.pm.old
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

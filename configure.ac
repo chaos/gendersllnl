@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.2 2003-05-14 00:30:35 achu Exp $
+## $Id: configure.ac,v 1.3 2003-05-14 01:06:40 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -68,6 +68,7 @@ AC_SUBST(GENDERSLLNL_PM_PREFIX)
 AC_PROG_CC
 AC_PROG_LIBTOOL
 AC_PROG_MAKE_SET
+AC_PATH_PROG(PERL, perl)
 
 ##
 # Checks for header files.
@@ -116,6 +117,7 @@ AC_CONFIG_FILES( \
   src/libgendersllnl/Makefile \
   src/Libgendersllnl/Makefile \
   src/Gendersllnl/Makefile \
+  man/Makefile
 )
 AC_OUTPUT
 
