@@ -1,9 +1,4 @@
 2005-01-03  Albert Chu  <chu11@llnl.gov>
-
-	* src/libgendersllnl/hostlist.h, src/libgendersllnl/hostlist.c:
-	Update to newest version.
-	
-2005-01-03  Albert Chu  <chu11@llnl.gov>
 	
 	* tagged gendersllnl-1-6-0-pre1
 
