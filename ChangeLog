@@ -2,9 +2,25 @@
 
 	* src/Gendersllnl/Gendersllnl.pm: Added get_cluster() to perldoc.
 
+	* dist/dist_all: Reworked to avoid using -r option with nodeattr.
+
+	* dist/dist_all: Changed -r option to -i option, so that it
+	coincides with -i option in dist2.
+	
+	* man/dist/dist_all.1: 
+	Removed SP specific references.
+	Changed -r option to -i option and re-worded manpage appropriately.
+
+	* man/dist/dist_cmp.1:
+	Fixed "dsh" to "pdsh", which is what is used on Linux systems. 
+	
+	* gendersllnl.spec: Added requirement of pdsh >= 2.0 for dist subpackage.
+
+	* Tagged gendersllnl-1-1-1
+	
 2003-07-15  Albert Chu  <chu11@llnl.gov>
 
-	* dist/inst.c: Fixed bug gnats/214. 
+	* dist/inst.c: Fixed gnats/214 bug. 
 
 	* Tagged gendersllnl-1-0-1.
 	
