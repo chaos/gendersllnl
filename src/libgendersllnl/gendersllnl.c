@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.c,v 1.12 2003-05-29 15:46:36 achu Exp $
+ * $Id: gendersllnl.c,v 1.13 2003-05-29 16:04:41 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.c,v $
  */
 
@@ -10,16 +10,10 @@
 #include "gendersllnl.h"
 #include "hostlist.h"
 
-#define GENDERSLLNL_BUFFERLEN             65536
-
 #define GENDERSLLNL_GENDNAME_NOPRESERVE   0
 #define GENDERSLLNL_GENDNAME_PRESERVE     1
 #define GENDERSLLNL_ALTNAME_NOPRESERVE    2
 #define GENDERSLLNL_ALTNAME_PRESERVE      3
-
-#ifndef MAXHOSTNAMELEN
-#define MAXHOSTNAMELEN 64
-#endif
 
 /* handle common code between genders_getaltnodes() and
  * genders_getaltnodes_preserve()
@@ -463,7 +457,7 @@ int genders_string_common(genders_t handle,
                           char *buf,
                           int buflen,
                           int flag) {
-  int maxvallen, ret;
+  int maxvallen, maxnodelen, maxlen, ret;
   char *node = NULL;
   char *strbuf = NULL;
   hostlist_t src = NULL;
@@ -478,9 +472,13 @@ int genders_string_common(genders_t handle,
   if ((maxvallen = genders_getmaxvallen(handle)) == -1) 
     goto cleanup;
 
-  maxvallen = (MAXHOSTNAMELEN > maxvallen) ? MAXHOSTNAMELEN : maxvallen;
+  if ((maxnodelen = genders_getmaxnodelen(handle)) == -1)
+    goto cleanup;
 
-  if ((strbuf = (char *)malloc(maxvallen+1)) == NULL) {
+  /* to protect against possible overflow on 'to_altname_preserve' */
+  maxlen = (maxnodelen > maxvallen) ? maxnodelen : maxvallen;
+
+  if ((strbuf = (char *)malloc(maxlen+1)) == NULL) {
     genders_set_errnum(handle, GENDERS_ERR_OUTMEM);
     goto cleanup;
   }
@@ -503,23 +501,23 @@ int genders_string_common(genders_t handle,
   while ((node = hostlist_next(iter)) != NULL) {
 
     /* realloc b/c of potential buf overflow */ 
-    if (strlen(node) > maxvallen) {
-      maxvallen = strlen(node);
-      if ((strbuf = (char *)realloc(strbuf, maxvallen+1)) == NULL) {
+    if (strlen(node) > maxlen) {
+      maxlen = strlen(node);
+      if ((strbuf = (char *)realloc(strbuf, maxlen+1)) == NULL) {
         genders_set_errnum(handle, GENDERS_ERR_OUTMEM);
         goto cleanup;
       }
     }
-    memset(strbuf, '\0', maxvallen+1);
+    memset(strbuf, '\0', maxlen+1);
 
     if (flag == GENDERSLLNL_GENDNAME_NOPRESERVE)
-      ret = genders_to_gendname(handle, node, strbuf, maxvallen+1);
+      ret = genders_to_gendname(handle, node, strbuf, maxlen+1);
     else if (flag == GENDERSLLNL_GENDNAME_PRESERVE)
-      ret = genders_to_gendname_preserve(handle, node, strbuf, maxvallen+1);
+      ret = genders_to_gendname_preserve(handle, node, strbuf, maxlen+1);
     else if (flag == GENDERSLLNL_ALTNAME_NOPRESERVE)
-      ret = genders_to_altname(handle, node, strbuf, maxvallen+1);
+      ret = genders_to_altname(handle, node, strbuf, maxlen+1);
     else if (flag == GENDERSLLNL_ALTNAME_PRESERVE)
-      ret = genders_to_altname_preserve(handle, node, strbuf, maxvallen+1);
+      ret = genders_to_altname_preserve(handle, node, strbuf, maxlen+1);
 
     if (ret == -1)
       goto cleanup;
