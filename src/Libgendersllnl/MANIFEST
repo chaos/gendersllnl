@@ -3,6 +3,5 @@ Libgendersllnl.pm
 Libgendersllnl.xs
 Makefile.PL
 MANIFEST
-test.pl
 typemap
 
