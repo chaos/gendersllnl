@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.3 2003-07-01 00:11:32 achu Exp $
+#  $Id: dist2,v 1.4 2003-07-01 00:39:48 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2002 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -81,7 +81,7 @@ $line_no = 		1;
 use strict;
 
 my ($attrpair, @attrpairs, @want_labels, @found_labels);
-my (@packages, $cmd);
+my (@packages, $cmd, $gendobj);
 
 # die if ruid is not root
 if ($< != 0) {
@@ -99,6 +99,7 @@ if ($main::opt_c) {
 	$main::local_cluster = $main::opt_c;
 	$gendobj = Gendersllnl->new(sprintf($main::path_genders, $main::local_cluster));
 } else {
+        $gendobj = Gendersllnl->new();
         $main::local_cluster = $gendobj->get_cluster();
 	if ($main::local_cluster eq "") {
                 print STDERR ("Error retrieving cluster name\n");
@@ -421,7 +422,7 @@ sub participating_nodes
 	my (@nodes, $myframe, $hname);
 
 	if (defined($main::opt_l)) {
-                $hname = $gendobj->getnodename()
+                $hname = $gendobj->getnodename();
 		@nodes = ($hname);
 	} elsif (defined($main::opt_w)) {
 		@nodes = split(/,/, $main::opt_w);
@@ -431,7 +432,7 @@ sub participating_nodes
 		$myframe = $gendobj->getattrval("frame");
 		# If no frame attr (i.e. CWS) just act like -l 
 		if ($myframe eq "") {
-                        $hname = $gendobj->getnodename()
+                        $hname = $gendobj->getnodename();
 			@nodes = ($hname);
 		} else {
 			@nodes = $gendobj->getnodes("frame","$myframe");
