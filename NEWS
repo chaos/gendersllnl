@@ -14,6 +14,9 @@ Changes in gendersllnl-1.2-1
  -- Re-ordered error return code priority within some API functions.
     For example, when an array of length 0 is specified,
     GENDERS_ERR_OVERFLOW may be returned instead of GENDERS_ERR_PARAMETERS.
+ -- Changed -v option in dist2 to -d.
+ -- Added -v, -x, and -V options to dist2.
+ -- Added hostrange support to dist2 -w option.
 
 Changes in gendersllnl-1.1-1
 ============================
@@ -24,4 +27,4 @@ Changes in gendersllnl-1.0-1
 ============================
  -- Fixed bug regarding timestamps in inst.  (gnats/214)
 
-$Id: NEWS,v 1.10 2003-12-06 00:00:10 achu Exp $
+$Id: NEWS,v 1.11 2004-02-11 01:46:11 achu Exp $
