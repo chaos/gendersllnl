@@ -33,7 +33,6 @@ DESTDIR="$RPM_BUILD_ROOT" make install
 %files
 %defattr(-,root,root)
 %doc README ChangeLog COPYING NEWS DISCLAIMER
-/usr/man/man3/
 /usr/share/man/man3/
 /usr/include/gendersllnl.h
 /usr/lib/
@@ -41,5 +40,5 @@ DESTDIR="$RPM_BUILD_ROOT" make install
 %files dist
 %defattr(-,root,root)
 %doc dist/TUTORIAL dist/Distfile.sample
-/usr/man/man1/*
+/usr/share/man/man1/*
 /usr/bin/
