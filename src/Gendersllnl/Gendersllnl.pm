@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Gendersllnl.pm,v 1.17 2003-12-30 22:51:16 achu Exp $
+#  $Id: Gendersllnl.pm,v 1.18 2003-12-31 18:46:27 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -32,7 +32,7 @@ package Gendersllnl;
 use strict;
 use Genders qw(_errormsg $handlekey $debugkey);
 use Libgendersllnl;
-our $VERSION = "2.0";
+our $VERSION = "0.01";
 
 our @ISA = qw(Genders);
 
