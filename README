@@ -1,8 +1,22 @@
-Gendersllnl is a package of libraries and tools written around genders
-for use at Lawrence Livermore National Laboratories.  A number of
-these libraries and tools may or may not be useful.  Some of them may
-need to be modified for use on your particular systems.  (This is why
-it is called the GendersLLNL, duh! :-).
+Originally, many of the functions and tools in this package were
+included in the Genders package.  It was later decided to split the
+Genders into two different packages:
+
+1) Genders - a package of generic cluster database libraries and
+tools.
+
+2) Gendersllnl - a package of libraries and tools build around
+Genders, for use on Lawrence Livermore National Laboratory (LLNL)
+clusters.
+
+This split allows Genders to be potentially more useful to
+administrators and developers outside of LLNL, but allows us to
+keep our specific Genders needs at the laboratory.
+
+A number of the libraries and tools in this package may be useful for
+clusters outside of Lawrence Livermore, but they may need to be
+modified for use on your particular systems.  Some may be of
+absolutely no use.
 
 This package includes:
 
@@ -27,7 +41,7 @@ This package includes:
     /var/dist.  See dist2(1).
 
 * dist_all, dist_local, dist_cmp, dist_bootstrap
-  - Wrappers arond dist2, see manpages for details.
+  - Wrappers around dist2, see manpages for details.
 
 * inst
   - Similar to gnu fileutils install -C, tuned for dist2 needs.

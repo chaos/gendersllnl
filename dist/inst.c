@@ -1,13 +1,16 @@
 /*****************************************************************************\
- *  $Id: inst.c,v 1.2 2003-07-15 21:17:03 achu Exp $
+ *  $Id: inst.c,v 1.3 2003-12-30 22:51:16 achu Exp $
  *****************************************************************************
- *  Copyright (C) 2001-2002 The Regents of the University of California.
+ *  Copyright (C) 2001-2003 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
- *  Written by Jim Garlick <garlick@llnl.gov>.
+ *  Written by Jim Garlick <garlick@llnl.gov> and Albert Chu <chu11@llnl.gov>.
  *  UCRL-CODE-2003-004.
  *
- *  This file is part of Genders, a cluster configuration database and
- *  rdist preprocessor.  For details, see <http://www.llnl.gov/linux/genders/>.
+ *  This file is part of Gendersllnl, a cluster configuration database
+ *  and rdist preprocessor for LLNL site specific needs.  This package
+ *  was originally a part of the Genders package, but has now been
+ *  split off into a separate package.  For details, see
+ *  <http://www.llnl.gov/linux/genders/>.
  *  
  *  Genders is free software; you can redistribute it and/or modify it under
  *  the terms of the GNU General Public License as published by the Free

@@ -1,7 +1,5 @@
-libgendersllnl, Libgendersllnl, Gendersllnl
+Original Authori:
+Jim Galick <garlick1@llnl.gov>
 
+Current Maintainer:
 Albert Chu <chu11@llnl.gov>
-
-dist2 subpackage
- 
-Jim Garlick <garlick1@llnl.gov>
