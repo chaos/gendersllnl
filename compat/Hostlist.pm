@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Hostlist.pm,v 1.9 2004-02-09 19:53:00 grondo Exp $
+#  $Id: Hostlist.pm,v 1.10 2004-02-11 00:46:43 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -179,8 +179,6 @@ sub expand
                 # Replace ',' chars internal to "[]" with ':"
                 #
                 while ($list =~ s/(\[[^\]]*),([^\[]*\])/$1:$2/) {}
-
-		print "\"$list\"\n";
 
                 return map { expand_quadrics_range($_) } split /,/, $list;
 
