@@ -1,3 +1,9 @@
+2003-08-13  Albert Chu  <chu11@llnl.gov>
+
+	* compat/Hostlist.pm: Added ability to export symbols.
+
+	* compat/Hostlist.pm: Added perldoc manpage.
+
 2003-08-07  Albert Chu  <chu11@llnl.gov>
 
 	* gendersllnl.spec: Lowered pdsh version requirement

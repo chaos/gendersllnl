@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Hostlist.pm,v 1.3 2003-05-19 16:49:03 achu Exp $
+#  $Id: Hostlist.pm,v 1.4 2003-08-13 23:04:48 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2002 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -34,7 +34,24 @@ package Hostlist;
 use strict;
 use Carp;
 
-use Genders;
+use Gendersllnl;
+
+require Exporter;
+our @ISA = qw(Exporter);
+@EXPORT_OK = qw(mk_file mk_gend mk_cmdline to_initial to_reliable
+                detect_metachar expand compress intersect union diff
+                xor within same);
+
+%EXPORT_TAGS = (
+                all => [ qw(mk_file mk_gend mk_cmdline to_initial to_reliable
+                            detect_metachar expand compress intersect union diff
+                            xor within same) ],
+                mk => [ qw(mk_file mk_gend mk_cmdline) ],
+                to => [ qw(to_initial to_reliable) ],
+                convert => [ qw(expand compress) ], 
+                set => [ qw(intersect union diff xor within same) ],
+                misc => [ qw(detect_metachar) ],
+                );
 
 if (!$Hostlist::included) {
 $Hostlist::included = 1;
@@ -73,7 +90,7 @@ sub mk_gend
         my ($attrName) = @_;
         my $obj;
 
-        $obj = Genders->new();
+        $obj = Gendersllnl->new();
         return $obj->getnodes($attrName);
 }
 
@@ -97,11 +114,13 @@ sub to_initial
 {
         my (@inList) = @_;
         my (@outList, $node, $iname);
+        my $obj;
 
+        $obj = Gendersllnl->new();
         foreach $node (@inList) {
                 ($node) = split(/\./, $node);                   # shorten name
-                #$iname = Sdr::nn2sname(Sdr::ename2nn($node));  # convert
-                push(@outList, $iname ? $iname : $node);
+                $iname = $obj->to_gendname_preserve($node);
+                push(@outList, $iname);
         }
         
         return @outList;
@@ -115,11 +134,13 @@ sub to_reliable
 {
         my (@inList) = @_;
         my (@outList, $node, $rname);
+        my $obj;
 
+        $obj = Gendersllnl->new();
         foreach $node (@inList) {
                 ($node) = split(/\./, $node);                   # shorten name
-                #$rname = Sdr::nn2ename(Sdr::sname2nn($node));  # convert
-                push(@outList, $rname ? $rname : $node);
+                $rname = $obj->to_altname_preserve($node);
+                push(@outList, $rname);
         }
         
         return @outList;
@@ -358,4 +379,177 @@ sub sortn
 
 
 }       # Hostlist::included
+
 1;      # return a true value...
+
+__END__
+
+=head1 NAME
+
+Hostlist - Routines for operating on lists of hosts.
+
+=head1 SYNOPSIS
+
+ use Hostlist;
+
+ Hostlist::mk_file($fileName)
+ Hostlist::mk_gend($attrName) 
+ Hostlist::mk_cmdline($cmdLine)
+
+ Hostlist::to_initial(@reliableNames)
+ Hostlist::to_reliable(@initialNames)
+
+ Hostlist::detect_metachar($entry)
+ Hostlist::expand($hostList)
+ Hostlist::compress(@inList)
+
+ Hostlist::intersect(\@a, \@b)
+ Hostlist::union(\@a, \@b)
+ Hostlist::diff(\@a, \@b)
+ Hostlist::xor(\@a, \@b)
+ Hostlist::within(\@a, \@b)
+ Hostlist::same(\@a, \@b)
+
+=head1 DESCRIPTION
+
+This package provides routines for reading, converting, operating, and
+displaying lists of hosts.
+
+=over 4
+
+=item B<Hostlist::mk_file($fileName)>
+
+Returns a list of the hostnames listed in the specified file.  
+
+=item B<Hostlist::mk_gend($attrName)> 
+
+Returns a list of hostnames with the specified genders attribute.
+
+=item B<Hostlist::mk_cmdline($cmdLine)>
+
+Returns a list of hostnames originally separated by commas on the
+command line.
+
+=item B<Hostlist::to_initial(@reliableNames)>
+
+Returns a list of initial hostnames, converted from the specified list
+of reliable hostnames.  Hostnames are preserved if the conversion
+fails.
+
+=item B<Hostlist::to_reliable(@initialNames)>
+
+Returns a list of reliable hostnames, converted from the specified
+list of initial hostnames.  Hostnames are preserved if the conversion
+fails.
+
+=item B<Hostlist::detect_metachar($entry)>
+
+Returns true if shell metacharacters are detected in the specified
+hostlist entry.
+
+=item B<Hostlist::expand($hostList)>
+
+Return a list of hostnames based on the specified hostrange.
+
+=item B<Hostlist::compress(@inList)>
+
+Return a hostrange based on a list of hostnames with identical
+prefixes.
+
+=item B<Hostlist::intersect(\@a, \@b)>
+
+Returns the intersection of two lists.
+
+=item B<Hostlist::union(\@a, \@b)>
+
+Returns the union of two lists.  
+
+=item B<Hostlist::diff(\@a, \@b)>
+
+Returns the list of hosts @a that are not in @b.
+
+=item B<Hostlist::xor(\@a, \@b)>
+
+Returns the exclusive OR of hosts in @a and @b.
+
+=item B<Hostlist::within(\@a, \@b)>
+
+Returns true if all hosts in @a are in @b.
+
+=item B<Hostlist::same(\@a, \@b)>
+
+Returns true if @a and @b contain the exact same hosts.
+
+=back
+
+=head1 EXPORT SYMBOLS
+
+When the Hostlist module is loaded, the following symbols can be
+exported.
+
+=over 4
+
+=item mk_file
+
+=item mk_gend
+
+=item mk_cmdline
+
+=item to_initial
+
+=item to_reliable
+
+=item detect_metachar
+
+=item expand
+
+=item compress
+
+=item intersect
+
+=item union
+
+=item diff
+
+=item xor
+
+=item within
+
+=item same
+
+=back
+
+=head1 EXPORT TAGS
+
+When the Hostlist module is loaded, the following tags can be used to
+export the following sets of symbols.
+
+=over 10
+
+=item B<all>
+
+mk_file, mk_gend, mk_cmdline, to_initial, to_reliable,
+detect_metachar, expand, compress, intersect, union, diff, xor,
+within, same
+
+=item B<mk>
+
+mk_file, mk_gend, mk_cmdline
+
+=item B<to>
+
+to_initial, to_reliable
+
+=item B<convert>
+
+expand, compress
+
+=item B<set>
+
+intersect, union, diff, xor, within, same
+
+=item B<misc>
+
+detect_metachar
+
+=back
