@@ -1,6 +1,11 @@
+2004-02-09  Mark Grondona <mgrondona@llnl.gov>
+
+	* compat/Hostlist.pm (expand) :  Properly handle multiple quadrics
+        style hostlists separated by the comma character.
+
 2003-02-04  Albert Chu  <chu11@llnl.gov>
 
-	* Fix copyright notices everywhere to say "Gendersllnl" instead of
+	* : Fix copyright notices everywhere to say "Gendersllnl" instead of
 	"Genders".
 	
 2003-01-15  Albert Chu  <chu11@llnl.gov>
@@ -28,7 +33,7 @@
 	* compat/Hostlist.pm: Fixed declarations of EXPORT_OK and
 	EXPORT_TAGS.
 
-	* tagged gendersllnl-1-2-0-pre3
+	* : tagged gendersllnl-1-2-0-pre3
 	
 2003-11-07  Albert Chu  <chu11@llnl.gov>
 
@@ -103,7 +108,7 @@
 	
 2003-08-14  Albert Chu  <chu11@llnl.gov>
 
-	* src/Gendersllnl/Gendersllnl.pm (get_cluster); Added optional
+	* src/Gendersllnl/Gendersllnl.pm (get_cluster): Added optional
 	$node option so that you do not have to be on a node in the
 	genders database.
 
@@ -143,16 +148,16 @@
 	
 	* gendersllnl.spec: Added requirement of pdsh >= 2.0 for dist subpackage.
 
-	* Tagged gendersllnl-1-1-1
+	* : Tagged gendersllnl-1-1-1
 	
 2003-07-15  Albert Chu  <chu11@llnl.gov>
 
 	* dist/inst.c: Fixed gnats/214 bug. 
 
-	* Tagged gendersllnl-1-0-1.
+	* : Tagged gendersllnl-1-0-1.
 	
 2003-05-15  Albert Chu  <chu11@llnl.gov>
 
-	* Initial Entry.
+	* : Initial Entry.
 
-	* Tagged gendersllnl-1-0-1pre.
+	* : Tagged gendersllnl-1-0-1pre.

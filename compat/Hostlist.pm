@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Hostlist.pm,v 1.8 2003-12-31 18:47:22 achu Exp $
+#  $Id: Hostlist.pm,v 1.9 2004-02-09 19:53:00 grondo Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -170,16 +170,26 @@ sub expand
 
         # matching "[" "]" pair with stuff inside will be considered a quadrics
         # range:
-        if ($list =~ /[^[]+\[.+\]/) {
+        if ($list =~ /[^[]*\[.+\]/) {
                 # quadrics ranges are separated by whitespace in RMS -
                 # try to support that here
-                return map { expand_quadrics_range($_) } split /\s+/, $list;
+		$list =~ s/\s+/,/g;
+
+                # 
+                # Replace ',' chars internal to "[]" with ':"
+                #
+                while ($list =~ s/(\[[^\]]*),([^\[]*\])/$1:$2/) {}
+
+		print "\"$list\"\n";
+
+                return map { expand_quadrics_range($_) } split /,/, $list;
+
         } else {
                 return map { 
-                            s/(\w+?)(\d+)-(\w*?)(\d+)/"$1$2".."$1$4"/ 
+                            s/(\w*?)(\d+)-(\w*?)(\d+)/"$2".."$4"/ 
                                                || 
-                                          s/(.+)/"$1"/; 
-                            eval; 
+                                          s/(.+)/""/; 
+                            map {"$1$_"} eval; 
                            } split /,/, $list;
         }
 }
@@ -197,8 +207,8 @@ sub expand_quadrics_range
         return $list if (!defined $ranges);
 
         return map {"$pfx$_"} 
-                   map { s/(\d+)-(\d+)/$1..$2/; eval } 
-                       split(/,/, $ranges);
+                   map { s/(\d+)-(\d+)/"$1".."$2"/; eval } 
+                       split(/,|:/, $ranges);
 }
 
 # compress_to_quadrics
@@ -268,7 +278,7 @@ sub comp2
                            ) ? $i{$$_[0]} : ++$i{$$_[0]}
                          ]
               }, ($$_[1])
-        ) for map { [/(.+?)(\d*)$/] } sortn(@_);
+        ) for map { [/(.*?)(\d*)$/] } sortn(@_);
 
         for my $key (keys %s) {
                 @{$s{$key}} = 
