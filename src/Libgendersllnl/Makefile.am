@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.11 2004-12-14 21:45:40 achu Exp $
+## $Id: Makefile.am,v 1.12 2004-12-20 16:45:43 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -32,7 +32,7 @@ Makefile.xs: Makefile.PL Libgendersllnl.xs Libgendersllnl.pm
 	if ! test -a Libgendersllnl.xs; then \
 		cp $(srcdir)/Libgendersllnl.xs .; \
 	fi
-	$(PERL) Makefile.PL PREFIX=$(PERL_INSTALL_PREFIX)$(prefix) MAKEFILE=Makefile.xs FIRST_MAKEFILE=Makefile.xs
+	$(PERL) Makefile.PL PREFIX=$(PERL_INSTALL_PREFIX) MAKEFILE=Makefile.xs FIRST_MAKEFILE=Makefile.xs
 
 test: Makefile.xs 
 	$(MAKE) -f Makefile.xs test

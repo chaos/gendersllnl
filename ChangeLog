@@ -1,3 +1,9 @@
+2004-12-18  Albert Chu  <chu11@llnl.gov>
+
+	* gendersllnl.spec.in, configure.ac, compat/Makefile.am,
+	src/Libgendersllnl/Makefile.am, src/Gendersllnl/Makefile.am: Fix
+	make install corner case.
+	
 2004-12-14  Albert Chu  <chu11@llnl.gov>
 
         * gendersllnl.spec.in, src/Gendersllnl/Makefile.am,

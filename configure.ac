@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.15 2004-10-28 21:44:58 achu Exp $
+## $Id: configure.ac,v 1.16 2004-12-20 16:45:43 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -20,27 +20,30 @@ AM_INIT_AUTOMAKE($PROJECT, $VERSION)
 AM_CONFIG_HEADER([config/config.h])
 AM_MAINTAINER_MODE
 
-# Perl Install Prefix
+# Perl Install Destdir
 # - Used almost exclusively so perl install works with rpm builds
-AC_MSG_CHECKING(for --with-perl-install-prefix )
-AC_ARG_WITH(perl-install-prefix,
-    AC_HELP_STRING([--with-perl-install-prefix=path], [define perl modules install prefix]),
+AC_MSG_CHECKING(for --with-perl-install-destdir )
+AC_ARG_WITH(perl-install-destdir,
+    AC_HELP_STRING([--with-perl-install-destdir=path], [define perl modules ins\tall prefix]),
     [ case "$withval" in
     yes)
-        withperllinstallprefix=yes
+        withperllinstalldestdir=yes
         ;;
     no)
         ;;
     *)
-        withperllinstallprefix=yes
-        PERL_INSTALL_PREFIX="$withval"
+        withperllinstalldestdir=yes
+        PERL_INSTALL_DESTDIR="$withval"
         ;;
     esac ]
 )
-AC_MSG_RESULT(${withperllinstallprefix=no})
-if test -z "$PERL_INSTALL_PREFIX"; then
+AC_MSG_RESULT(${withperllinstalldestdir=no})
+if test -z "$PERL_INSTALL_DESTDIR"; then
    PERL_INSTALL_PREFIX='${prefix}'
+else
+   PERL_INSTALL_PREFIX='${PERL_INSTALL_DESTDIR}${prefix}'
 fi
+AC_SUBST(PERL_INSTALL_DESTDIR)
 AC_SUBST(PERL_INSTALL_PREFIX)
 
 ##
