@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.15 2003-08-15 23:18:54 achu Exp $
+# $Id: Gendersllnl.pm,v 1.16 2003-09-11 23:16:04 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -34,7 +34,6 @@ sub new {
     $ret = $self->{$handlekey}->genders_load_data($filename);
     if ($ret == -1) {
         _errormsg($self, "genders_load_data()");
-        Libgenders::genders_handle_destroy($handle);
         return undef;
     } 
 

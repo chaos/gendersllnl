@@ -1,5 +1,10 @@
 2003-09-11  Albert Chu  <chu11@llnl.gov>
 
+	* src/Gendersllnl/Gendersllnl.pm (new): 
+	Removed unnecessary function call that can cause errors.
+	
+2003-09-11  Albert Chu  <chu11@llnl.gov>
+
 	Modified build files
 
 	* configure.ac: 
