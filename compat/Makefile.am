@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.1 2003-05-17 00:17:31 achu Exp $
+## $Id: Makefile.am,v 1.2 2003-05-19 16:31:25 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -10,21 +10,21 @@
 COMPAT_PREFIX = @COMPAT_PREFIX@
 
 all: Makefile.pm
-	$(MAKE) -f Makefile.pm
+        $(MAKE) -f Makefile.pm
 
 Makefile.pm: Makefile.PL
-	$(PERL) Makefile.PL PREFIX=$(COMPAT_PREFIX) MAKEFILE=Makefile.pm FIRST_MAKEFILE=\Makefile.pm
+        $(PERL) Makefile.PL PREFIX=$(COMPAT_PREFIX) MAKEFILE=Makefile.pm FIRST_MAKEFILE=\Makefile.pm
 
 install: Makefile.pm
-	$(MAKE) -f Makefile.pm pure_install
+        $(MAKE) -f Makefile.pm pure_install
 
 pure_install: Makefile.pm
-	$(MAKE) -f Makefile.pm pure_install
+        $(MAKE) -f Makefile.pm pure_install
 
 install-data-local:
-	$(MAKE) -f Makefile.pm pure_install
+        $(MAKE) -f Makefile.pm pure_install
 
 clean:
-	$(MAKE) -f Makefile.pm clean
-	rm -f Makefile.pm
-	rm -f Makefile.pm.old
+        $(MAKE) -f Makefile.pm clean
+        rm -f Makefile.pm
+        rm -f Makefile.pm.old
