@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.18 2004-03-10 23:04:59 achu Exp $
+#  $Id: dist2,v 1.18.6.1 2005-02-03 21:54:19 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -397,6 +397,7 @@ sub find_attrs_in_file
 		close(FILE);
 		$retval = 1;
 	} else {
+		print STDERR ("Couldn't open file: file=$file: $!\n");
 		$retval = 0;
 	}
 
@@ -449,6 +450,9 @@ sub cat_file
 		}
 		xprintf($fh, "# end %s\n", $file);
 		close(FILE);
+	}
+	else {
+		print STDERR ("Couldn't open file: file=$file: $!\n");
 	}
 }
 
@@ -617,6 +621,9 @@ sub get_all_packages
 		}
                 closedir(DIR);
 	}
+	else {
+		print STDERR ("Couldn't opendir: dir=$main::path_vardist: $!\n");
+	}
 }
 
 # Start rdist for the specified file
@@ -631,7 +638,7 @@ sub dist_file
 		$cmd = sprintf("%s %s -f-", $main::path_rdist, 
 				$main::rdist_passthru_opts);
 		if (!open(PIPE, "|$cmd")) {
-			print STDERR ("Couldn't fork rdist\n");
+			print STDERR ("Couldn't fork rdist: cmd=$cmd: $!\n");
 			return 0;
 		}
 	}
@@ -655,15 +662,14 @@ sub dist_pkg
 
 	if (!$main::opt_d) {
 		if (!chdir($main::path_vardist)) {
-			printf STDERR ("Couldn't chdir to %s\n",
-			    $main::path_vardist);
-			return 0;
+                        printf STDERR ("Couldn't chdir: dir=$main::path_vardist: $!\n");
+                        return 0;
 		}
 		$cmd = sprintf("%s %s -f- %s", 
 				$main::path_rdist, $main::rdist_passthru_opts,
 				join(" ", @{$labels}));
 		if (!open(PIPE, "|$cmd")) {
-			print STDERR ("Couldn't fork rdist\n");
+			print STDERR ("Couldn't fork rdist: cmd=$cmd: $!\n");
 			return 0;
 		}
 	}

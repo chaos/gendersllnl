@@ -1,3 +1,11 @@
+2004-02-03  Albert Chu  <chu11@llnl.gov>
+
+	* dist/dist2: Backport error message improvements.
+
+	* META: Updated for release
+	
+	* tagged gendersllnl-1-5-2-debug
+	
 2004-12-14  Albert Chu  <chu11@llnl.gov>
 
         * gendersllnl.spec.in, src/Gendersllnl/Makefile.am,
