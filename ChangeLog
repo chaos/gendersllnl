@@ -1,3 +1,18 @@
+2005-01-05  Albert Chu  <chu11@llnl.gov>
+
+	* dist/dist2 (emit_definition, participating_nodes, usage): Revert
+	behavior of -l option (i.e. dist_local) back to the
+	gendersllnl-1-5-2 behavior.  Changed the -L option to -H option. A
+	new -L option runs rdist on the localhost without a network
+	connection.
+
+	* man/dist/dist2.1, man/dist/dist_local.1: Fix for modifications
+	in behavior.
+
+	* META: Updated for new release
+
+	* tagged gendersllnl-1-6-0-pre2
+	
 2005-01-03  Albert Chu  <chu11@llnl.gov>
 	
 	* tagged gendersllnl-1-6-0-pre1
@@ -11,7 +26,7 @@
 	* dist/dist2 (emit_definition, usage, participating_nodes): Added
 	-L option.
 
-	* man/dist/dist2: Documented -L option and -c option.
+	* man/dist/dist2.1: Documented -L option and -c option.
 
 2004-12-18  Albert Chu  <chu11@llnl.gov>
 

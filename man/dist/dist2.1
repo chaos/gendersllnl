@@ -1,5 +1,5 @@
 \."##########################################################################
-\."  $Id: dist2.1,v 1.8 2004-12-20 23:56:45 achu Exp $
+\."  $Id: dist2.1,v 1.9 2005-01-05 17:18:34 achu Exp $
 \."##########################################################################
 \."  Copyright (C) 2001-2003 The Regents of the University of California.
 \."  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -124,14 +124,35 @@ is not installed, the
 .I -v 
 option will fail.
 .LP
-When the -l option is specified, each occurrence of the local hostname
-in the Distfiles is replaced with the string "localhost".  If this is
-not desired, the
-.I -w 
-option should be used to manually select the local hostname.  If a
-different node should be replaced with the "localhost" string, the -L
-option can be used to specify an alternate hostname to replace.  If
-desired a different cluster can also be specified with the -c option.
+When the -l option is specified, 
+.B rdist
+will typically start the
+.B rdist
+server through a network connection, even though the server will run
+on the local machine.  In order to avoid this network connection, the
+.I -L
+option can be specified.  When the 
+.I -L
+option is specified, each occurrence of the local hostname in the
+Distfiles is replaced with the string "localhost".  This forces
+.B rdist
+to run the 
+.B rdist
+server locally in a shell. The 
+.I -H
+option can be used to specify an alternate hostname to replace with
+the "localhost" string.
+The 
+.I -L
+option can only be used when the 
+.I -l 
+option is specified.  Similarly, the
+.I -H
+option can only be used when the 
+.I -l 
+and 
+.I -L 
+options are specified.
 .LP
 .I -i
 selects canonical hostnames (the left hand side of a genders file entry).

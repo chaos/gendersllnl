@@ -1,5 +1,5 @@
 \."##########################################################################
-\."  $Id: dist_local.1,v 1.2 2003-12-30 22:51:16 achu Exp $
+\."  $Id: dist_local.1,v 1.3 2005-01-05 17:18:34 achu Exp $
 \."##########################################################################
 \."  Copyright (C) 2001-2003 The Regents of the University of California.
 \."  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -49,6 +49,32 @@ Typically these include the names of packages/filesets to be updated.
 Packages are groups of files managed by a single Distfile in /var/dist, and 
 filesets are labels within Distfiles.  If no packages are specified, everything
 in /var/dist updated.
+.LP
+When
+.B dist_local
+is executed,
+.B rdist
+will typically start the 
+.B rdist
+server through a network connection, even though the server will run
+on the local machine.  In order to avoid this network connection, the
+.I -L
+option can be specified.  When the 
+.I -L
+option is specified, each occurrence of the local hostname in the
+Distfiles is replaced with the string "localhost".  This forces
+.B rdist
+to run the 
+.B rdist
+server locally in a shell. The 
+.I -H
+option can be used to specify an alternate hostname to replace with
+the "localhost" string.
+The
+.I -H
+option can only be used when the 
+.I -L 
+option is specified.
 .LP
 .SH "SEE ALSO"
 rdist(1), dist2(1)
