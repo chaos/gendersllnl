@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.18 2004-03-10 23:04:59 achu Exp $
+#  $Id: dist2,v 1.19 2004-12-20 17:18:28 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -79,7 +79,7 @@ if ($havePSSP) {
 	$path_rdist = 		"/usr/bin/rdist";
 }
 $path_postp_closed =	"/usr/local.scf/admin/dist/postp";
-$local_clister = 	"";
+$local_cluster = 	"";
 @limit_nodes =		();
 $rdist_passthru_opts = 	"";
 
@@ -229,9 +229,23 @@ exit(0);
 sub emit_definition
 {
 	my ($fh, $attr, $cluster) = @_;
-	my ($variable, @node_list, $i);
+	my ($variable, @node_list, $i, $node, $hname, @localhostnodes);
 
 	construct_definition($attr, $cluster, \$variable, \@node_list);
+
+	# Special case, change the local node to the string "localhost"
+	if ($main::opt_l) {
+		$hname = $gendobj->getnodename();
+		foreach $node (@node_list) {
+			if ($node eq $hname) {
+				push(@localhostnodes, "localhost");
+			}
+			else {
+				push(@localhostnodes, $node);
+			}
+		}	
+		@node_list = @localhostnodes;
+	}
 
 	if ($#node_list + 1 < 6) {
 		xprintf($fh, "%20s = (%s)\n", $variable, join(" ", @node_list));

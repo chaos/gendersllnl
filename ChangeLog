@@ -3,6 +3,11 @@
 	* gendersllnl.spec.in, configure.ac, compat/Makefile.am,
 	src/Libgendersllnl/Makefile.am, src/Gendersllnl/Makefile.am: Fix
 	make install corner case.
+
+	* dist/dist2 (emit_definition): Force rdist to run on localhost when
+	-l option is used.
+
+	* dist/dist2: Fix "local_clister" variable name typo.
 	
 2004-12-14  Albert Chu  <chu11@llnl.gov>
 
