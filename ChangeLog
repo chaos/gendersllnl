@@ -9,6 +9,10 @@
 	src/Gendersllnl/Makefile.am, src/Libgendersllnl/Makefile.am,
 	src/libgendersllnl/Makefile.am: Fixes for distcheck.
 
+	* META: Updated release.
+
+	* tagged gendersllnl-1-4-2
+
 2004-04-30  Albert Chu  <chu11@llnl.gov>
 
 	* dist/dist_all: Fix bug in which -v option should be used with
