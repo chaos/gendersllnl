@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.5 2003-05-14 23:37:27 achu Exp $
+# $Id: Gendersllnl.pm,v 1.6 2003-05-16 00:17:57 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -328,9 +328,9 @@ Gendersllnl - LLNL site specific Perl library for querying genders file
 
  use Gendersllnl;
 
- Gendersllnl::GENDERS_ALTNAME_ATTRIBUTE
- Gendersllnl::GENDERS_CLUSTER_ATTRIBUTE
- Gendersllnl::GENDERS_ALL_ATTRIBUTE
+ $Gendersllnl::GENDERS_ALTNAME_ATTRIBUTE
+ $Gendersllnl::GENDERS_CLUSTER_ATTRIBUTE
+ $Gendersllnl::GENDERS_ALL_ATTRIBUTE
 
  $obj = Gendersllnl->new([$filename])
 
@@ -360,15 +360,15 @@ all Genders functionality is also included in this package.
 
 =over 4
 
-=item B<Gendersllnl::GENDERS_ALTNAME_ATTRIBUTE>
+=item B<$Gendersllnl::GENDERS_ALTNAME_ATTRIBUTE>
 
 Genders alternate node name attribute.
 
-=item B<Gendersllnl::GENDERS_CLUSTER_ATTRIBUTE>
+=item B<$Gendersllnl::GENDERS_CLUSTER_ATTRIBUTE>
 
 Genders cluster name attribute.
 
-=item B<Gendersllnl::GENDERS_ALL_ATTRIBUTE>
+=item B<$Gendersllnl::GENDERS_ALL_ATTRIBUTE>
 
 Genders all attribute.
 
