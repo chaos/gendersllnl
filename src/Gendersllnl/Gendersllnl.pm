@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.8 2003-05-22 16:21:24 achu Exp $
+# $Id: Gendersllnl.pm,v 1.9 2003-05-27 23:56:03 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -12,8 +12,7 @@ our $VERSION = "2.0";
 
 our @ISA = qw(Genders);
 
-# need to bless into Libgendersllnl, therefore cannot use Genders'
-# new.
+# need to bless into Libgendersllnl, therefore cannot use Genders' new.
 sub new {
     my $proto = shift;
     my $class = ref($proto) || $proto;

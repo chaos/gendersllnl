@@ -74,23 +74,19 @@ genders_getaltnodes (handle, attr=NULL, val=NULL)
     char *val
     PREINIT:
         int num, ret, temp, i;
-        char **altnodelist = NULL;
+        char **altlist = NULL;
     CODE:
-        if ((num = genders_altnodelist_create(handle, &altnodelist)) == -1)
+        if ((num = genders_altnodelist_create(handle, &altlist)) == -1)
             goto handle_error;
 
-        if ((ret = genders_getaltnodes(handle,
-                                       altnodelist,
-                                       num,
-                                       attr,
-                                       val)) == -1)
+        if ((ret = genders_getaltnodes(handle, altlist, num, attr, val)) == -1)
             goto handle_error;
 
         RETVAL = newAV();
         for (i = 0; i < ret; i++)
-            av_push(RETVAL, newSVpv(altnodelist[i], 0));
+            av_push(RETVAL, newSVpv(altlist[i], 0));
 
-        if (genders_altnodelist_destroy(handle, altnodelist) == -1)
+        if (genders_altnodelist_destroy(handle, altlist) == -1)
             goto handle_error;
 
         goto the_end;
@@ -99,7 +95,7 @@ genders_getaltnodes (handle, attr=NULL, val=NULL)
         
             temp = genders_errnum(handle);
            
-            (void)genders_altnodelist_destroy(handle, altnodelist);
+            (void)genders_altnodelist_destroy(handle, altlist);
         
             genders_set_errnum(handle, temp);
 
@@ -116,13 +112,13 @@ genders_getaltnodes_preserve (handle, attr=NULL, val=NULL)
     char *val
     PREINIT:
         int num, ret, temp, i;
-        char **altnodelist = NULL;
+        char **altlist = NULL;
     CODE:
-        if ((num = genders_altnodelist_create(handle, &altnodelist)) == -1)
+        if ((num = genders_altnodelist_create(handle, &altlist)) == -1)
             goto handle_error;
 
         if ((ret = genders_getaltnodes_preserve(handle,
-                                                altnodelist,
+                                                altlist,
                                                 num,
                                                 attr,
                                                 val)) == -1)
@@ -130,9 +126,9 @@ genders_getaltnodes_preserve (handle, attr=NULL, val=NULL)
 
         RETVAL = newAV();
         for (i = 0; i < ret; i++)
-            av_push(RETVAL, newSVpv(altnodelist[i], 0));
+            av_push(RETVAL, newSVpv(altlist[i], 0));
 
-        if (genders_altnodelist_destroy(handle, altnodelist) == -1)
+        if (genders_altnodelist_destroy(handle, altlist) == -1)
             goto handle_error;
 
         goto the_end;
@@ -141,7 +137,7 @@ genders_getaltnodes_preserve (handle, attr=NULL, val=NULL)
 
             temp = genders_errnum(handle);
            
-            (void)genders_altnodelist_destroy(handle, altnodelist);
+            (void)genders_altnodelist_destroy(handle, altlist);
         
             genders_set_errnum(handle, temp);
 

@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.c,v 1.8 2003-05-27 23:41:10 achu Exp $
+ * $Id: gendersllnl.c,v 1.9 2003-05-27 23:52:53 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.c,v $
  */
 
@@ -172,7 +172,7 @@ int genders_getaltnodes_common(genders_t handle,
                                const char *attr,
                                const char *val,
                                int flag) {
-  int i, maxvallen, nodes_len, num, ret;
+  int i, maxvallen, maxnodelen, maxlen, nodes_len, num, ret;
   char **nodes = NULL;
   char *buf = NULL;
   
@@ -181,8 +181,14 @@ int genders_getaltnodes_common(genders_t handle,
   
   if ((maxvallen = genders_getmaxvallen(handle)) == -1)
     goto cleanup;
+
+  if ((maxnodelen = genders_getmaxnodelen(handle)) == -1)
+    goto cleanup;
+
+  /* to protect against possible overflow on 'to_altname_preserve' */
+  maxlen = (maxnodelen > maxvallen) ? maxnodelen : maxvallen;
   
-  if ((buf = (char *)malloc(maxvallen+1)) == NULL) {
+  if ((buf = (char *)malloc(maxlen+1)) == NULL) {
     genders_set_errnum(handle, GENDERS_ERR_OUTMEM);
     goto cleanup;
   }
@@ -196,12 +202,12 @@ int genders_getaltnodes_common(genders_t handle,
   }
 
   for (i = 0; i < num; i++) {
-    memset(buf, '\0', maxvallen+1);
+    memset(buf, '\0', maxlen+1);
 
     if (flag == GENDERSLLNL_ALTNAME_NOPRESERVE)
-      ret = genders_to_altname(handle, nodes[i], buf, maxvallen+1);
+      ret = genders_to_altname(handle, nodes[i], buf, maxlen+1);
     else 
-      ret = genders_to_altname_preserve(handle, nodes[i], buf, maxvallen+1);
+      ret = genders_to_altname_preserve(handle, nodes[i], buf, maxlen+1);
       
     if (ret == -1)
       goto cleanup;
@@ -476,8 +482,7 @@ int genders_string_common(genders_t handle,
   int maxvallen, ret;
   char *node = NULL;
   char *strbuf = NULL;
-  hostlist_t src = NULL;
-  hostlist_t dest = NULL;
+  hostlist_t src = NULL, dest = NULL;
   hostlist_iterator_t iter = NULL;
 
   if (str == NULL || buf == NULL || buflen <= 0) {
@@ -512,6 +517,7 @@ int genders_string_common(genders_t handle,
 
   while ((node = hostlist_next(iter)) != NULL) {
 
+    /* realloc b/c of potential buf overflow */ 
     if (strlen(node) > maxvallen) {
       maxvallen = strlen(node);
       if ((strbuf = (char *)realloc(strbuf, maxvallen+1)) == NULL) {
