@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: gendersllnl.c,v 1.16 2003-12-30 22:51:16 achu Exp $
+ *  $Id: gendersllnl.c,v 1.17 2004-01-15 19:11:16 achu Exp $
  *****************************************************************************
  *  Copyright (C) 2001-2003 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -463,17 +463,17 @@ static int _string_to(genders_t handle, const char *str,
   }
 
   if ((src = hostlist_create(str)) == NULL) {
-    genders_set_errnum(handle, GENDERS_ERR_INTERNAL);
+    genders_set_errnum(handle, GENDERS_ERR_OUTMEM);
     goto cleanup;
   }
 
   if ((dest = hostlist_create(NULL)) == NULL) {
-    genders_set_errnum(handle, GENDERS_ERR_INTERNAL);
+    genders_set_errnum(handle, GENDERS_ERR_OUTMEM);
     goto cleanup;
   }
 
   if ((iter = hostlist_iterator_create(src)) == NULL) {
-    genders_set_errnum(handle, GENDERS_ERR_INTERNAL);
+    genders_set_errnum(handle, GENDERS_ERR_OUTMEM);
     goto cleanup;
   }
 
