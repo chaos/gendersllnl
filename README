@@ -5,7 +5,7 @@ Genders into two different packages:
 1) Genders - a package of generic cluster database libraries and
 tools.
 
-2) Gendersllnl - a package of libraries and tools build around
+2) Gendersllnl - a package of libraries and tools built around
 Genders, for use on Lawrence Livermore National Laboratory (LLNL)
 clusters.
 
