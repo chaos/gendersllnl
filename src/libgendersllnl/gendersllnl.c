@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: gendersllnl.c,v 1.17 2004-01-15 19:11:16 achu Exp $
+ *  $Id: gendersllnl.c,v 1.18 2004-01-15 19:24:36 achu Exp $
  *****************************************************************************
  *  Copyright (C) 2001-2003 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -39,8 +39,9 @@
 #define ALTNAME_NO_PRESERVE    2
 #define ALTNAME_PRESERVE       3
 
-int genders_get_cluster(genders_t handle, const char *node, 
-                        char *buf, int buflen) {
+int 
+genders_get_cluster(genders_t handle, const char *node, char *buf, int buflen)
+{
   int ret;
   char *clustattr = GENDERS_CLUSTER_ATTRIBUTE;
 
@@ -58,7 +59,9 @@ int genders_get_cluster(genders_t handle, const char *node,
   }
 }
 
-int genders_altnodelist_create(genders_t handle, char ***altnodelist) {
+int 
+genders_altnodelist_create(genders_t handle, char ***altnodelist) 
+{
   int i, j, numnodes, maxvallen;
   char **temp;
  
@@ -100,7 +103,9 @@ int genders_altnodelist_create(genders_t handle, char ***altnodelist) {
   return numnodes;
 }
 
-int genders_altnodelist_clear(genders_t handle, char **altnodelist) {
+int 
+genders_altnodelist_clear(genders_t handle, char **altnodelist) 
+{
   int i, numnodes, maxvallen;
  
   if ((numnodes = genders_getnumnodes(handle)) == -1)
@@ -129,7 +134,9 @@ int genders_altnodelist_clear(genders_t handle, char **altnodelist) {
   return 0;
 }
 
-int genders_altnodelist_destroy(genders_t handle, char **altnodelist) {
+int 
+genders_altnodelist_destroy(genders_t handle, char **altnodelist) 
+{
   int i, numnodes;
 
   if ((numnodes = genders_getnumnodes(handle)) == -1)
@@ -151,8 +158,10 @@ int genders_altnodelist_destroy(genders_t handle, char **altnodelist) {
   return 0;
 }
 
-static int _getaltnodes(genders_t handle, char *altnodes[], int len,
-                        const char *attr, const char *val, int flag) {
+static int 
+_getaltnodes(genders_t handle, char *altnodes[], int len,
+             const char *attr, const char *val, int flag) 
+{
   int i, maxvallen, maxnodelen, maxlen, nodes_len, num, ret;
   int errnum = GENDERS_ERR_SUCCESS;
   int retval = -1;
@@ -217,21 +226,29 @@ static int _getaltnodes(genders_t handle, char *altnodes[], int len,
   return retval;
 }
 
-int genders_getaltnodes(genders_t handle, char *altnodes[], int len,
-                        const char *attr, const char *val) {
+int 
+genders_getaltnodes(genders_t handle, char *altnodes[], int len,
+                    const char *attr, const char *val) 
+{
   return _getaltnodes(handle, altnodes, len, attr, val, ALTNAME_NO_PRESERVE);
 }
 
-int genders_getaltnodes_preserve(genders_t handle, char *altnodes[], int len,
-                                 const char *attr, const char *val) {
+int 
+genders_getaltnodes_preserve(genders_t handle, char *altnodes[], int len,
+                             const char *attr, const char *val) 
+{
   return _getaltnodes(handle, altnodes, len, attr, val, ALTNAME_PRESERVE);
 }
 
-int genders_isaltnode(genders_t handle, const char *altnode) {
+int 
+genders_isaltnode(genders_t handle, const char *altnode) 
+{
   return genders_isattrval(handle, GENDERS_ALTNAME_ATTRIBUTE, altnode);
 }
 
-int genders_isnode_or_altnode(genders_t handle, const char *nodename) {
+int 
+genders_isnode_or_altnode(genders_t handle, const char *nodename) 
+{
   int ret;
 
   /* must be non-NULL, b/c isnode() interprets NULL to be the current node
@@ -251,8 +268,9 @@ int genders_isnode_or_altnode(genders_t handle, const char *nodename) {
   return ret;
 }
 
-static int _to_gendname(genders_t handle, const char *altnode, 
-                        char *buf, int buflen) {
+static int 
+_to_gendname(genders_t handle, const char *altnode, char *buf, int buflen) 
+{
   int maxnodelen, ret, retval = -1;
   char *nodebuf = NULL;
   char *altattr = GENDERS_ALTNAME_ATTRIBUTE;
@@ -301,8 +319,10 @@ static int _to_gendname(genders_t handle, const char *altnode,
   return retval;
 }
 
-int genders_to_gendname(genders_t handle, const char *altnode, 
-                        char *buf, int buflen) {
+int 
+genders_to_gendname(genders_t handle, const char *altnode, 
+                    char *buf, int buflen) 
+{
   int ret;
 
   if ((ret = _to_gendname(handle, altnode, buf, buflen)) == -1)
@@ -317,8 +337,10 @@ int genders_to_gendname(genders_t handle, const char *altnode,
   return 0;
 }
 
-int genders_to_gendname_preserve(genders_t handle, const char *altnode, 
-                                 char *buf, int buflen) {
+int 
+genders_to_gendname_preserve(genders_t handle, const char *altnode, 
+                             char *buf, int buflen) 
+{
   int ret;
 
   if ((ret = _to_gendname(handle, altnode, buf, buflen)) == -1)
@@ -336,8 +358,9 @@ int genders_to_gendname_preserve(genders_t handle, const char *altnode,
   return 0;
 }
 
-static int _to_altname(genders_t handle, const char *node, 
-                       char *buf, int buflen) {
+static int 
+_to_altname(genders_t handle, const char *node, char *buf, int buflen) 
+{
   int ret, maxvallen, retval = -1;
   char *altnodebuf = NULL;
   char *altattr = GENDERS_ALTNAME_ATTRIBUTE;
@@ -399,8 +422,10 @@ static int _to_altname(genders_t handle, const char *node,
   return retval;
 }
 
-int genders_to_altname(genders_t handle, const char *node, 
-                       char *buf, int buflen) {
+int 
+genders_to_altname(genders_t handle, const char *node, 
+                   char *buf, int buflen) 
+{
   int ret;
 
   if ((ret = _to_altname(handle, node, buf, buflen)) == -1)
@@ -415,8 +440,10 @@ int genders_to_altname(genders_t handle, const char *node,
   return 0;
 }
 
-int genders_to_altname_preserve(genders_t handle, const char *node, 
-                                char *buf, int buflen) {
+int 
+genders_to_altname_preserve(genders_t handle, const char *node, 
+                            char *buf, int buflen) 
+{
   int ret;
 
   if ((ret = _to_altname(handle, node, buf, buflen)) == -1)
@@ -434,8 +461,9 @@ int genders_to_altname_preserve(genders_t handle, const char *node,
   return 0;
 }
 
-static int _string_to(genders_t handle, const char *str, 
-                      char *buf, int buflen, int flag) {
+static int 
+_string_to(genders_t handle, const char *str, char *buf, int buflen, int flag) 
+{
   int maxvallen, maxnodelen, maxlen, ret, retval = -1;
   char *node = NULL;
   char *strbuf = NULL;
@@ -528,22 +556,30 @@ static int _string_to(genders_t handle, const char *str,
   return retval;
 }
 
-int genders_string_to_gendnames(genders_t handle, const char *str, 
-                                char *buf, int buflen) {
+int 
+genders_string_to_gendnames(genders_t handle, const char *str, 
+                            char *buf, int buflen) 
+{
   return _string_to(handle, str, buf, buflen, GENDNAME_NO_PRESERVE);
 }
 
-int genders_string_to_gendnames_preserve(genders_t handle, const char *str,
-                                         char *buf, int buflen) {
+int 
+genders_string_to_gendnames_preserve(genders_t handle, const char *str,
+                                     char *buf, int buflen) 
+{
   return _string_to(handle, str, buf, buflen, GENDNAME_PRESERVE);
 }
 
-int genders_string_to_altnames(genders_t handle, const char *str,
-                               char *buf, int buflen) {
+int 
+genders_string_to_altnames(genders_t handle, const char *str,
+                           char *buf, int buflen) 
+{
   return _string_to(handle, str, buf, buflen, ALTNAME_NO_PRESERVE);
 }
 
-int genders_string_to_altnames_preserve(genders_t handle, const char *str,
-                                        char *buf, int buflen) {
+int 
+genders_string_to_altnames_preserve(genders_t handle, const char *str,
+                                    char *buf, int buflen) 
+{
   return _string_to(handle, str, buf, buflen, ALTNAME_PRESERVE);
 }

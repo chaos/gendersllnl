@@ -2,7 +2,7 @@
 
 	* src/libgendersllnl/gendersllnl.c: All hostlist_create or
 	hostlist_iterator_create errors are OUTMEM errors rather than
-	INTERNAL errors.
+	INTERNAL errors.  Change code style to fit more with GNU standard.
 	
 2003-01-09  Albert Chu  <chu11@llnl.gov>
 
