@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.c,v 1.11 2003-05-28 15:58:25 achu Exp $
+ * $Id: gendersllnl.c,v 1.12 2003-05-29 15:46:36 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.c,v $
  */
 
@@ -24,49 +24,37 @@
 /* handle common code between genders_getaltnodes() and
  * genders_getaltnodes_preserve()
  */
-static int genders_getaltnodes_common(genders_t handle,
-                                      char *altnodes[],
-                                      int len,
-                                      const char *attr,
-                                      const char *val,
-                                      int flag);
+static int genders_getaltnodes_common(genders_t, 
+                                      char **, int, 
+                                      const char *, 
+                                      const char *, 
+                                      int);
 
 /* handle common code between genders_to_gendname() and
  * genders_to_gendname_preserve().  If 'altnode' not found returns 0
  */
-static int genders_to_gendname_common(genders_t handle,
-                                      const char *altnode,
-                                      char *buf,
-                                      int buflen);
+static int genders_to_gendname_common(genders_t, const char *, char *, int);
 
 /* handle common code between genders_to_altname() and
  * genders_to_altname_preserve().  If 'node' not found returns 0
  */
-static int genders_to_altname_common(genders_t handle,
-                                     const char *node,
-                                     char *buf,
-                                     int buflen);
+static int genders_to_altname_common(genders_t, const char *, char *, int);
 
 /* handle common code between genders_string_to_gendnames(),
- * genders_string_to_gendnames_preserve(),
- * genders_string_to_altnames(), and
+ * genders_string_to_gendnames_preserve(), genders_string_to_altnames(), and
  * genders_string_to_altnames_preserve()
  */
-static int genders_string_common(genders_t handle,
-                                 const char *str,
-                                 char *buf,
-                                 int buflen,
-                                 int flag);
+static int genders_string_common(genders_t, const char *, char *, int, int);
 
 int genders_get_cluster(genders_t handle, 
                         const char *node, 
                         char *buf, 
                         int buflen) {
-
-  char *clustattr = GENDERS_CLUSTER_ATTRIBUTE;
   int ret;
+  char *clustattr = GENDERS_CLUSTER_ATTRIBUTE;
 
-  ret = genders_testattr(handle, node, clustattr, buf, buflen);
+  if ((ret = genders_testattr(handle, node, clustattr, buf, buflen)) == -1)
+    return -1;
 
   if (ret == 0) {
     /* cluster attribute not found */ 
@@ -75,8 +63,6 @@ int genders_get_cluster(genders_t handle,
   }
   else if (ret == 1)
     return 0;
-  else
-    return ret;
 }
 
 int genders_altnodelist_create(genders_t handle, char ***altnodelist) {
@@ -259,8 +245,7 @@ int genders_isaltnode(genders_t handle, const char *altnode) {
 int genders_isnode_or_altnode(genders_t handle, const char *nodename) {
   int ret;
 
-  /* must be non-NULL, b/c isnode() interprets
-   * NULL to be the current node
+  /* must be non-NULL, b/c isnode() interprets NULL to be the current node
    */
   if (nodename == NULL) {
     genders_set_errnum(handle, GENDERS_ERR_PARAMETERS);
@@ -276,7 +261,7 @@ int genders_isnode_or_altnode(genders_t handle, const char *nodename) {
   return ret;
 }
 
-int genders_to_gendname_common(genders_t handle,
+int genders_to_gendname_common(genders_t handle, 
                                const char *altnode,
                                char *buf,
                                int buflen) {
