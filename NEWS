@@ -5,7 +5,7 @@ admins.
 Changes in gendersllnl-1.2-1
 ============================
  -- Added ability for Gendersllnl perl module's get_cluster() to work 
-    with non-default genders files.
+    if you are not on a node in the genders database.
  -- Added exportable symbols to Hoslist perl module.
  -- Added Hostlist perl module manpage.
 
@@ -18,4 +18,4 @@ Changes in gendersllnl-1.0-1
 ============================
  -- Fixed bug regarding timestamps in inst.  (gnats/214)
 
-$Id: NEWS,v 1.4 2003-08-15 00:17:31 achu Exp $
+$Id: NEWS,v 1.5 2003-08-15 15:27:39 achu Exp $
