@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.c,v 1.13 2003-05-29 16:04:41 achu Exp $
+ * $Id: gendersllnl.c,v 1.14 2003-05-30 17:36:11 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.c,v $
  */
 
@@ -10,35 +10,36 @@
 #include "gendersllnl.h"
 #include "hostlist.h"
 
-#define GENDERSLLNL_GENDNAME_NOPRESERVE   0
-#define GENDERSLLNL_GENDNAME_PRESERVE     1
-#define GENDERSLLNL_ALTNAME_NOPRESERVE    2
-#define GENDERSLLNL_ALTNAME_PRESERVE      3
+#define GENDNAME_NOPRESERVE   0
+#define GENDNAME_PRESERVE     1
+#define ALTNAME_NOPRESERVE    2
+#define ALTNAME_PRESERVE      3
 
 /* handle common code between genders_getaltnodes() and
  * genders_getaltnodes_preserve()
  */
-static int genders_getaltnodes_common(genders_t, 
-                                      char **, int, 
-                                      const char *, 
-                                      const char *, 
-                                      int);
+static int _getaltnodes(genders_t, 
+                        char **, 
+                        int, 
+                        const char *, 
+                        const char *, 
+                        int);
 
 /* handle common code between genders_to_gendname() and
  * genders_to_gendname_preserve().  If 'altnode' not found returns 0
  */
-static int genders_to_gendname_common(genders_t, const char *, char *, int);
+static int _to_gendname(genders_t, const char *, char *, int);
 
 /* handle common code between genders_to_altname() and
  * genders_to_altname_preserve().  If 'node' not found returns 0
  */
-static int genders_to_altname_common(genders_t, const char *, char *, int);
+static int _to_altname(genders_t, const char *, char *, int);
 
 /* handle common code between genders_string_to_gendnames(),
  * genders_string_to_gendnames_preserve(), genders_string_to_altnames(), and
  * genders_string_to_altnames_preserve()
  */
-static int genders_string_common(genders_t, const char *, char *, int, int);
+static int _string_to(genders_t, const char *, char *, int, int);
 
 int genders_get_cluster(genders_t handle, 
                         const char *node, 
@@ -146,12 +147,12 @@ int genders_altnodelist_destroy(genders_t handle, char **altnodelist) {
   return 0;
 }
 
-int genders_getaltnodes_common(genders_t handle,
-                               char *altnodes[],
-                               int len,
-                               const char *attr,
-                               const char *val,
-                               int flag) {
+int _getaltnodes(genders_t handle,
+                 char *altnodes[],
+                 int len,
+                 const char *attr,
+                 const char *val,
+                 int flag) {
   int i, maxvallen, maxnodelen, maxlen, nodes_len, num, ret;
   char **nodes = NULL;
   char *buf = NULL;
@@ -184,7 +185,7 @@ int genders_getaltnodes_common(genders_t handle,
   for (i = 0; i < num; i++) {
     memset(buf, '\0', maxlen+1);
 
-    if (flag == GENDERSLLNL_ALTNAME_NOPRESERVE)
+    if (flag == ALTNAME_NOPRESERVE)
       ret = genders_to_altname(handle, nodes[i], buf, maxlen+1);
     else 
       ret = genders_to_altname_preserve(handle, nodes[i], buf, maxlen+1);
@@ -215,9 +216,7 @@ int genders_getaltnodes(genders_t handle,
                         const char *attr,
                         const char *val) {
 
-  int flag = GENDERSLLNL_ALTNAME_NOPRESERVE;
-
-  return genders_getaltnodes_common(handle, altnodes, len, attr, val, flag);
+  return _getaltnodes(handle, altnodes, len, attr, val, ALTNAME_NOPRESERVE);
 }
 
 int genders_getaltnodes_preserve(genders_t handle,
@@ -226,9 +225,7 @@ int genders_getaltnodes_preserve(genders_t handle,
                                  const char *attr,
                                  const char *val) {
 
-  int flag = GENDERSLLNL_ALTNAME_PRESERVE;
-
-  return genders_getaltnodes_common(handle, altnodes, len, attr, val, flag);
+  return _getaltnodes(handle, altnodes, len, attr, val, ALTNAME_PRESERVE);
 }
 
 int genders_isaltnode(genders_t handle, const char *altnode) {
@@ -255,10 +252,7 @@ int genders_isnode_or_altnode(genders_t handle, const char *nodename) {
   return ret;
 }
 
-int genders_to_gendname_common(genders_t handle, 
-                               const char *altnode,
-                               char *buf,
-                               int buflen) {
+int _to_gendname(genders_t handle, const char *altnode, char *buf, int buflen) {
   int maxnodelen, ret;
   char *nodebuf = NULL;
   char *altattr = GENDERS_ALTNAME_ATTRIBUTE;
@@ -316,7 +310,7 @@ int genders_to_gendname(genders_t handle,
                         int buflen) {
   int ret;
 
-  if ((ret = genders_to_gendname_common(handle, altnode, buf, buflen)) == -1)
+  if ((ret = _to_gendname(handle, altnode, buf, buflen)) == -1)
     return -1;
 
   if (ret == 0) {
@@ -333,7 +327,7 @@ int genders_to_gendname_preserve(genders_t handle,
                                  int buflen) {
   int ret;
 
-  if ((ret = genders_to_gendname_common(handle, altnode, buf, buflen)) == -1)
+  if ((ret = _to_gendname(handle, altnode, buf, buflen)) == -1)
     return -1;
 
   if (ret == 0) {
@@ -347,10 +341,7 @@ int genders_to_gendname_preserve(genders_t handle,
   return 0;
 }
 
-int genders_to_altname_common(genders_t handle,
-                              const char *node,
-                              char *buf,
-                              int buflen) {
+int _to_altname(genders_t handle, const char *node, char *buf, int buflen) {
   int ret, maxvallen;
   char *altnodebuf = NULL;
   char *altattr = GENDERS_ALTNAME_ATTRIBUTE;
@@ -421,7 +412,7 @@ int genders_to_altname(genders_t handle,
                        int buflen) {
   int ret;
 
-  if ((ret = genders_to_altname_common(handle, node, buf, buflen)) == -1)
+  if ((ret = _to_altname(handle, node, buf, buflen)) == -1)
     return -1;
 
   if (ret == 0) {
@@ -438,7 +429,7 @@ int genders_to_altname_preserve(genders_t handle,
                                 int buflen) {
   int ret;
 
-  if ((ret = genders_to_altname_common(handle, node, buf, buflen)) == -1)
+  if ((ret = _to_altname(handle, node, buf, buflen)) == -1)
     return -1;
 
   if (ret == 0) {
@@ -452,11 +443,11 @@ int genders_to_altname_preserve(genders_t handle,
   return 0;
 }
 
-int genders_string_common(genders_t handle,
-                          const char *str,
-                          char *buf,
-                          int buflen,
-                          int flag) {
+int _string_to(genders_t handle, 
+               const char *str, 
+               char *buf, 
+               int buflen, 
+               int flag) {
   int maxvallen, maxnodelen, maxlen, ret;
   char *node = NULL;
   char *strbuf = NULL;
@@ -510,13 +501,13 @@ int genders_string_common(genders_t handle,
     }
     memset(strbuf, '\0', maxlen+1);
 
-    if (flag == GENDERSLLNL_GENDNAME_NOPRESERVE)
+    if (flag == GENDNAME_NOPRESERVE)
       ret = genders_to_gendname(handle, node, strbuf, maxlen+1);
-    else if (flag == GENDERSLLNL_GENDNAME_PRESERVE)
+    else if (flag == GENDNAME_PRESERVE)
       ret = genders_to_gendname_preserve(handle, node, strbuf, maxlen+1);
-    else if (flag == GENDERSLLNL_ALTNAME_NOPRESERVE)
+    else if (flag == ALTNAME_NOPRESERVE)
       ret = genders_to_altname(handle, node, strbuf, maxlen+1);
-    else if (flag == GENDERSLLNL_ALTNAME_PRESERVE)
+    else if (flag == ALTNAME_PRESERVE)
       ret = genders_to_altname_preserve(handle, node, strbuf, maxlen+1);
 
     if (ret == -1)
@@ -561,9 +552,7 @@ int genders_string_to_gendnames(genders_t handle,
                                 char *buf,
                                 int buflen) {
 
-  int flag = GENDERSLLNL_GENDNAME_NOPRESERVE;
-
-  return genders_string_common(handle, str, buf, buflen, flag);
+  return _string_to(handle, str, buf, buflen, GENDNAME_NOPRESERVE);
 }
 
 int genders_string_to_gendnames_preserve(genders_t handle,
@@ -571,9 +560,7 @@ int genders_string_to_gendnames_preserve(genders_t handle,
                                          char *buf,
                                          int buflen) {
 
-  int flag = GENDERSLLNL_GENDNAME_PRESERVE;
-
-  return genders_string_common(handle, str, buf, buflen, flag);
+  return _string_to(handle, str, buf, buflen, GENDNAME_PRESERVE);
 }
 
 int genders_string_to_altnames(genders_t handle,
@@ -581,9 +568,7 @@ int genders_string_to_altnames(genders_t handle,
                                char *buf,
                                int buflen) {
 
-  int flag = GENDERSLLNL_ALTNAME_NOPRESERVE;
-
-  return genders_string_common(handle, str, buf, buflen, flag);
+  return _string_to(handle, str, buf, buflen, ALTNAME_NOPRESERVE);
 }
 
 int genders_string_to_altnames_preserve(genders_t handle,
@@ -591,7 +576,5 @@ int genders_string_to_altnames_preserve(genders_t handle,
                                         char *buf,
                                         int buflen) {
 
-  int flag = GENDERSLLNL_ALTNAME_PRESERVE;
-
-  return genders_string_common(handle, str, buf, buflen, flag);
+  return _string_to(handle, str, buf, buflen, ALTNAME_PRESERVE);
 }
