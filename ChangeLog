@@ -4,7 +4,7 @@
 
 	* gendersllnl.spec.in: Fix for port issues.
 
-	* dist/Makefile.am: Fix distcheck.
+	* Makefile.am, dist/Makefile.am: distcheck fixes.
 	
 2004-06-21  Albert Chu  <chu11@llnl.gov>
 
