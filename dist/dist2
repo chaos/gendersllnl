@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.15 2004-02-12 23:57:46 achu Exp $
+#  $Id: dist2,v 1.16 2004-02-13 00:13:25 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -255,7 +255,6 @@ sub construct_definition
 	my (@node_list);
 
 	# construct LHS
-	# $attr =~ s/(\w+)=(\w+)/$1$main::equal_sign_key$2/;
 	if ($cluster) {
 		${$variable} = sprintf("%s!attr_%s", $cluster, $attr);
 	} else {
