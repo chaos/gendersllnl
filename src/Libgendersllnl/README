@@ -1,5 +1,5 @@
-Libgenders version 2.0-1pre
-===========================
+Libgendersllnl
+==============
 
 INSTALLATION
 
@@ -7,9 +7,3 @@ To install this module type the following:
 
    make
    make install
-
-COPYRIGHT AND LICENCE
-
-Put the correct copyright and licence information here.
-
-
