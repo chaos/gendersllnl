@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Hostlist.pm,v 1.10 2004-02-11 00:46:43 achu Exp $
+#  $Id: Hostlist.pm,v 1.11 2004-11-30 21:29:44 grondo Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -184,7 +184,7 @@ sub expand
 
         } else {
                 return map { 
-                            s/(\w*?)(\d+)-(\w*?)(\d+)/"$2".."$4"/ 
+                            s/(\w*?)(\d+)-(\1|)(\d+)/"$2".."$4"/ 
                                                || 
                                           s/(.+)/""/; 
                             map {"$1$_"} eval; 

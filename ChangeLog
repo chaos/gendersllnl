@@ -1,3 +1,8 @@
+2004-11-30  Mark Grondona <mgrondona@llnl.gov>
+
+	* compat/Hostlist.pm (expand) : Don't attempt to expand regular
+	  hostnames that happen to have the `-' character.
+
 2004-11-16  Albert Chu  <chu11@llnl.gov>
 
 	* gendersllnl.spec.in: Remove copyright, add license.
