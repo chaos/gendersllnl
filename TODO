@@ -9,4 +9,3 @@
 - Add regular expression matching to dist2
 - Add thorough example Distfile to dist2 manpage 
 - Why doesn't distcheck work?
-- have dist_local output more meaningful debug messages
