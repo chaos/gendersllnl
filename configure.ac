@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.4 2003-05-14 23:50:46 achu Exp $
+## $Id: configure.ac,v 1.5 2003-05-15 00:42:19 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -118,7 +118,8 @@ AC_CONFIG_FILES( \
   src/Libgendersllnl/Makefile \
   src/Gendersllnl/Makefile \
   dist/Makefile \
-  man/Makefile
+  man/Makefile \
+  man/dist/Makefile \
 )
 AC_OUTPUT
 

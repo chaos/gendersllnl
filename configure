@@ -8556,7 +8556,7 @@ fi
 ##
 # Epilogue.
 ##
-ac_config_files="$ac_config_files Makefile src/Makefile src/libgendersllnl/Makefile src/Libgendersllnl/Makefile src/Gendersllnl/Makefile dist/Makefile man/Makefile"
+ac_config_files="$ac_config_files Makefile src/Makefile src/libgendersllnl/Makefile src/Libgendersllnl/Makefile src/Gendersllnl/Makefile dist/Makefile man/Makefile man/dist/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -9060,6 +9060,7 @@ do
   "src/Gendersllnl/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/Gendersllnl/Makefile" ;;
   "dist/Makefile" ) CONFIG_FILES="$CONFIG_FILES dist/Makefile" ;;
   "man/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/Makefile" ;;
+  "man/dist/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/dist/Makefile" ;;
   "depfiles" ) CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
   "config/config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS config/config.h" ;;
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
