@@ -1,8 +1,10 @@
 2004-10-26  Albert Chu  <chu11@llnl.gov>
 
-	* config/Make-rpm.mk: updated script
+	* config/Make-rpm.mk: updated script for porting issues.
 
 	* gendersllnl.spec.in: Fix for port issues.
+
+	* dist/Makefile.am: Fix distcheck.
 	
 2004-06-21  Albert Chu  <chu11@llnl.gov>
 
