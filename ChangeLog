@@ -1,3 +1,9 @@
+2003-01-15  Albert Chu  <chu11@llnl.gov>
+
+	* src/libgendersllnl/gendersllnl.c: All hostlist_create or
+	hostlist_iterator_create errors are OUTMEM errors rather than
+	INTERNAL errors.
+	
 2003-01-09  Albert Chu  <chu11@llnl.gov>
 
 	* dist/dist2: Fixed corner case when falling through to
