@@ -1,3 +1,7 @@
+2003-11-09  Albert Chu  <chu11@llnl.gov>
+
+	* Tagged gendersllnl-1-2-1
+	
 2003-11-07  Albert Chu  <chu11@llnl.gov>
 
 	* src/Libgendersllnl/Makefile.am, src/Gendersllnl/Makefile.am,
