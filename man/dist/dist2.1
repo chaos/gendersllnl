@@ -1,5 +1,5 @@
 \."##########################################################################
-\."  $Id: dist2.1,v 1.7 2004-12-20 23:42:26 achu Exp $
+\."  $Id: dist2.1,v 1.8 2004-12-20 23:56:45 achu Exp $
 \."##########################################################################
 \."  Copyright (C) 2001-2003 The Regents of the University of California.
 \."  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -156,6 +156,12 @@ Distfile.  This option provides a means for the Distfile author to see
 the preprocessed version.  If 
 .I -n 
 is also specified, line numbers will be prepended to each line.
+.LP
+The 
+.I -c
+option can be used to specify an alternate cluster to the one
+.B dist2
+is run on.
 .LP
 /var/dist is actually used to manage rdisted files across several MPP
 systems.  Distfile macros of the form ${attr_attrname} or

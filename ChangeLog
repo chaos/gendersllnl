@@ -3,7 +3,7 @@
 	* dist/dist2 (emit_definition, usage, participating_nodes): Added
 	-L option.
 
-	* man/dist/dist2: Documented -L option.
+	* man/dist/dist2: Documented -L option and -c option.
 	
 2004-12-18  Albert Chu  <chu11@llnl.gov>
 
