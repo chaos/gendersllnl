@@ -2,8 +2,8 @@ Name:    @PROJECT@
 Version: @VERSION@
 Release: @RELEASE@
 Summary: LLNL site specific genders libraries
-Copyright: none
 Group: System Environment/Base
+License: GPL
 Source: %{name}-%{version}-%{release}.tgz
 Requires: genders >= 1.2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
