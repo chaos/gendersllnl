@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.4.2.1 2004-10-27 02:17:48 achu Exp $
+## $Id: Makefile.am,v 1.4.2.2 2004-10-27 02:22:16 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -32,4 +32,4 @@ noinst_HEADERS            = hostlist.h
 lib_LTLIBRARIES           = libgendersllnl.la
 libgendersllnl_la_SOURCES = gendersllnl.c hostlist.c
 libgendersllnl_la_LDFLAGS = -version-info $(current):$(rev):$(age) $(OTHER_FLAGS)
-
+EXTRA_DIST                = gendersllnl.map
