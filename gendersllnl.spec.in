@@ -1,7 +1,7 @@
 Name:    @PROJECT@
 Version: @VERSION@
 Release: @RELEASE@
-Summary: LLNL site specific genders library
+Summary: LLNL site specific genders libraries and tools
 Copyright: none
 Group: System Environment/Base
 Source: %{name}-%{version}-%{release}.tgz
@@ -9,7 +9,11 @@ Requires: genders >= 1.2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
-A LLNL genders site specific library 
+Gendersllnl is a set of Lawrence Livermore National Laboratory (LLNL)
+site specific genders libraries and tools.  The libraries contain API
+functions especially suited for LLNL needs and tools with a particular
+setup.  The tools will most likely not work by default in a non-LLNL
+environment.
 
 %package dist
 Summary: gendersllnl dist 

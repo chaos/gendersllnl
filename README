@@ -1,55 +1,49 @@
-Originally, many of the functions and tools in this package were
-included in the Genders package.  It was later decided to split the
-Genders into two different packages:
-
-1) Genders - a package of generic cluster database libraries and
-tools.
-
-2) Gendersllnl - a package of libraries and tools built around
-Genders, for use on Lawrence Livermore National Laboratory (LLNL)
-clusters.
-
-This split allows Genders to be potentially more useful to
-administrators and developers outside of LLNL, but allows us to
-keep our specific Genders needs at the laboratory.
+The Gendersllnl package is a local genders package that contains
+libraries with extra helper functions for Lawrence Livermore National
+Laboratory (LLNL) specific needs.  They illustrate how local APIs can
+be developed on top of the genders base API.  The LLNL tool dist2 is
+also included in the Gendersllnl package.
 
 A number of the libraries and tools in this package may be useful for
 clusters outside of Lawrence Livermore, but they may need to be
-modified for use on your particular systems.  Some may be of
-absolutely no use.
+modified for use on your particular systems.  They are perhaps best
+used as an illustration of how libraries and tools can be built
+on top of the base genders libraries and tools.
 
 This package includes:
 
 * libgendersllnl    
-  - A C library which can be linked with -lgendersllnl.  Includes a
-    number of library functions particularly useful for LLNL code.
+  - A C library with additional genders functions for unique LLNL needs.
     See libgendersllnl(3).
 
 * Libgendersllnl.pm
-  - A Perl module developed with Perl Extensions that accesses
-    the C library.  Perl extensions is limited and provides
-    a very strange Perl API.  It is therefore recommended most users
-    use Gendersllnl.pm.  See Libgendersllnl(3).
+  - A Perl module developed with Perl Extensions that takes advantage
+    of the already available C library.  Perl extensions is limited
+    and provides an unorthodox Perl API.  It is therefore recommended
+    that users use Gendersllnl.pm.  See Libgendersllnl(3).
 
 * Gendersllnl.pm
   - A Perl module that interfaces with Libgendersllnl.pm, hiding away
-    the yuckiness of Libgendersllnl.pm.  See Gendersllnl(3).
+    the ugliness of Libgendersllnl.pm.  See Gendersllnl(3).
 
 * dist2
-  - Wrapper for USC rdist which expands special macros into node lists
-    from /etc/genders and operators on a localization "repository" in
-    /var/dist.  See dist2(1).
+  - Dist2 is an rdist preprocessor that expands specially formatted
+    macros with embedded genders attributes into node lists. When the
+    genders database changes, dist2 can be rerun to redistribute
+    appropriate configuration file variations.  Dist2 assumes a
+    particular file system setup for rdisted files.  The tool should
+    be looked at as an illustration of how Genders can be used for
+    powerful cluster management.  It will most likely not work by default
+    for a non-LLNL environment.  See dist2(1).
 
 * dist_all, dist_local, dist_cmp, dist_bootstrap
-  - Wrappers around dist2, see manpages for details.
+  - Wrappers around dist2, see individual manpages for details.
 
 * inst
   - Similar to gnu fileutils install -C, tuned for dist2 needs.
 
-Comments, patches, fixes, suggestions are always welcome.
-
-Please read DISCLAIMER and COPYING for copyright and license
-information.
+Comments, patches, fixes, suggestions are always welcome.  Please read
+DISCLAIMER and COPYING for copyright and license information.
 
 Albert Chu
 chu11@llnl.gov
