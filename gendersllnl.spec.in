@@ -34,10 +34,7 @@ DESTDIR="$RPM_BUILD_ROOT" make install
 %doc README ChangeLog COPYING NEWS DISCLAIMER
 /usr/share/man/man3/
 /usr/include/gendersllnl.h
-/usr/lib/
-%ifarch ppc64
-/usr/lib64/
-%endif
+%{_libdir}
 
 %files dist
 %defattr(-,root,root)
