@@ -1,3 +1,8 @@
+2003-08-14  Albert Chu  <chu11@llnl.gov>
+
+	* src/Gendersllnl/Gendersllnl.pm (get_cluster); Fix bug so that
+	you do not have to be on a node in the genders database.
+
 2003-08-13  Albert Chu  <chu11@llnl.gov>
 
 	* compat/Hostlist.pm: Added ability to export symbols.
