@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.14 2004-04-27 18:01:14 achu Exp $
+## $Id: configure.ac,v 1.15 2004-10-28 21:44:58 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -89,7 +89,8 @@ AC_CHECK_FUNCS( \
 ##
 # Check for genders library that we need
 ##
-AC_CHECK_LIB(genders, genders_handle_create)
+AC_CHECK_LIB(genders, genders_handle_create, ,
+             AC_MSG_ERROR([libgenders must be installed]))
 
 # Do this last, you could add compile options which can make
 # function checks fail

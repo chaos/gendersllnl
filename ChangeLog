@@ -1,6 +1,9 @@
 2004-10-28  Albert Chu  <chu11@llnl.gov>
 
 	* gendersllnl.spec.in: Fixed additional port issues.
+
+	* configure.ac: Require genders to be installed or disallow
+	compilation.
 	
 2004-10-26  Albert Chu  <chu11@llnl.gov>
 
