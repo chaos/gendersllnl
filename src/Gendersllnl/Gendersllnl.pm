@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.2 2003-05-14 17:25:13 achu Exp $
+# $Id: Gendersllnl.pm,v 1.3 2003-05-14 20:05:12 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -315,11 +315,11 @@ Gendersllnl - LLNL site specific Perl library for querying genders file
 
  $obj->get_cluster()
 
- $obj->genders_getaltnodes([$attr, [$val]])
- $obj->genders_getaltnodes_preserve([$attr, [$val]])
+ $obj->getaltnodes([$attr, [$val]])
+ $obj->getaltnodes_preserve([$attr, [$val]])
 
- $obj->genders_isaltnode($altnode)
- $obj->genders_isnode_altnode($node)
+ $obj->isaltnode($altnode)
+ $obj->isnode_altnode($node)
 
  $obj->to_gendname($altnode)
  $obj->to_gendname_preserve($altnode)
@@ -345,7 +345,7 @@ Creates a Gendersllnl object and load genders data from the specified
 file.  If the genders file is not specified, the default genders file
 will be used.  Returns undef if file cannot be read.
 
-=item B<$obj-E<gt>genders_getaltnodes([$attr, [$val]])>
+=item B<$obj-E<gt>getaltnodes([$attr, [$val]])>
 
 Returns a list of alternate named nodes with the specified attribute
 and value.  If a value is not specified only the attribute is
@@ -353,7 +353,7 @@ considered.  If the attribute is not specified, the alternate names of
 all nodes listed in the genders file are returned.  If any node does
 not have an alternate name listed, this will return an empty list.
 
-=item B<$obj-E<gt>genders_getaltnodes_preserve([$attr, [$val]])>
+=item B<$obj-E<gt>getaltnodes_preserve([$attr, [$val]])>
 
 Returns a list of alternate named nodes with the specified attribute
 and value.  If a value is not specified only the attribute is
@@ -362,12 +362,12 @@ all nodes listed in the genders file are returned.  If any node does
 not have an alternate name listed, the genders nodename will be returned
 in the list instead.
 
-=item B<$obj-E<gt>genders_isaltnode($altnode)>
+=item B<$obj-E<gt>isaltnode($altnode)>
 
 Returns 1 if the specified alternate node name is listed in the
 genders file, 0 if it is not.
 
-=item B<$obj-E<gt>genders_isnode_altnode($node)>
+=item B<$obj-E<gt>isnode_altnode($node)>
 
 Returns 1 if the specified node name is listed in the genders file as
 a genders node or an alternate node name, 0 if it is not.
