@@ -1,6 +1,9 @@
 #!/usr/bin/perl -w
 use Gendersllnl;
 
+print $Genders::GENDERS_DEFAULT_FILE,"\n";
+print $Gendersllnl::GENDERS_ALTNAME_ATTRIBUTE,"\n";
+
 $handle = Gendersllnl->new();
 if (!defined($handle)) {
     print "Error, genders_handle_create()\n";
