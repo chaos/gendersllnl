@@ -1,3 +1,7 @@
+2003-08-18  Albert Chu  <chu11@llnl.gov>
+
+	* man/: Replaced "Release 1.0" with "August 2003" in all manpages.
+
 2003-08-15  Albert Chu  <chu11@llnl.gov>
 
 	* src/Gendersllnl/Gendersllnl.pm: Explicitly import the only
