@@ -9,6 +9,8 @@
 
 MODULE = Libgendersllnl         PACKAGE = Libgendersllnl                
 
+PROTOTYPES: ENABLE
+
 SV *
 GENDERS_ALTNAME_ATTRIBUTE (sv=&PL_sv_undef)
     SV *sv    
