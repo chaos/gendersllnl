@@ -1,3 +1,10 @@
+2003-09-19  Albert Chu  <chu11@llnl.gov>
+
+	* dist/dist2: Added error messages when genders files cannot be
+	loaded.  Error messages were excluded before, because older
+	genders implementions had error messages within the genders
+	library.
+
 2003-09-11  Albert Chu  <chu11@llnl.gov>
 
 	* src/Gendersllnl/Gendersllnl.pm (new): 
