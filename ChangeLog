@@ -1,3 +1,7 @@
+2004-01-03  Albert Chu  <chu11@llnl.gov>
+	
+	* tagged gendersllnl-1-6-0-pre1
+
 2004-12-29  Albert Chu  <chu11@llnl.gov>
 
 	* Makefile.am: distcheck fix.
@@ -8,7 +12,7 @@
 	-L option.
 
 	* man/dist/dist2: Documented -L option and -c option.
-	
+
 2004-12-18  Albert Chu  <chu11@llnl.gov>
 
 	* gendersllnl.spec.in, configure.ac, compat/Makefile.am,
