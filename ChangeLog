@@ -1,9 +1,16 @@
+2004-04-30  Albert Chu  <chu11@llnl.gov>
+
+	* dist/dist_all: Fix bug in which -v option should be used with
+	pdsh.
+
+	* Tagged gendersllnl-1-4-1
+
 2004-04-27  Albert Chu  <chu11@llnl.gov>
 
 	* gendersllnl.spec.in: Use %configure macro.
 
 	* Localize all non-genderllnl library symbols.
-
+	
 2004-03-10  Albert Chu  <chu11@llnl.gov>
 
 	* dist/dist2 (find_attrs_in_file, cat_file, getnodes,
