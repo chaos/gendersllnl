@@ -1,5 +1,5 @@
 \."##########################################################################
-\."  $Id: dist2.1,v 1.4 2004-02-10 23:46:49 achu Exp $
+\."  $Id: dist2.1,v 1.5 2004-02-13 00:35:55 achu Exp $
 \."##########################################################################
 \."  Copyright (C) 2001-2003 The Regents of the University of California.
 \."  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -150,15 +150,15 @@ is also specified, line numbers will be prepended to each line.
 .LP
 /var/dist is actually used to manage rdisted files across several MPP
 systems.  Distfile macros of the form ${attr_attrname} or
-${attr_attrname_value} implicitly refer to the local cluster.
+${attr_attrname=value} implicitly refer to the local cluster.
 Specific clusters can be targeted by specifying a macro of the form
-${clustername!attr_attrname} or ${clustername!attr_attrname_value}.
+${clustername!attr_attrname} or ${clustername!attr_attrname=value}.
 These definitions expand to empty lists on clusters other than the one
 specified.
 .LP
 Put another way, ${attr_attrname} refers to all nodes in all clusters with the 
 .I attrname
-attribute, ${attr_attrname_value} refers to all nodes in all clusters with
+attribute, ${attr_attrname=value} refers to all nodes in all clusters with
 the 
 .I attrname
 attribute equal to
@@ -167,7 +167,7 @@ ${clustername!attr_attrname} only refers to the nodes in
 .I clustername
 with the 
 .I attrname
-attribute, and ${clustername!attr_attrname} only refers to the nodes in
+attribute, and ${clustername!attr_attrname=value} only refers to the nodes in
 .I clustername
 with the 
 .I attrname

@@ -1,6 +1,9 @@
 2004-02-12  Albert Chu  <chu11@llnl.gov>
 
-	* dist/dist2: Support equal sign for attr=val in distfiles
+	* dist/dist2: Support equal sign for attr=val in distfiles.
+	Remove old format for attr=val.
+
+	* man/dist/dist2.1: Updated for changes.
 
 	* tagged gendersllnl-1-3-1
 	
