@@ -14,14 +14,8 @@
 
 @SET_MAKE@
 
-# This is a hack to get autoconf, automake, and ExtUtils::MakeMaker
-# to work together.  
-#
-# Currently, it only supports the common MakeMaker options of
-#
-# make install
-# make pure_install
-# make test
+# We will cheat and use ExtUtils::MakeMaker to install this
+# Perl Module instead of doing some whacked out autoconf
 SHELL = @SHELL@
 
 srcdir = @srcdir@
@@ -45,7 +39,7 @@ oldincludedir = /usr/include
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
-top_builddir = ../..
+top_builddir = ..
 
 ACLOCAL = @ACLOCAL@
 AUTOCONF = @AUTOCONF@
@@ -82,6 +76,7 @@ AMTAR = @AMTAR@
 AS = @AS@
 AWK = @AWK@
 CC = @CC@
+
 COMPAT_PREFIX = @COMPAT_PREFIX@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
@@ -97,23 +92,22 @@ PERL = @PERL@
 RANLIB = @RANLIB@
 STRIP = @STRIP@
 VERSION = @VERSION@
-
 XS_PREFIX = @XS_PREFIX@
 am__include = @am__include@
 am__quote = @am__quote@
 install_sh = @install_sh@
-subdir = src/Libgendersllnl
+subdir = compat
 mkinstalldirs = $(SHELL) $(top_srcdir)/config/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config/config.h
 CONFIG_CLEAN_FILES =
 DIST_SOURCES =
-DIST_COMMON = README Makefile.am Makefile.in
+DIST_COMMON = Makefile.am Makefile.in
 all: all-am
 
 .SUFFIXES:
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.ac $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  src/Libgendersllnl/Makefile
+	  $(AUTOMAKE) --gnu  compat/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -131,7 +125,7 @@ TAGS:
 
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 
-top_distdir = ../..
+top_distdir = ..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
 
 distdir: $(DISTFILES)
@@ -229,36 +223,25 @@ uninstall-am: uninstall-info-am
 	mostlyclean-libtool uninstall uninstall-am uninstall-info-am
 
 
-all: Makefile.xs
-	$(MAKE) -f Makefile.xs
+all: Makefile.pm
+	$(MAKE) -f Makefile.pm
 
-Makefile.xs: Makefile.PL Libgendersllnl.xs Libgendersllnl.pm
-	cp ../libgendersllnl/gendersllnl.c .
-	cp ../libgendersllnl/gendersllnl.h .
-	cp ../libgendersllnl/hostlist.c .
-	cp ../libgendersllnl/hostlist.h .
-	$(PERL) Makefile.PL PREFIX=$(XS_PREFIX) MAKEFILE=Makefile.xs FIRST_MAKEFILE=Makefile.xs
+Makefile.pm: Makefile.PL
+	$(PERL) Makefile.PL PREFIX=$(COMPAT_PREFIX) MAKEFILE=Makefile.pm FIRST_MAKEFILE=\Makefile.pm
 
-test: Makefile.xs 
-	$(MAKE) -f Makefile.xs test
+install: Makefile.pm
+	$(MAKE) -f Makefile.pm pure_install
 
-install: Makefile.xs
-	$(MAKE) -f Makefile.xs pure_install
-
-pure_install: Makefile.xs
-	$(MAKE) -f Makefile.xs pure_install
+pure_install: Makefile.pm
+	$(MAKE) -f Makefile.pm pure_install
 
 install-data-local:
-	$(MAKE) -f Makefile.xs pure_install
+	$(MAKE) -f Makefile.pm pure_install
 
-clean: 
-	$(MAKE) -f Makefile.xs clean
-	rm -f Makefile.xs
-	rm -f Makefile.xs.old
-	rm -f gendersllnl.c
-	rm -f gendersllnl.h
-	rm -f hostlist.c
-	rm -f hostlist.h
+clean:
+	$(MAKE) -f Makefile.pm clean
+	rm -f Makefile.pm
+	rm -f Makefile.pm.old
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

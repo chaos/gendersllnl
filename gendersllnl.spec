@@ -12,7 +12,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}
 A LLNL genders site specific library 
 
 %package dist
-Summary: genders dist 
+Summary: gendersllnl dist 
 Group: System Environment/Base
 %description dist
 file distribution tool
@@ -21,7 +21,7 @@ file distribution tool
 %setup  -q -n %{name}-%{version}
 
 %build
-./configure --prefix=/usr --with-xs-prefix="$RPM_BUILD_ROOT/usr" --with-gendersllnl-pm-prefix="$RPM_BUILD_ROOT/usr"
+./configure --prefix=/usr --with-xs-prefix="$RPM_BUILD_ROOT/usr" --with-gendersllnl-pm-prefix="$RPM_BUILD_ROOT/usr" --with-compat-prefix="$RPM_BUILD_ROOT/usr"
 make 
 
 %install

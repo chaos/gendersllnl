@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.5 2003-05-15 00:42:19 achu Exp $
+## $Id: configure.ac,v 1.6 2003-05-17 00:17:31 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -36,7 +36,7 @@ AC_ARG_WITH(xs-prefix,
 )
 AC_MSG_RESULT(${withxsprefix=no})
 if test -z "$XS_PREFIX"; then
-   XS_PREFIX="/usr"
+   XS_PREFIX='${prefix}'
 fi
 AC_SUBST(XS_PREFIX)
 
@@ -58,9 +58,31 @@ AC_ARG_WITH(gendersllnl-pm-prefix,
 )
 AC_MSG_RESULT(${withgendersllnlpm=no})
 if test -z "$GENDERSLLNL_PM_PREFIX"; then
-   GENDERSLLNL_PM_PREFIX="/usr"
+   GENDERSLLNL_PM_PREFIX='${prefix}'
 fi
 AC_SUBST(GENDERSLLNL_PM_PREFIX)
+
+# compat install location
+AC_MSG_CHECKING(for --with-compat-prefix )
+AC_ARG_WITH(compat-prefix,
+    AC_HELP_STRING([--with-compat-prefix=path], [define compat subpackage prefix]),
+    [ case "$withval" in
+    yes)
+        withcompatprefix=yes
+        ;;
+    no)
+        ;;
+    *)
+        withcompatprefix=yes
+        COMPAT_PREFIX="\"$withval\""
+        ;;
+    esac ]
+)
+AC_MSG_RESULT(${withcompatprefix=no})
+if test -z "$COMPAT_PREFIX"; then
+   COMPAT_PREFIX='${prefix}'
+fi
+AC_SUBST(COMPAT_PREFIX)
 
 ##
 # Checks for programs.
@@ -118,6 +140,7 @@ AC_CONFIG_FILES( \
   src/Libgendersllnl/Makefile \
   src/Gendersllnl/Makefile \
   dist/Makefile \
+  compat/Makefile \
   man/Makefile \
   man/dist/Makefile \
 )
