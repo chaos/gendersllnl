@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.10 2003-05-27 23:56:42 achu Exp $
+# $Id: Gendersllnl.pm,v 1.11 2003-07-02 00:15:00 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -337,7 +337,7 @@ all Genders functionality is also included in this package.
 
 =over 4
 
-=item B<Genders-E<gt>new([$filename])>
+=item B<Gendersllnl-E<gt>new([$filename])>
 
 Creates a Gendersllnl object and load genders data from the specified
 file.  If the genders file is not specified, the default genders file
