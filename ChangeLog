@@ -1,13 +1,20 @@
+2004-11-13  Albert Chu  <chu11@llnl.gov>
+
+	* README, gendersllnl.spec.in: Backport updated documentation and
+	port fixes from higher branch.
+
+	* META: Updated for new release
+
+	* tagged gendersllnl-1-4-3
+	
 2004-10-26  Albert Chu  <chu11@llnl.gov>
 
-	* config/Make-rpm.mk: Updated for porting issues.
-
-	* gendersllnl.spec.in: Fix for porting issues.
-
-	* Makefile.am, dist/Makefile.am, man/Makefile.am,
-	man/dist/Makefile.am, compat/Makefile.am,
-	src/Gendersllnl/Makefile.am, src/Libgendersllnl/Makefile.am,
-	src/libgendersllnl/Makefile.am: Fixes for distcheck.
+	* config/Make-rpm.mk, gendersllnl.spec.in, Makefile.am,
+	dist/Makefile.am, man/Makefile.am, man/dist/Makefile.am,
+	compat/Makefile.am, src/Gendersllnl/Makefile.am,
+	src/Libgendersllnl/Makefile.am, src/libgendersllnl/Makefile.am:
+	Backport port and dist fixes from higher branch to enable builds
+	on other systems.
 
 	* META: Updated release.
 

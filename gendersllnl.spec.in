@@ -1,7 +1,7 @@
 Name:    @PROJECT@
 Version: @VERSION@
 Release: @RELEASE@
-Summary: LLNL site specific genders library
+Summary: LLNL site specific genders libraries
 Copyright: none
 Group: System Environment/Base
 Source: %{name}-%{version}-%{release}.tgz
@@ -9,14 +9,17 @@ Requires: genders >= 1.2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
-A LLNL genders site specific library 
+Gendersllnl is a set of Lawrence Livermore National Laboratory (LLNL)
+site specific genders libraries.  The libraries contain API functions
+specifically for LLNL tools.
 
 %package dist
-Summary: gendersllnl dist 
+Summary: LLNL file distribution tools
 Group: System Environment/Base
 Requires: pdsh >= 2.0-0.pre18
 %description dist
-file distribution tool
+Sets of file distribution tools used specifically by LLNL.  The tools
+will most likely not work by default in a non-LLNL environment.
 
 %prep
 %setup  -q -n %{name}-%{version}-%{release}
@@ -32,12 +35,12 @@ DESTDIR="$RPM_BUILD_ROOT" make install
 %files
 %defattr(-,root,root)
 %doc README ChangeLog COPYING NEWS DISCLAIMER
-/usr/share/man/man3/
-/usr/include/gendersllnl.h
-%{_libdir}
+%{_mandir}/man3/*
+%{_includedir}/*
+%{_libdir}/*
 
 %files dist
 %defattr(-,root,root)
 %doc dist/TUTORIAL dist/Distfile.sample
-/usr/share/man/man1/*
-/usr/bin/
+%{_mandir}/man1/*
+%{_bindir}/*
