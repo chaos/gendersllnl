@@ -1,3 +1,8 @@
+2003-02-04  Albert Chu  <chu11@llnl.gov>
+
+	* Fix copyright notices everywhere to say "Gendersllnl" instead of
+	"Genders".
+	
 2003-01-15  Albert Chu  <chu11@llnl.gov>
 
 	* src/libgendersllnl/gendersllnl.c: All hostlist_create or
