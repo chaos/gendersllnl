@@ -2,8 +2,8 @@
 
 	* Makefile.am compat/Makefile.am, man/Makefile.am,
 	man/dist/Makefile.am, dist/Makefile.am,
-	src/Libgendersllnl/Makefile.am, src/Gendersllnl/Makefile.am: Fixed
-	dist issues.
+	src/libgendersllnl/Makefile.am, src/Libgendersllnl/Makefile.am,
+	src/Gendersllnl/Makefile.am: Fixed dist issues.
 	
 	* src/libgendersllnl/Makefile.am: Cleanup.
 	
