@@ -73,7 +73,7 @@ genders_getaltnodes (handle, attr=NULL, val=NULL)
     char *attr
     char *val
     PREINIT:
-        int num, ret, i;
+        int num, ret, temp, i;
         char **altnodelist = NULL;
     CODE:
         if ((num = genders_altnodelist_create(handle, &altnodelist)) == -1)
@@ -90,16 +90,18 @@ genders_getaltnodes (handle, attr=NULL, val=NULL)
         for (i = 0; i < ret; i++)
             av_push(RETVAL, newSVpv(altnodelist[i], 0));
 
-        (void)genders_altnodelist_destroy(handle, altnodelist);
+        if (genders_altnodelist_destroy(handle, altnodelist) == -1)
+            goto handle_error;
+
         goto the_end;
 
         handle_error:
-            /* manually destroy lists, to preserve error value */
-            if (altnodelist != NULL) {
-                for (i = 0; i < num; i++)
-                    free(altnodelist[i]);
-                free(altnodelist);
-            }
+        
+            temp = genders_errnum(handle);
+           
+            (void)genders_altnodelist_destroy(handle, altnodelist);
+        
+            genders_set_errnum(handle, temp);
 
             XSRETURN_UNDEF;
 
@@ -113,7 +115,7 @@ genders_getaltnodes_preserve (handle, attr=NULL, val=NULL)
     char *attr
     char *val
     PREINIT:
-        int num, ret, i;
+        int num, ret, temp, i;
         char **altnodelist = NULL;
     CODE:
         if ((num = genders_altnodelist_create(handle, &altnodelist)) == -1)
@@ -130,16 +132,18 @@ genders_getaltnodes_preserve (handle, attr=NULL, val=NULL)
         for (i = 0; i < ret; i++)
             av_push(RETVAL, newSVpv(altnodelist[i], 0));
 
-        (void)genders_altnodelist_destroy(handle, altnodelist);
+        if (genders_altnodelist_destroy(handle, altnodelist) == -1)
+            goto handle_error;
+
         goto the_end;
 
         handle_error:
-            /* manually destroy lists, to preserve error value */
-            if (altnodelist != NULL) {
-                for (i = 0; i < num; i++)
-                    free(altnodelist[i]);
-                free(altnodelist);
-            }
+
+            temp = genders_errnum(handle);
+           
+            (void)genders_altnodelist_destroy(handle, altnodelist);
+        
+            genders_set_errnum(handle, temp);
 
             XSRETURN_UNDEF;
 
