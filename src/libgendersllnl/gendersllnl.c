@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.c,v 1.7 2003-05-27 15:43:50 achu Exp $
+ * $Id: gendersllnl.c,v 1.8 2003-05-27 23:41:10 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.c,v $
  */
 
@@ -24,39 +24,39 @@
 /* handle common code between genders_getaltnodes() and
  * genders_getaltnodes_preserve()
  */
-int genders_getaltnodes_common(genders_t handle,
-                               char *altnodes[],
-                               int len,
-                               const char *attr,
-                               const char *val,
-                               int flag);
+static int genders_getaltnodes_common(genders_t handle,
+                                      char *altnodes[],
+                                      int len,
+                                      const char *attr,
+                                      const char *val,
+                                      int flag);
 
 /* handle common code between genders_to_gendname() and
  * genders_to_gendname_preserve().  If 'altnode' not found returns 0
  */
-int genders_to_gendname_common(genders_t handle,
-                               const char *altnode,
-                               char *buf,
-                               int buflen);
+static int genders_to_gendname_common(genders_t handle,
+                                      const char *altnode,
+                                      char *buf,
+                                      int buflen);
 
 /* handle common code between genders_to_altname() and
  * genders_to_altname_preserve().  If 'node' not found returns 0
  */
-int genders_to_altname_common(genders_t handle,
-                              const char *node,
-                              char *buf,
-                              int buflen);
+static int genders_to_altname_common(genders_t handle,
+                                     const char *node,
+                                     char *buf,
+                                     int buflen);
 
 /* handle common code between genders_string_to_gendnames(),
  * genders_string_to_gendnames_preserve(),
  * genders_string_to_altnames(), and
  * genders_string_to_altnames_preserve()
  */
-int genders_string_common(genders_t handle,
-                          const char *str,
-                          char *buf,
-                          int buflen,
-                          int flag);
+static int genders_string_common(genders_t handle,
+                                 const char *str,
+                                 char *buf,
+                                 int buflen,
+                                 int flag);
 
 int genders_get_cluster(genders_t handle,
                         const char *node,
@@ -571,6 +571,7 @@ int genders_string_to_gendnames(genders_t handle,
                                 const char *str,
                                 char *buf,
                                 int buflen) {
+
   int flag = GENDERSLLNL_GENDNAME_NOPRESERVE;
 
   return genders_string_common(handle, str, buf, buflen, flag);
@@ -580,6 +581,7 @@ int genders_string_to_gendnames_preserve(genders_t handle,
                                          const char *str,
                                          char *buf,
                                          int buflen) {
+
   int flag = GENDERSLLNL_GENDNAME_PRESERVE;
 
   return genders_string_common(handle, str, buf, buflen, flag);
@@ -589,6 +591,7 @@ int genders_string_to_altnames(genders_t handle,
                                const char *str,
                                char *buf,
                                int buflen) {
+
   int flag = GENDERSLLNL_ALTNAME_NOPRESERVE;
 
   return genders_string_common(handle, str, buf, buflen, flag);
@@ -598,6 +601,7 @@ int genders_string_to_altnames_preserve(genders_t handle,
                                         const char *str,
                                         char *buf,
                                         int buflen) {
+
   int flag = GENDERSLLNL_ALTNAME_PRESERVE;
 
   return genders_string_common(handle, str, buf, buflen, flag);

@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.h,v 1.2 2003-05-22 00:44:41 achu Exp $
+ * $Id: gendersllnl.h,v 1.3 2003-05-27 23:41:10 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.h,v $
  */
 
@@ -30,8 +30,7 @@ int genders_get_cluster(genders_t handle,
                         int buflen);
 
 /* Allocate an array of character strings to store altnodes in 
- * Returns: number of elements the list can store on success,
- *          -1 on failure
+ * Returns: number of elements the list can store on success, -1 on failure
  */
 int genders_altnodelist_create(genders_t handle, char ***altnodelist);
 
