@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.9 2004-06-21 16:15:59 achu Exp $
+## $Id: Makefile.am,v 1.10 2004-06-21 16:24:21 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -20,7 +20,7 @@ Makefile.pm: Makefile.PL
 	if ! test -a Gendersllnl.pm; then \
 		cp $(srcdir)/Gendersllnl.pm .; \
 	fi
-	$(PERL) $(srcdir)/Makefile.PL PREFIX=$(PERL_INSTALL_PREFIX) MAKEFILE=Makefile.pm FIRST_MAKEFILE=\Makefile.pm
+	$(PERL) Makefile.PL PREFIX=$(PERL_INSTALL_PREFIX) MAKEFILE=Makefile.pm FIRST_MAKEFILE=\Makefile.pm
 
 install: Makefile.pm
 	$(MAKE) -f Makefile.pm pure_install
