@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.6 2003-05-17 00:17:31 achu Exp $
+## $Id: configure.ac,v 1.7 2003-05-27 17:53:02 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -21,7 +21,7 @@ AM_MAINTAINER_MODE
 # Libgenders install location
 AC_MSG_CHECKING(for --with-xs-prefix )
 AC_ARG_WITH(xs-prefix,
-    AC_HELP_STRING([--with-xs-prefix=path], [define perl xs prefix for install]),
+    AC_HELP_STRING([--with-xs-prefix=path], [define perl xs prefix dir]),
     [ case "$withval" in
     yes)
         withxsprefix=yes
@@ -40,10 +40,10 @@ if test -z "$XS_PREFIX"; then
 fi
 AC_SUBST(XS_PREFIX)
 
-# Genders.pm install location
+# Gendersllnl.pm install location
 AC_MSG_CHECKING(for --with-gendersllnl-pm-prefix )
 AC_ARG_WITH(gendersllnl-pm-prefix,
-    AC_HELP_STRING([--with-gendersllnl-pm-prefix=path], [define genders.pm install dir]),
+    AC_HELP_STRING([--with-gendersllnl-pm-prefix=path], [define gendersllnl.pm prefix dir]),
     [ case "$withval" in
     yes)
         withgendersllnlpm=yes
@@ -98,10 +98,11 @@ AC_PATH_PROG(PERL, perl)
 AC_HEADER_STDC
 AC_CHECK_HEADERS( \
   errno.h \
+  stdio.h \
   stdlib.h \
   string.h \
   unistd.h \
-  unistd.h \
+  genders.h \
 )
 
 ##

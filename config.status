@@ -793,9 +793,11 @@ ${ac_dA}HAVE_UNISTD_H${ac_dB}HAVE_UNISTD_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_DLFCN_H${ac_dB}HAVE_DLFCN_H${ac_dC}1${ac_dD}
 ${ac_dA}STDC_HEADERS${ac_dB}STDC_HEADERS${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_ERRNO_H${ac_dB}HAVE_ERRNO_H${ac_dC}1${ac_dD}
+${ac_dA}HAVE_STDIO_H${ac_dB}HAVE_STDIO_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_STDLIB_H${ac_dB}HAVE_STDLIB_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_STRING_H${ac_dB}HAVE_STRING_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_UNISTD_H${ac_dB}HAVE_UNISTD_H${ac_dC}1${ac_dD}
+${ac_dA}HAVE_GENDERS_H${ac_dB}HAVE_GENDERS_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_STDLIB_H${ac_dB}HAVE_STDLIB_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_MALLOC${ac_dB}HAVE_MALLOC${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_STRCMP${ac_dB}HAVE_STRCMP${ac_dC}1${ac_dD}
@@ -838,9 +840,11 @@ ${ac_uA}HAVE_UNISTD_H${ac_uB}HAVE_UNISTD_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_DLFCN_H${ac_uB}HAVE_DLFCN_H${ac_uC}1${ac_uD}
 ${ac_uA}STDC_HEADERS${ac_uB}STDC_HEADERS${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_ERRNO_H${ac_uB}HAVE_ERRNO_H${ac_uC}1${ac_uD}
+${ac_uA}HAVE_STDIO_H${ac_uB}HAVE_STDIO_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_STDLIB_H${ac_uB}HAVE_STDLIB_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_STRING_H${ac_uB}HAVE_STRING_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_UNISTD_H${ac_uB}HAVE_UNISTD_H${ac_uC}1${ac_uD}
+${ac_uA}HAVE_GENDERS_H${ac_uB}HAVE_GENDERS_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_STDLIB_H${ac_uB}HAVE_STDLIB_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_MALLOC${ac_uB}HAVE_MALLOC${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_STRCMP${ac_uB}HAVE_STRCMP${ac_uC}1${ac_uD}

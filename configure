@@ -1006,9 +1006,9 @@ Optional Features:
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
-  --with-xs-prefix=path   define perl xs prefix for install
+  --with-xs-prefix=path   define perl xs prefix dir
   --with-gendersllnl-pm-prefix=path
-                          define genders.pm install dir
+                          define gendersllnl.pm prefix dir
   --with-compat-prefix=path
                           define compat subpackage prefix
   --with-gnu-ld           assume the C compiler uses GNU ld default=no
@@ -1906,7 +1906,7 @@ if test -z "$XS_PREFIX"; then
 fi
 
 
-# Genders.pm install location
+# Gendersllnl.pm install location
 echo "$as_me:$LINENO: checking for --with-gendersllnl-pm-prefix " >&5
 echo $ECHO_N "checking for --with-gendersllnl-pm-prefix ... $ECHO_C" >&6
 
@@ -7685,12 +7685,14 @@ fi
 
 
 
+
 for ac_header in \
   errno.h \
+  stdio.h \
   stdlib.h \
   string.h \
   unistd.h \
-  unistd.h \
+  genders.h \
 
 do
 as_ac_Header=`echo "ac_cv_header_$ac_header" | $as_tr_sh`
