@@ -1,3 +1,8 @@
+2003-01-09  Albert Chu  <chu11@llnl.gov>
+
+	* dist/dist2: Fixed corner case when falling through to
+	/etc/genders.
+	
 2003-12-31  Albert Chu  <chu11@llnl.gov>
 
 	* src/libgendersllnl/Makefile.am, src/Gendersllnl/Gendersllnl.pm,

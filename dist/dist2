@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.6 2003-12-30 22:51:16 achu Exp $
+#  $Id: dist2,v 1.7 2004-01-09 17:46:18 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -56,7 +56,7 @@ use Getopt::Std;
 
 $path_vardist =		"/var/dist";
 $path_genders = 	"/var/dist/genders/genders.%s";
-$path_genders_fallback = Gendersllnl::GENDERS_DEFAULT_FILE;
+$path_genders_fallback = $Gendersllnl::GENDERS_DEFAULT_FILE;
 $path_distfile = 	"/var/dist/Distfile.%s";
 $path_testfile =	"/var/dist/VAR_DIST_IS_MOUNTED";
 $path_openfile =	"/var/dist/VAR_DIST_OPEN_VERSION";
@@ -120,6 +120,10 @@ if ($main::opt_c) {
         if (!defined $gendobj) {
                 # Fall back to default if /var/dist perhaps isn't mounted
 		$gendobj = Gendersllnl->new($main::path_genders_fallback);
+		if (!defined $gendobj) {
+			print STDERR ("Cannot find a genders file\n");
+			exit(1);
+		}
 	}
 }
 
