@@ -2,6 +2,10 @@
 
 	* tagged pre_dist2_err_msg_cleanup
 
+	* dist/dist2: Cleaned up error message output.
+	
+	* tagged post_dist2_err_msg_cleanup
+
 2005-01-10  Albert Chu  <chu11@llnl.gov>
 
 	* src/libgendersllnl/hostlist.h, src/libgendersllnl/hostlist.c:
