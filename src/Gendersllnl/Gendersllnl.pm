@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.1.1.1 2003-05-13 01:20:50 achu Exp $
+# $Id: Gendersllnl.pm,v 1.2 2003-05-14 17:25:13 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -209,6 +209,95 @@ sub to_altname_preserve {
     }
 }
 
+sub to_gendnames {
+    my $self = shift;
+    my @altnames = @_;
+    my @gendnames = ();
+    my $gendname;
+
+    if (ref($self)) {
+        foreach (@altnames) {
+            $gendname = $self->{"_HANDLE"}->genders_to_gendname($_);
+            if (!defined $gendname) {
+                _errormsg($self, "genders_to_gendname()");
+                return ();
+            }
+            push(@gendnames, $gendname);
+        }
+        return @gendnames;
+    }
+    else {
+        return ();
+    }
+}
+
+sub to_gendnames_preserve {
+    my $self = shift;
+    my @altnames = @_;
+    my @gendnames = ();
+    my $gendname;
+
+    if (ref($self)) {
+        foreach (@altnames) {
+            $gendname = $self->{"_HANDLE"}->genders_to_gendname_preserve($_);
+            if (!defined $gendname) {
+                _errormsg($self, "genders_to_gendname_preserve()");
+                return ();
+            }
+            push(@gendnames, $gendname);
+        }
+        return @gendnames;
+    }
+    else {
+        return ();
+    }
+}
+
+sub to_altnames {
+    my $self = shift;
+    my @nodes = @_;
+    my @altnames = ();
+    my $altname;
+
+    if (ref($self)) {
+        foreach (@nodes) {
+            $altname = $self->{"_HANDLE"}->genders_to_altname($_);
+            if (!defined $altname) {
+                _errormsg($self, "genders_to_altname()");
+                return ();
+            }
+            push(@altnames, $altname);
+        }
+        return @altnames; 
+    }
+    else {
+        return ();
+    }
+}
+
+sub to_altnames_preserve {
+    my $self = shift;
+    my @nodes = @_;
+    my @altnames = ();
+    my $altname;
+
+    if (ref($self)) {
+        foreach (@nodes) {
+            $altname = $self->{"_HANDLE"}->genders_to_altname_preserve($_);
+            if (!defined $altname) {
+                _errormsg($self, "genders_to_altname_preserve()");
+                return ();
+            }
+            push(@altnames, $altname);
+        }
+        return @altnames; 
+    }
+    else {
+        return ();
+    }
+}
+
+
 
 1;
 
@@ -236,6 +325,11 @@ Gendersllnl - LLNL site specific Perl library for querying genders file
  $obj->to_gendname_preserve($altnode)
  $obj->to_altname($node)
  $obj->to_altname_preserve($node)
+
+ $obj->to_gendnames(@altnodes)
+ $obj->to_gendnames_preserve(@altnodes)
+ $obj->to_altnames(@nodes)
+ $obj->to_altnames_preserve(@nodes)
 
 =head1 DESCRIPTION
 
@@ -301,6 +395,30 @@ the genders file.
 Returns the alternate node name of the specified genders node name.
 Returns the specified genders node name if it is not found in the
 genders file.
+
+=item B<$obj-E<gt>to_gendnames(@altnodes)>
+
+Returns a list of genders node names for each alternate node name
+listed in the specified list.  Returns an empty list if any alternate
+node name is not found in the genders file.
+
+=item B<$obj-E<gt>to_gendnames_preserve(@altnodes)>
+
+Returns a list of genders node names for each alternate node name
+listed in the specified list.  Preserves the alternate node name if it
+is not found in the genders file.
+
+=item B<$obj-E<gt>to_altnames(@nodes)>
+
+Returns a list of alternate node names for each genders node name
+listed in the specified list.  Returns an empty list if any genders
+node name is not found in the genders file.
+
+=item B<$obj-E<gt>to_altnames_preserve(@nodes)>
+
+Returns a list of alternate node names for each genders node name
+listed in the specified list.  Preserves the genders node name if it
+is not found in the genders file.
 
 =back 
 
