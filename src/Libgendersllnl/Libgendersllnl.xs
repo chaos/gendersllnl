@@ -7,7 +7,7 @@
 #include <genders.h>
 #include "gendersllnl.h"
 
-MODULE = Libgendersllnl		PACKAGE = Libgendersllnl		
+MODULE = Libgendersllnl         PACKAGE = Libgendersllnl                
 
 SV *
 GENDERS_ALTNAME_ATTRIBUTE (sv=&PL_sv_undef)

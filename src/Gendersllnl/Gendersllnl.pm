@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.3 2003-05-14 20:05:12 achu Exp $
+# $Id: Gendersllnl.pm,v 1.4 2003-05-14 23:09:04 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -11,6 +11,23 @@ use Libgendersllnl;
 our $VERSION = "2.0";
 
 our @ISA = qw(Genders);
+
+require Exporter;
+
+our @ISA = qw(Exporter Genders);
+our @EXPORT = qw(GENDERS_ALTNAME_ATTRIBUTE 
+                 GENDERS_CLUSTER_ATTRIBUTE 
+                 GENDERS_ALL_ALLTRIBUTE);
+our @EXPORT_OK = qw(GENDERS_ALTNAME_ATTRIBUTE 
+                    GENDERS_CLUSTER_ATTRIBUTE 
+                    GENDERS_ALL_ALLTRIBUTE);
+our %EXPORT_TAGS = ( 'all' => [ qw(GENDERS_ALTNAME_ATTRIBUTE 
+                                   GENDERS_CLUSTER_ATTRIBUTE 
+                                   GENDERS_ALL_ALLTRIBUTE) ] );
+
+GENDERS_ALTNAME_ATTRIBUTE = Libgendersllnl->GENDERS_ALTNAME_ATTRIBUTE;
+GENDERS_CLUSTER_ATTRIBUTE = Libgendersllnl->GENDERS_CLUSTER_ATTRIBUTE;
+GENDERS_ALL_ATTRIBUTE = Libgendersllnl->GENDERS_ALL_ATTRIBUTE;
 
 # need to bless into Libgendersllnl, therefore cannot use Genders'
 # new.  Technically could use SUPER to call Gender's new and reduce
@@ -311,6 +328,10 @@ Gendersllnl - LLNL site specific Perl library for querying genders file
 
  use Gendersllnl;
 
+ Gendersllnl::GENDERS_ALTNAME_ATTRIBUTE
+ Gendersllnl::GENDERS_CLUSTER_ATTRIBUTE
+ Gendersllnl::GENDERS_ALL_ATTRIBUTE
+
  $obj = Gendersllnl->new([$filename])
 
  $obj->get_cluster()
@@ -338,6 +359,18 @@ a genders file.  This package inherits from the Genders package, so all.
 Genders functionality is also included in this package.
 
 =over 4
+
+=item B<Gendersllnl::GENDERS_ALTNAME_ATTRIBUTE>
+
+Genders alternate node name attribute.
+
+=item B<Gendersllnl::GENDERS_CLUSTER_ATTRIBUTE>
+
+Genders cluster name attribute.
+
+=item B<Gendersllnl::GENDERS_ALL_ATTRIBUTE>
+
+Genders all attribute.
 
 =item B<Genders->new([$filename])>
 
