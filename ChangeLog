@@ -4,6 +4,10 @@
 
 	* compat/Hostlist.pm: Added perldoc manpage.
 
+	* src/Libgenders/MANIFEST: Removed pointless files from file list.
+
+	* src/Libgenders/README: Removed file.
+
 2003-08-07  Albert Chu  <chu11@llnl.gov>
 
 	* gendersllnl.spec: Lowered pdsh version requirement
