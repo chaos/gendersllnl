@@ -5,7 +5,7 @@ Summary: LLNL site specific genders library
 Copyright: none
 Group: System Environment/Base
 Source0:
-Prereq: genders
+Requires: genders >= 2.0
 BuildRoot: %{_tmppath}/%{name}-%{version}
 
 %description
