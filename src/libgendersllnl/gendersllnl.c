@@ -1,5 +1,5 @@
 /*
- * $Id: gendersllnl.c,v 1.10 2003-05-28 15:10:37 achu Exp $
+ * $Id: gendersllnl.c,v 1.11 2003-05-28 15:58:25 achu Exp $
  * $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/libgendersllnl/gendersllnl.c,v $
  */
 
@@ -58,9 +58,9 @@ static int genders_string_common(genders_t handle,
                                  int buflen,
                                  int flag);
 
-int genders_get_cluster(genders_t handle,
-                        const char *node,
-                        char *buf,
+int genders_get_cluster(genders_t handle, 
+                        const char *node, 
+                        char *buf, 
                         int buflen) {
 
   char *clustattr = GENDERS_CLUSTER_ATTRIBUTE;
@@ -257,7 +257,6 @@ int genders_isaltnode(genders_t handle, const char *altnode) {
 }
 
 int genders_isnode_or_altnode(genders_t handle, const char *nodename) {
-
   int ret;
 
   /* must be non-NULL, b/c isnode() interprets
