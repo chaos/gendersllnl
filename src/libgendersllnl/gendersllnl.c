@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: gendersllnl.c,v 1.20 2004-02-04 22:44:53 achu Exp $
+ *  $Id: gendersllnl.c,v 1.21 2004-05-19 22:15:28 achu Exp $
  *****************************************************************************
  *  Copyright (C) 2001-2003 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -57,6 +57,9 @@ genders_get_cluster(genders_t handle, const char *node, char *buf, int buflen)
     genders_set_errnum(handle, GENDERS_ERR_SUCCESS);
     return 0;
   }
+
+  /* NOT REACHED */
+  return 0;
 }
 
 int 

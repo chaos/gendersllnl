@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.6 2003-11-07 19:28:18 achu Exp $
+## $Id: Makefile.am,v 1.7 2004-05-19 22:15:28 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -28,3 +28,5 @@ clean:
 	if test -a Makefile.pm; then $(MAKE) -f Makefile.pm clean; fi
 	rm -f Makefile.pm
 	rm -f Makefile.pm.old
+
+EXTRA_DIST = Gendersllnl.pm Makefile.PL

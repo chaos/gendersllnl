@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.7 2004-01-16 17:33:09 achu Exp $
+## $Id: Makefile.am,v 1.8 2004-05-19 22:15:28 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -38,5 +38,5 @@ clean:
 	rm -f Makefile.xs
 	rm -f Makefile.xs.old
 
-
+EXTRA_DIST = Libgendersllnl.pm Libgendersllnl.xs Makefile.PL typemap
 

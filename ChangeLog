@@ -1,3 +1,14 @@
+2004-05-19  Albert Chu  <chu11@llnl.gov>
+
+	* compat/Makefile.am, man/Makefile.am, man/dist/Makefile.am,
+	dist/Makefile.am, src/Libgendersllnl/Makefile.am,
+	src/Gendersllnl/Makefile.am: Fixed dist issues.
+	
+	* src/libgendersllnl/Makefile.am: Cleanup.
+	
+	* src/libgendersllnl/gendersllnl.c (genders_get_cluster): Fix
+	compiler warning.
+	
 2004-04-30  Albert Chu  <chu11@llnl.gov>
 
 	* dist/dist_all: Fix bug in which -v option should be used with
