@@ -1,5 +1,5 @@
 ;#############################################################################
-# $Id: Gendersllnl.pm,v 1.9 2003-05-27 23:56:03 achu Exp $
+# $Id: Gendersllnl.pm,v 1.10 2003-05-27 23:56:42 achu Exp $
 # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/src/Gendersllnl/Gendersllnl.pm,v $
 #############################################################################
 
@@ -85,7 +85,8 @@ sub getaltnodes_preserve {
     my $altnodes;
 
     if (ref($self)) {
-        $altnodes = $self->{$handlekey}->genders_getaltnodes_preserve($attr, $val);
+        $altnodes = $self->{$handlekey}->genders_getaltnodes_preserve($attr, 
+                                                                      $val);
         if (!defined($altnodes)) {
             _errormsg($self, "genders_getaltnodes_preserve()");
             return ();
