@@ -1,6 +1,6 @@
-Name: 
-Version:
-Release:
+Name:    @PROJECT@
+Version: @VERSION@
+Release: @RELEASE@
 Summary: LLNL site specific genders library
 Copyright: none
 Group: System Environment/Base
@@ -22,6 +22,7 @@ file distribution tool
 %setup  -q -n %{name}-%{version}
 
 %build
+./bootstrap
 ./configure --prefix=/usr --with-xs-prefix="$RPM_BUILD_ROOT/usr" --with-gendersllnl-pm-prefix="$RPM_BUILD_ROOT/usr" --with-compat-prefix="$RPM_BUILD_ROOT/usr"
 make 
 

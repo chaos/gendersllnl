@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.8 2003-07-02 17:57:24 achu Exp $
+## $Id: configure.ac,v 1.9 2003-09-11 15:37:28 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -147,6 +147,7 @@ AC_CHECK_LIB(genders, genders_handle_create)
 # Epilogue.
 ##
 AC_CONFIG_FILES( \
+  gendersllnl.spec \
   Makefile \
   src/Makefile \
   src/libgendersllnl/Makefile \
