@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: inst.c,v 1.1 2003-05-14 23:27:53 achu Exp $
+ *  $Id: inst.c,v 1.2 2003-07-15 21:17:03 achu Exp $
  *****************************************************************************
  *  Copyright (C) 2001-2002 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -288,7 +288,7 @@ int main(int argc, char *argv[])
 
         /* touch date to be the same as source file */
         times[0].tv_sec = sb_src.st_mtime;
-        times[0].tv_usec = sb_src.st_mtime;
+        times[0].tv_usec = 0;
         times[1] = times[0];
         if (utimes(dst_file, times) == -1)
             perror(dst_file);
