@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.9 2004-06-08 16:16:36 achu Exp $
+## $Id: Makefile.am,v 1.10 2004-06-21 16:15:59 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -17,7 +17,20 @@ Makefile.xs: Makefile.PL Libgendersllnl.xs Libgendersllnl.pm
 	cp $(srcdir)/../libgendersllnl/gendersllnl.h .
 	cp $(srcdir)/../libgendersllnl/hostlist.c .
 	cp $(srcdir)/../libgendersllnl/hostlist.h .
-	$(PERL) $(srcdir)/Makefile.PL PREFIX=$(PERL_INSTALL_PREFIX) MAKEFILE=Makefile.xs FIRST_MAKEFILE=Makefile.xs
+# Hacks to make distcheck work
+	if ! test -a Makefile.PL; then \
+		cp $(srcdir)/Makefile.PL .; \
+	fi
+	if ! test -a typemap; then \
+		cp $(srcdir)/typemap .; \
+	fi
+	if ! test -a Libgendersllnl.pm; then \
+		cp $(srcdir)/Libgendersllnl.pm .; \
+	fi
+	if ! test -a Libgendersllnl.xs; then \
+		cp $(srcdir)/Libgendersllnl.xs .; \
+	fi
+	$(PERL) Makefile.PL PREFIX=$(PERL_INSTALL_PREFIX) MAKEFILE=Makefile.xs FIRST_MAKEFILE=Makefile.xs
 
 test: Makefile.xs 
 	$(MAKE) -f Makefile.xs test
@@ -32,7 +45,9 @@ install-data-local:
 	$(MAKE) -f Makefile.xs pure_install
 
 clean: 
-	if test -a Makefile.xs; then $(MAKE) -f Makefile.xs clean; fi
+	if test -a Makefile.xs; then \
+		$(MAKE) -f Makefile.xs clean; \
+	fi
 	rm -f gendersllnl.*
 	rm -f hostlist.*
 	rm -f Makefile.xs

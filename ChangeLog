@@ -1,3 +1,8 @@
+2004-06-21  Albert Chu  <chu11@llnl.gov>
+
+	* src/Libgendersllnl/Makefile.am, src/Gendersllnl/Makefile.am,
+	compat/Makefile.am: Fixes to make distcheck work.
+	
 2004-06-08  Albert Chu  <chu11@llnl.gov>
 
 	* src/libgendersllnl/Makefile.am, src/Libgendersllnl/Makefile.am,
