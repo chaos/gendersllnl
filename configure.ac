@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.10 2003-09-11 16:00:07 achu Exp $
+## $Id: configure.ac,v 1.11 2003-09-11 16:03:25 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -8,6 +8,7 @@
 # Prologue.
 ##
 AC_INIT([gendersllnl])
+AC_META
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([README])
 AC_CANONICAL_SYSTEM
