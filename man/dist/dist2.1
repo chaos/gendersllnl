@@ -1,5 +1,5 @@
 \."##########################################################################
-\."  $Id: dist2.1,v 1.2 2003-12-30 22:51:16 achu Exp $
+\."  $Id: dist2.1,v 1.3 2004-02-10 20:09:58 achu Exp $
 \."##########################################################################
 \."  Copyright (C) 2001-2003 The Regents of the University of California.
 \."  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -30,15 +30,15 @@
 .\" Author: Jim Garlick
 .\" Adapted from IBM SP version for linux 4/00.
 .\"
-.TH DIST2 1 "4/14/99" "LLNL" "DIST2"
+.TH DIST2 1 "2/10/04" "LLNL" "DIST2"
 .SH NAME
 dist2 \- rdist wrapper
 .SH SYNOPSIS
 .B dist2
-.I "[-o rdist_opts] [-c cluster] [-v [-n]] [-i] [node spec] [package.[fileset]...]"
+.I "[-o rdist_opts] [-V] [-c cluster] [-d [-n]] [-i] [-v] [node spec] [package.[fileset]...]"
 .br
 .B dist2
-.I "[-o rdist_opts] [-c cluster] [-v [-n]] [-i] [node spec] -f Distfile"
+.I "[-o rdist_opts] [-V] [-c cluster] [-d [-n]] [-i] [-v] [node spec] -f Distfile"
 .br
 .SH DESCRIPTION
 .B Dist2
@@ -74,19 +74,21 @@ the
 program.
 .LP
 Node specification options are
-.I -w node1,node2,node3
-or
+.I -w node1,node2,node3,
+.I -w node[X-Y],
 .I -g genders_attribute
 or
-.I -l
-.
+.I -l.
 In the absense of these options,
 all nodes targeted by the preprocessed Distfile (potentially all nodes 
 appearing in the genders file) are updated.
 .LP
 .I -w
-limits the update to the listed nodes.  Always specify the name as it appears
-in the genders file; generally the primary hostname as reported by the 
+limits the update to the listed nodes.  Nodes can be specified in a
+comma separated list or in hostlist format.  See HOST RANGES below for
+information on the hostlist format.  Always specify the name as it
+appears in the genders file; generally the primary hostname as
+reported by the
 .B hostname
 command.
 .LP
@@ -94,7 +96,26 @@ command.
 similarly selects the set of nodes that have the specified genders attribute.
 .LP
 .I -l
-selects the local node.
+selects the local node.  
+.LP
+When the
+.I -l
+option is not used, the -x and -v options can be used to exclude a set of
+nodes.  
+The
+.I -x
+option can be used similarly to the
+.I -w 
+option to explicitly list a set of nodes to exclude.  The nodes should
+be specified as it appears in the genders file.  The
+.I -v
+option exclude nodes that
+.B whatsup(1)
+determines are down.  When both of the options are used, 
+.B dist2
+will first eliminate those nodes specified with the 
+.I -x
+option.
 .LP
 .I -i
 selects canonical hostnames (the left hand side of a genders file entry).
@@ -103,7 +124,15 @@ The default on the SP is to convert these "initial_hostname" values to
 taking the value of an "altname" genders attribute, if any.  This option
 defeats this conversion.
 .LP
-.I -v
+The
+.I -o
+option can be used to pass options to
+.B rdist.
+The 
+.I -V
+option passes the "verify" option to rdist.
+.LP
+.I -d
 is used for debugging Distfile problems.  When
 .B rdist
 reports a syntax error, it refers to line numbers in the preprocessed
@@ -129,6 +158,28 @@ with the
 .I xyz
 attribute.
 .LP
+.SH "HOST RANGES"
+.B dist2
+accepts ranges of hostnames in the general form: prefix[n-m,l-k,...],
+where n < m and l < k, etc., as an alternative to explicit lists of
+hosts.  This form should not be confused with regular expression
+character classes (also denoted by ``[]''). For example, foo[19] does
+not represent foo1 or foo9, but rather represents a degenerate range:
+foo19.
+
+This range syntax is meant only as a convenience on clusters with a
+prefixNN naming convention and specification of ranges should not be
+considered necessary -- the list foo1,foo9 could be specified as such,
+or by the range foo[1,9].
+
+Some examples of range usage follow:
+    foo[01-05] instead of foo01,foo02,foo03,foo04,foo05
+    foo[7,9-10] instead of foo7,foo9,foo10
+    foo[0-3] instead of foo0,foo1,foo2,foo3
+
+As a reminder to the reader, some shells will interpret brackets ('['
+and ']') for pattern matching.  Depending on your shell, it may be
+necessary to enclose ranged lists within quotes.
 .SH "BUGS"
 When expanding macros, we actually refer to /var/dist/genders/genders.cluster
 instead of the installed version, /etc/genders.  Since the genders file
@@ -154,4 +205,4 @@ be taken so it does not execute on a whole machine reboot to avoid saturating
 the ethernet.
 .LP
 .SH "SEE ALSO"
-rdist(1), dist_all(1), dist_local(1)
+rdist(1), dist_all(1), dist_local(1), whatsup(1)

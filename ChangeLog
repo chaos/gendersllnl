@@ -1,3 +1,13 @@
+2004-02-10  Albert Chu  <chu11@llnl.gov>
+
+	* dist/dist2: Change -v option to -d option.  Added -v, -V, -x
+	options.  Add hostrange support to -w and -x options.
+
+	* dist/dist_all: Call dist2 with -v option when -w option is not
+	listed.
+
+	* man/dist/dist2.1, man/dist/dist_all.1: Updated for changes.
+	
 2004-02-09  Mark Grondona <mgrondona@llnl.gov>
 
 	* compat/Hostlist.pm (expand) :  Properly handle multiple quadrics

@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.8 2004-02-04 22:44:52 achu Exp $
+#  $Id: dist2,v 1.9 2004-02-10 20:09:58 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -49,7 +49,6 @@
 #   support
 # - can update all nodes in a cluster or a subset
 #
-
 use Gendersllnl;
 
 use Getopt::Std;
@@ -61,6 +60,8 @@ $path_distfile = 	"/var/dist/Distfile.%s";
 $path_testfile =	"/var/dist/VAR_DIST_IS_MOUNTED";
 $path_openfile =	"/var/dist/VAR_DIST_OPEN_VERSION";
 $havePSSP =             (-d "/usr/lpp/ssp");
+$path_whatsup       =   "/usr/bin/whatsup";
+$path_whatsup_pssp  =   "/admin/scripts/whatsup";
 
 $gendobj =              undef;
 
@@ -92,7 +93,7 @@ if ($< != 0) {
 }
 
 # read arguments from command line
-if (!getopts("o:c:Fvinlw:g:f:")) { 		
+if (!getopts("o:c:FdVinlw:x:g:f:v")) { 		
 	usage();
 }					
 
@@ -136,13 +137,19 @@ if ($main::opt_f && @ARGV) {
 	usage();
 }
 
-# opt -n implies -v
+# opt -n implies -d
 if ($main::opt_n) {
-	$main::opt_v = 1;
+	$main::opt_d = 1;
 }
 
-if ($main::opt_o) {
-	$main::rdist_passthru_opts = "-o $main::opt_o";
+if ($main::opt_o && $main::opt_V) {
+	$main::rdist_passthru_opts = "-o verify,$main::opt_o";
+}
+elif ($main::opt_o) {
+        $main::rdist_passthru_opts = "-o $main::opt_o";
+}
+elif ($main::opt_V) {
+        $main::rdist_passthru_opts = "-o verify";
 }
 
 # quit if /var/dist isn't mounted
@@ -267,13 +274,20 @@ sub getnodes
 	my ($attr) = @_;
 	my ($node, @allnodes, @nodes);
 
-	@allnodes = $gendobj->getnodes($attr);
+	if ($attr =~ /(\w+)_(\w+)/) {
+	        @allnodes = $gendobj->getnodes($1, $2);
+	}
+	else {
+	        @allnodes = $gendobj->getnodes($attr);
+	}
+
 	if (! $main::opt_i) {
                 # Unique to LLNL, convert node names to 
                 # "alternate" node names.
 
 		@allnodes = $gendobj->to_altnames_preserve(@allnodes);
 	}
+
 	foreach $node (@allnodes) {
 		if (grep(/^$node$/, @main::limit_nodes)){
 			push(@nodes, $node);
@@ -433,32 +447,92 @@ sub usage
 
 sub participating_nodes
 {
-	my (@nodes, $myframe, $hname);
+        my (@allnodes, @selectednodes, @removenodes, @upnodes, @nodes);
+        my ($myframe, $hname);
 
-	if (defined($main::opt_l)) {
+        if (defined($main::opt_l)) {
                 $hname = $gendobj->getnodename();
-		@nodes = ($hname);
-	} elsif (defined($main::opt_w)) {
-		@nodes = split(/,/, $main::opt_w);
-	} elsif (defined($main::opt_g)) {
-		@nodes = $gendobj->getnodes($main::opt_g);
-	} elsif (defined($main::opt_F)) {
-		$myframe = $gendobj->getattrval("frame");
-		# If no frame attr (i.e. CWS) just act like -l 
-		if ($myframe eq "") {
+                @allnodes = ($hname);
+        } elsif (defined($main::opt_w)) {
+                @allnodes = Hostlist::expand($main::opt_w);
+        } elsif (defined($main::opt_g)) {
+                @allnodes = $gendobj->getnodes($main::opt_g);
+        } elsif (defined($main::opt_F)) {
+                $myframe = $gendobj->getattrval("frame");
+                # If no frame attr (i.e. CWS) just act like -l 
+                if ($myframe eq "") {
                         $hname = $gendobj->getnodename();
-			@nodes = ($hname);
-		} else {
-			@nodes = $gendobj->getnodes("frame","$myframe");
-		}
-	} else {
-		@nodes = $gendobj->getnodes();
-	}
+                        @allnodes = ($hname);
+                } else {
+                        @allnodes = $gendobj->getnodes("frame","$myframe");
+                }
+        } else {
+                @allnodes = $gendobj->getnodes();
+        }
 
-	if (! $main::opt_i) {
-		@nodes = $gendobj->to_altnames_preserve(@nodes);
+        if (!defined($main::opt_l) && defined($main::opt_x)) {
+                @removenodes = Hostlist::expand($main::opt_x);
+                
+                /* First check if the nodes are legit */
+                foreach $node (@removenodes) {
+                        if (grep(/^$node$/, @allnodes)) {
+                            print STDERR "Invalid argument to -x: $node\n";
+                            exit(1);
+                        }
+                }    
+
+                /* Remove nodes */
+                foreach $node (@allnodes) {
+                        if (!grep(/^$node$/, @removenodes)) {
+                                push(@selectednodes, $node);
+                        }
+                }
+        }
+        else {
+                @selectednodes = @allnodes;
+        }
+
+        if (!defined($main::opt_l) && defined($main::opt_v)) {
+                @upnodes = get_upnodes();
+
+                foreach $node (@selectednodes) {
+                        if (grep(/^$node$/, @upnodes)) {
+                                push(@nodes, $node);
+                        }
+                }
+        }
+        else {
+            @nodes = @selectednodes;
+        }
+
+        if (!$main::opt_i) {
+                @nodes = $gendobj->to_altnames_preserve(@nodes);
+        }
+
+        return @nodes;
+}
+
+sub get_upnodes 
+{
+        my (@upnodes, $upstr);
+    
+	if ($havePSSP) {
+	        if (!(-x $main::path_whatsup_pssp)) {
+		        print STDERR "-v not available on this machine\n";
+			exit(1);
+	        }
+	        $upstr = `$main::path_whatsup_pssp`;
+		@upnodes = split(/\n/, $upstr);
 	}
-	return @nodes;
+	else {
+	        if (!(-x $main::path_whatsup)) {
+		        print STDERR "-v not available on this machine\n";
+			exit(1);
+	        }
+	        $upstr = `$main::path_whatsup -uc`;
+		@upnodes = split(/,/, $upstr);
+	}
+	return @upnodes;
 }
 
 sub expand_dotted_list
@@ -539,7 +613,7 @@ sub dist_file
 	my ($file, $attrpairs) = @_;
 	my ($cmd);
 
-	if (!$main::opt_v) {
+	if (!$main::opt_d) {
 		$cmd = sprintf("%s %s -f-", $main::path_rdist, 
 				$main::rdist_passthru_opts);
 		if (!open(PIPE, "|$cmd")) {
@@ -547,10 +621,10 @@ sub dist_file
 			return 0;
 		}
 	}
-	emit_distfile_defs($main::opt_v ? \*STDOUT : \*PIPE, $attrpairs);
-	cat_file($main::opt_v ? \*STDOUT : \*PIPE, $file);
+	emit_distfile_defs($main::opt_d ? \*STDOUT : \*PIPE, $attrpairs);
+	cat_file($main::opt_d ? \*STDOUT : \*PIPE, $file);
 
-	if (!$main::opt_v) {
+	if (!$main::opt_d) {
 		close(PIPE);
 	}
 	return 1;
@@ -565,7 +639,7 @@ sub dist_pkg
 	my ($packages, $attrpairs, $labels) = @_;
 	my ($cmd);
 
-	if (!$main::opt_v) {
+	if (!$main::opt_d) {
 		if (!chdir($main::path_vardist)) {
 			printf STDERR ("Couldn't chdir to %s\n",
 			    $main::path_vardist);
@@ -580,10 +654,10 @@ sub dist_pkg
 		}
 	}
 
-	emit_distfile_defs($main::opt_v ? \*STDOUT : \*PIPE, $attrpairs);
-	cat_packages($main::opt_v ? \*STDOUT : \*PIPE, @{$packages});
+	emit_distfile_defs($main::opt_d ? \*STDOUT : \*PIPE, $attrpairs);
+	cat_packages($main::opt_d ? \*STDOUT : \*PIPE, @{$packages});
 
-	if (!$main::opt_v) {
+	if (!$main::opt_d) {
 		close(PIPE);
 	}
 

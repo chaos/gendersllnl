@@ -1,6 +1,6 @@
 #!/bin/sh
 #############################################################################
-#  $Id: dist_all,v 1.4 2004-02-04 22:44:52 achu Exp $
+#  $Id: dist_all,v 1.5 2004-02-10 20:09:58 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -54,14 +54,18 @@ while [ $# -gt 0 ]; do
 done
 
 if [ $WITHSWITCH ]; then
-	$DIST $WOPT -i $ARGS
+        if [ $WOPT ]; then
+	    $DIST $WOPT -i $ARGS
+	else
+	    $DIST -v -i $ARGS
+	fi
 else
 	# big system
 	if [ $NUMNODES -gt 4 ]; then
             if [ $WOPT ]; then
                 pdsh -b $WOPT -f$FANOUT "$DIST -l "$ARGS"" | sed 's/[^:]*: //'
             else
-                pdsh -b -a -f$FANOUT "$DIST -l "$ARGS"" | sed 's/[^:]*: //'
+                pdsh -b -a -f$FANOUT "$DIST -v -l "$ARGS"" | sed 's/[^:]*: //'
             fi    
 
 	# little system
