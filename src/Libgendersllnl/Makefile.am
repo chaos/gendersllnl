@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.13 2005-01-10 23:42:25 achu Exp $
+## $Id: Makefile.am,v 1.14 2005-04-19 23:53:52 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -11,17 +11,21 @@
 # make time, so this is our work around
 PERL_INSTALL_PREFIX = @PERL_INSTALL_PREFIX@
 
-MAKEMAKERFLAGS = INSTALLDIRS=site SITEPREFIX=$(PERL_INSTALL_PREFIX) \
-		 MAKEFILE=Makefile.xs FIRST_MAKEFILE=Makefile.xs
+PERL_INC = "-I../../config -I$(srcdir)/../libgendersllnl"
+ 
+PERL_LIBS = "-L../libgendersllnl/.libs -lgendersllnl"
+ 
+MAKEMAKERFLAGS = INSTALLDIRS=site \
+		 SITEPREFIX=$(PERL_INSTALL_PREFIX) \
+		 INC=$(PERL_INC) \
+		 LIBS=$(PERL_LIBS) \
+		 MAKEFILE=Makefile.xs \
+		 FIRST_MAKEFILE=Makefile.xs
 
 all: Makefile.xs
 	$(MAKE) -f Makefile.xs
 
 Makefile.xs: Makefile.PL Libgendersllnl.xs Libgendersllnl.pm
-	cp $(srcdir)/../libgendersllnl/gendersllnl.c .
-	cp $(srcdir)/../libgendersllnl/gendersllnl.h .
-	cp $(srcdir)/../libgendersllnl/hostlist.c .
-	cp $(srcdir)/../libgendersllnl/hostlist.h .
 # Hacks to make distcheck work
 	if ! test -a Makefile.PL; then \
 		cp $(srcdir)/Makefile.PL .; \

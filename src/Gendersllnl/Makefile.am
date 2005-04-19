@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.14 2005-01-10 23:42:25 achu Exp $
+## $Id: Makefile.am,v 1.15 2005-04-19 23:53:52 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -12,8 +12,10 @@
 PERL_INSTALL_DESTDIR = @PERL_INSTALL_DESTDIR@
 PERL_INSTALL_PREFIX = @PERL_INSTALL_PREFIX@
 
-MAKEMAKERFLAGS = INSTALLDIRS=site SITEPREFIX=$(PERL_INSTALL_PREFIX) \
-		 MAKEFILE=Makefile.xs FIRST_MAKEFILE=Makefile.xs
+MAKEMAKERFLAGS = INSTALLDIRS=site \
+		 SITEPREFIX=$(PERL_INSTALL_PREFIX) \
+		 MAKEFILE=Makefile.xs \
+		 FIRST_MAKEFILE=Makefile.xs
 
 all: Makefile.xs
 	$(MAKE) -f Makefile.xs

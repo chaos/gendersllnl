@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.17 2005-01-10 23:42:25 achu Exp $
+## $Id: configure.ac,v 1.18 2005-04-19 23:53:52 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -46,32 +46,6 @@ PERLGENDERSLLNL_MINOR=01
 PERLGENDERSLLNL_VERSION=$PERLGENDERSLLNL_MAJOR.$PERLGENDERSLLNL_MINOR
 AC_SUBST([PERLGENDERSLLNL_VERSION])
 
-# Perl Install Destdir
-# - Used almost exclusively so perl install works with rpm builds
-AC_MSG_CHECKING(for --with-perl-install-destdir )
-AC_ARG_WITH(perl-install-destdir,
-    AC_HELP_STRING([--with-perl-install-destdir=path], [define perl modules ins\tall prefix]),
-    [ case "$withval" in
-    yes)
-        withperllinstalldestdir=yes
-        ;;
-    no)
-        ;;
-    *)
-        withperllinstalldestdir=yes
-        PERL_INSTALL_DESTDIR="$withval"
-        ;;
-    esac ]
-)
-AC_MSG_RESULT(${withperllinstalldestdir=no})
-if test -z "$PERL_INSTALL_DESTDIR"; then
-   PERL_INSTALL_PREFIX='${prefix}'
-else
-   PERL_INSTALL_PREFIX='${PERL_INSTALL_DESTDIR}${prefix}'
-fi
-AC_SUBST(PERL_INSTALL_DESTDIR)
-AC_SUBST(PERL_INSTALL_PREFIX)
-
 ##
 # Checks for programs.
 ##
@@ -80,6 +54,7 @@ AC_PROG_LIBTOOL
 AC_PROG_MAKE_SET
 AM_CONDITIONAL(WITH_GNU_LD, test "$with_gnu_ld" = "yes")
 AC_PATH_PROG(PERL, perl)
+AC_DEBUG
 
 ##
 # Checks for header files.
@@ -93,6 +68,11 @@ AC_CHECK_HEADERS( \
   unistd.h \
   genders.h \
 )
+
+#
+# Check for perl install destdir
+#
+AC_PERL_INSTALL_DESTDIR
 
 ##
 # Checks for typedefs, structures, and compiler characteristics.
@@ -120,10 +100,6 @@ AC_CHECK_FUNCS( \
 ##
 AC_CHECK_LIB(genders, genders_handle_create, ,
              AC_MSG_ERROR([libgenders must be installed]))
-
-# Do this last, you could add compile options which can make
-# function checks fail
-AC_DEBUG
 
 ##
 # Epilogue.
