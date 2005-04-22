@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: gendersllnl.c,v 1.21 2004-05-19 22:15:28 achu Exp $
+ *  $Id: gendersllnl.c,v 1.22 2005-04-22 22:32:53 achu Exp $
  *****************************************************************************
  *  Copyright (C) 2001-2003 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -29,7 +29,9 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#if STDC_HEADERS
 #include <string.h>
+#endif /* STDC_HEADERS */
 
 #include "gendersllnl.h"
 #include "hostlist.h"
