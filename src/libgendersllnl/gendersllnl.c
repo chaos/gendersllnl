@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: gendersllnl.c,v 1.22 2005-04-22 22:32:53 achu Exp $
+ *  $Id: gendersllnl.c,v 1.23 2005-05-06 23:34:17 achu Exp $
  *****************************************************************************
  *  Copyright (C) 2001-2003 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -26,6 +26,10 @@
  *  with Gendersllnl; if not, write to the Free Software Foundation, Inc.,
  *  59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
 \*****************************************************************************/
+
+#if HAVE_CONFIG_H
+#include "config.h"
+#endif /* HAVE_CONFIG_H */
 
 #include <stdlib.h>
 #include <stdio.h>
