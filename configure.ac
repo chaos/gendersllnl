@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.19 2005-04-22 22:32:53 achu Exp $
+## $Id: configure.ac,v 1.20 2005-05-06 23:34:43 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -61,7 +61,7 @@ AC_DEBUG
 ##
 AC_HEADER_STDC
 AC_CHECK_HEADERS( \
-  fcntl.h
+  fcntl.h \
   unistd.h \
   genders.h \
 )
