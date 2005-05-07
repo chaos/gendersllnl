@@ -4,9 +4,9 @@
 
 	* Add config.h inclusion on .c files.
 
-	* Move to GNU style code style for libgenders.
+	* Move to GNU style code style for libgendersllnl.
 
-	* Cleanup code in general.
+	* Various code cleanup.
 	
 2005-04-22  Albert Chu  <chu11@llnl.gov>
 
