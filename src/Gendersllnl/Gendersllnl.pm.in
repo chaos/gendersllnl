@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Gendersllnl.pm.in,v 1.1 2005-01-10 23:44:57 achu Exp $
+#  $Id: Gendersllnl.pm.in,v 1.2 2005-05-07 18:23:23 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -43,7 +43,7 @@ sub new {
     my $filename = shift;
     my $self = {};
     my $handle;
-    my $ret;
+    my $rv;
     
     $self->{$debugkey} = 0;
     
@@ -55,8 +55,8 @@ sub new {
 
     $self->{$handlekey} = $handle;
 
-    $ret = $self->{$handlekey}->genders_load_data($filename);
-    if ($ret == -1) {
+    $rv = $self->{$handlekey}->genders_load_data($filename);
+    if ($rv < 0) {
         _errormsg($self, "genders_load_data()");
         return undef;
     } 
@@ -126,15 +126,15 @@ sub getaltnodes_preserve {
 sub isaltnode {
     my $self = shift;
     my $node = shift;
-    my $retval;
+    my $rv;
 
     if (ref($self)) {
-        $retval = $self->{$handlekey}->genders_isaltnode($node);
-        if ($retval == -1) {
+        $rv = $self->{$handlekey}->genders_isaltnode($node);
+        if ($rv < 0) {
             _errormsg($self, "genders_isaltnode()");
             return 0;
         }
-        return $retval; 
+        return $rv; 
     }
     else {
         return 0;
@@ -144,15 +144,15 @@ sub isaltnode {
 sub isnode_or_altnode {
     my $self = shift;
     my $node = shift;
-    my $retval;
+    my $rv;
 
     if (ref($self)) {
-        $retval = $self->{$handlekey}->genders_isnode_or_altnode($node);
-        if ($retval == -1) {
+        $rv = $self->{$handlekey}->genders_isnode_or_altnode($node);
+        if ($rv < 0) {
             _errormsg($self, "genders_isnode_or_altnode()");
             return 0;
         }
-        return $retval; 
+        return $rv; 
     }
     else {
         return 0;

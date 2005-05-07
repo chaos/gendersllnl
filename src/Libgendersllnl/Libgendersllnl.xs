@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: Libgendersllnl.xs,v 1.7 2004-02-04 22:44:53 achu Exp $
+ *  $Id: Libgendersllnl.xs,v 1.8 2005-05-07 18:23:23 achu Exp $
  *****************************************************************************
  *  Copyright (C) 2001-2003 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -72,15 +72,15 @@ genders_get_cluster (handle, node=NULL)
         int maxvallen;
         char *buf = NULL;
     CODE:
-        if ((maxvallen = genders_getmaxvallen(handle)) == -1) 
+        if ((maxvallen = genders_getmaxvallen(handle)) < 0) 
             goto handle_error;
 
-        if ((buf = (char *)malloc(maxvallen+1)) == NULL) 
+        if (!(buf = (char *)malloc(maxvallen+1))) 
             goto handle_error;
 
         memset(buf, '\0', maxvallen+1);
 
-        if (genders_get_cluster(handle, node, buf, maxvallen + 1) == -1)
+        if (genders_get_cluster(handle, node, buf, maxvallen + 1) < 0)
             goto handle_error;            
 
         RETVAL = newSVpv(buf, 0);
@@ -102,31 +102,31 @@ genders_getaltnodes (handle, attr=NULL, val=NULL)
     char *attr
     char *val
     PREINIT:
-        int num, ret, temp, i;
+        int len, num, errnum, i;
         char **altlist = NULL;
     CODE:
-        if ((num = genders_altnodelist_create(handle, &altlist)) == -1)
+        if ((len = genders_altnodelist_create(handle, &altlist)) < 0)
             goto handle_error;
 
-        if ((ret = genders_getaltnodes(handle, altlist, num, attr, val)) == -1)
+        if ((num = genders_getaltnodes(handle, altlist, len, attr, val)) < 0)
             goto handle_error;
 
         RETVAL = newAV();
-        for (i = 0; i < ret; i++)
+        for (i = 0; i < num; i++)
             av_push(RETVAL, newSVpv(altlist[i], 0));
 
-        if (genders_altnodelist_destroy(handle, altlist) == -1)
+        if (genders_altnodelist_destroy(handle, altlist) < 0)
             goto handle_error;
 
         goto the_end;
 
         handle_error:
         
-            temp = genders_errnum(handle);
+            errnum = genders_errnum(handle);
            
             (void)genders_altnodelist_destroy(handle, altlist);
         
-            genders_set_errnum(handle, temp);
+            genders_set_errnum(handle, errnum);
 
             XSRETURN_UNDEF;
 
@@ -140,35 +140,35 @@ genders_getaltnodes_preserve (handle, attr=NULL, val=NULL)
     char *attr
     char *val
     PREINIT:
-        int num, ret, temp, i;
+        int len, num, errnum, i;
         char **altlist = NULL;
     CODE:
-        if ((num = genders_altnodelist_create(handle, &altlist)) == -1)
+        if ((len = genders_altnodelist_create(handle, &altlist)) < 0)
             goto handle_error;
 
-        if ((ret = genders_getaltnodes_preserve(handle,
+        if ((num = genders_getaltnodes_preserve(handle,
                                                 altlist,
-                                                num,
+                                                len,
                                                 attr,
-                                                val)) == -1)
+                                                val)) < 0)
             goto handle_error;
 
         RETVAL = newAV();
-        for (i = 0; i < ret; i++)
+        for (i = 0; i < num; i++)
             av_push(RETVAL, newSVpv(altlist[i], 0));
 
-        if (genders_altnodelist_destroy(handle, altlist) == -1)
+        if (genders_altnodelist_destroy(handle, altlist) < 0)
             goto handle_error;
 
         goto the_end;
 
         handle_error:
 
-            temp = genders_errnum(handle);
+            errnum = genders_errnum(handle);
            
             (void)genders_altnodelist_destroy(handle, altlist);
         
-            genders_set_errnum(handle, temp);
+            genders_set_errnum(handle, errnum);
 
             XSRETURN_UNDEF;
 
@@ -202,15 +202,15 @@ genders_to_gendname (handle, altnode)
         int maxnodelen;
         char *buf = NULL;
     CODE:
-        if ((maxnodelen = genders_getmaxnodelen(handle)) == -1)
+        if ((maxnodelen = genders_getmaxnodelen(handle)) < 0)
             goto handle_error;
 
-        if ((buf = (char *)malloc(maxnodelen+1)) == NULL)
+        if (!(buf = (char *)malloc(maxnodelen+1)))
             goto handle_error;
 
         memset(buf, '\0', maxnodelen+1);
 
-        if (genders_to_gendname(handle, altnode, buf, maxnodelen + 1) == -1)
+        if (genders_to_gendname(handle, altnode, buf, maxnodelen + 1) < 0)
             goto handle_error;
 
         RETVAL = newSVpv(buf, 0);
@@ -234,13 +234,13 @@ genders_to_gendname_preserve (handle, altnode)
         int maxnodelen;
         char *buf = NULL;
     CODE:
-        if ((maxnodelen = genders_getmaxnodelen(handle)) == -1)
+        if ((maxnodelen = genders_getmaxnodelen(handle)) < 0)
             goto handle_error;
 
         if (altnode != NULL && strlen(altnode) > maxnodelen)
             maxnodelen = strlen(altnode);
 
-        if ((buf = (char *)malloc(maxnodelen+1)) == NULL)
+        if (!(buf = (char *)malloc(maxnodelen+1)))
             goto handle_error;
 
         memset(buf, '\0', maxnodelen+1);
@@ -248,7 +248,7 @@ genders_to_gendname_preserve (handle, altnode)
         if (genders_to_gendname_preserve(handle, 
                                          altnode, 
                                          buf, 
-                                         maxnodelen + 1) == -1)
+                                         maxnodelen + 1) < 0)
             goto handle_error;
 
         RETVAL = newSVpv(buf, 0);
@@ -273,15 +273,15 @@ genders_to_altname (handle, node)
         int maxvallen;
         char *buf = NULL;
     CODE:
-        if ((maxvallen = genders_getmaxvallen(handle)) == -1)
+        if ((maxvallen = genders_getmaxvallen(handle)) < 0)
             goto handle_error;
 
-        if ((buf = (char *)malloc(maxvallen+1)) == NULL)
+        if (!(buf = (char *)malloc(maxvallen+1)))
             goto handle_error;
 
         memset(buf, '\0', maxvallen+1);
 
-        if (genders_to_altname(handle, node, buf, maxvallen + 1) == -1)
+        if (genders_to_altname(handle, node, buf, maxvallen + 1) < 0)
             goto handle_error;
 
         RETVAL = newSVpv(buf, 0);
@@ -305,13 +305,13 @@ genders_to_altname_preserve (handle, node)
         int maxvallen;
         char *buf = NULL;
     CODE:
-        if ((maxvallen = genders_getmaxvallen(handle)) == -1)
+        if ((maxvallen = genders_getmaxvallen(handle)) < 0)
             goto handle_error;
 
         if (node != NULL && strlen(node) > maxvallen)
             maxvallen = strlen(node);
 
-        if ((buf = (char *)malloc(maxvallen+1)) == NULL)
+        if (!(buf = (char *)malloc(maxvallen+1)))
             goto handle_error;
 
         memset(buf, '\0', maxvallen+1);
@@ -319,7 +319,7 @@ genders_to_altname_preserve (handle, node)
         if (genders_to_altname_preserve(handle, 
                                         node,
                                         buf,
-                                        maxvallen + 1) == -1)
+                                        maxvallen + 1) < 0)
             goto handle_error;
 
         RETVAL = newSVpv(buf, 0);
