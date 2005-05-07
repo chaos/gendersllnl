@@ -8,5 +8,4 @@
     the need for the root install from package source into /var/dist.
 - Add regular expression matching to dist2
 - Add thorough example Distfile to dist2 manpage 
-- GNU style code
 - cleanup code in general
