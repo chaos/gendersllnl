@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.20 2005-05-06 23:34:43 achu Exp $
+## $Id: configure.ac,v 1.21 2005-05-10 16:12:15 achu Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -35,7 +35,7 @@ AM_MAINTAINER_MODE
 # If any interfaces have been removed, set age = 0
 #
 LIBGENDERSLLNL_CURRENT=0
-LIBGENDERSLLNL_REVISION=0
+LIBGENDERSLLNL_REVISION=1
 LIBGENDERSLLNL_AGE=0
 LIBGENDERSLLNL_VERSION_INFO=$LIBGENDERSLLNL_CURRENT:$LIBGENDERSLLNL_REVISION:$LIBGENDERSLLNL_AGE
 AC_SUBST([LIBGENDERSLLNL_VERSION_INFO])
