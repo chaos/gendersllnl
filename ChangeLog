@@ -4,22 +4,12 @@
 	
 2005-05-06  Albert Chu  <chu11@llnl.gov>
 
-	* Manpage cleanup.
-
-	* Add config.h inclusion on .c files.
-
-	* Move to GNU style code style for libgendersllnl.
-
-	* Various code cleanup.
+	* Various code cleanup and header file re-organization.
 	
 2005-04-22  Albert Chu  <chu11@llnl.gov>
 
-	* Minor code cleanup.
+	*  Various code, autoconf, and makefile cleanup.
 	
-2005-04-19  Albert Chu  <chu11@llnl.gov>
-	 
-        * Autoconf, Makefile, Built cleanup.
-	 
 2005-02-03  Albert Chu  <chu11@llnl.gov>
 
 	* tagged pre_dist2_err_msg_cleanup
