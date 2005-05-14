@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.11 2005-05-14 00:09:09 achu Exp $
+## $Id: Makefile.am,v 1.12 2005-05-14 00:11:52 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -16,6 +16,6 @@ Hostlist.3pm:
 man3_MANS = Hostlist.3pm
 
 install-data-hook:
-        chmod 444 $(DESTDIR)/$(libdir)/$(INSTALLSITEARCH)/Hostlist.pm
+	chmod 444 $(DESTDIR)/$(libdir)/$(INSTALLSITEARCH)/Hostlist.pm
 
 EXTRA_DIST = Hostlist.pm
