@@ -1,10 +1,10 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.19 2005-05-14 00:09:09 achu Exp $
+## $Id: Makefile.am,v 1.20 2005-05-14 03:04:39 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
 
-INSTALLSITEARCH=`perl -e 'use Config; $$T=$$Config{installsitearch}; $$T=~/\/usr\/(lib|lib64)(.*)/; print $$2;'`
+INSTALLSITEARCH=`perl -e 'use Config; $$T=$$Config{installsitearch}; $$T=~/\/usr\/(lib|lib64)\/(.*)/; print $$2;'`
  
 GENDERSLLNLPMFILES = Gendersllnl.pm
 GENDERSLLNLPMFILESdir = $(libdir)/$(INSTALLSITEARCH)
