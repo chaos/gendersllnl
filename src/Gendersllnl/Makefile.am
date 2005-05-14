@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.20 2005-05-14 03:04:39 achu Exp $
+## $Id: Makefile.am,v 1.21 2005-05-14 05:00:22 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -11,6 +11,10 @@ GENDERSLLNLPMFILESdir = $(libdir)/$(INSTALLSITEARCH)
 GENDERSLLNLPMFILES_DATA = $(GENDERSLLNLPMFILES)
  
 Gendersllnl.3pm:
+# Hacks to make distcheck work
+	if ! test -a Gendersllnl.pm; then \
+		cp $(srcdir)/Gendersllnl.pm .; \
+	fi
 	$(POD2MAN) Gendersllnl.pm Gendersllnl.3pm
  
 man3_MANS = Gendersllnl.3pm
