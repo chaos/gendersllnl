@@ -1,11 +1,14 @@
 2005-05-13  Albert Chu  <chu11@llnl.gov>
 	 
-        * src/Genders/Makefile.am: Cleanup and fix build.
+        * src/Genders/Makefile.am, compat/Makefile.am: Cleanup and fix
+	build.
  
-        * src/Genders/Makefile.PL: Removed file.
+        * src/Genders/Makefile.PL, compat/Makefile.PL: Removed files.
 
 	* configure.ac: Add search for pod2man.
 		
+	* tagged gendersllnl-1-6-0-pre3
+
 2005-05-10  Albert Chu  <chu11@llnl.gov>
 
 	* configure.ac: Update library versions.

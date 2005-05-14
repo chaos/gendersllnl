@@ -1,45 +1,21 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.10 2004-12-20 16:45:43 achu Exp $
+## $Id: Makefile.am,v 1.11 2005-05-14 00:09:09 achu Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
 
-# Use Perl's ExtUtils::MakeMaker to get autoconf/automake to install
-# into the correct location
+INSTALLSITEARCH=`perl -e 'use Config; $$T=$$Config{installsitearch}; $$T=~/\/usr\/(lib\|lib64)(.*)/; print $$2;'`
 
-# DESTDIR is usually set during make install time, not configure or
-# make time, so this is our work around
-PERL_INSTALL_DESTDIR = @PERL_INSTALL_DESTDIR@
-PERL_INSTALL_PREFIX = @PERL_INSTALL_PREFIX@
+HOSTLISTPMFILES = Hostlist.pm
+HOSTLISTPMFILESdir = $(libdir)/$(INSTALLSITEARCH)
+HOSTLISTPMFILES_DATA = $(HOSTLISTPMFILES)
 
-all: Makefile.pm
-	$(MAKE) -f Makefile.pm
+Hostlist.3pm:
+	$(POD2MAN) Hostlist.pm Hostlist.3pm
 
-Makefile.pm: Makefile.PL
-# Hacks to make distcheck work
-	if ! test -a Makefile.PL; then \
-		cp $(srcdir)/Makefile.PL .; \
-	fi
-	if ! test -a Hostlist.pm; then \
-		cp $(srcdir)/Hostlist.pm .; \
-	fi
-	TEMPINSTALLSITELIB=`perl -e 'use Config; print $$Config{installsitearch}'`; \
-	$(PERL) Makefile.PL PREFIX=$(PERL_INSTALL_PREFIX) MAKEFILE=Makefile.pm FIRST_MAKEFILE=Makefile.pm INSTALLSITELIB=$(PERL_INSTALL_DESTDIR)$$TEMPINSTALLSITELIB
+man3_MANS = Hostlist.3pm
 
-install: Makefile.pm
-	$(MAKE) -f Makefile.pm pure_install
+install-data-hook:
+        chmod 444 $(DESTDIR)/$(libdir)/$(INSTALLSITEARCH)/Hostlist.pm
 
-pure_install: Makefile.pm
-	$(MAKE) -f Makefile.pm pure_install
-
-install-data-local:
-	$(MAKE) -f Makefile.pm pure_install
-
-clean:
-	if test -a Makefile.pm; then \
-		$(MAKE) -f Makefile.pm clean; \
-	fi
-	rm -f Makefile.pm
-	rm -f Makefile.pm.old
-
-EXTRA_DIST = Hostlist.pm Makefile.PL
+EXTRA_DIST = Hostlist.pm
