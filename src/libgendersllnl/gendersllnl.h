@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: gendersllnl.h,v 1.7 2005-05-07 05:28:54 achu Exp $
+ *  $Id: gendersllnl.h,v 1.8 2005-06-02 15:52:22 achu Exp $
  *****************************************************************************
  *  Copyright (C) 2001-2003 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -98,7 +98,7 @@ int genders_getaltnodes(genders_t handle,
 			const char *val);
 
 /* 
- * genders_getaltnodes
+ * genders_getaltnodes_preserve
  * 
  * Gets list of altnodes with the specified attribute.  Identical to
  * genders_getnodes(), except altnodes are returned.

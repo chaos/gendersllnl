@@ -1,3 +1,7 @@
+2005-06-02  Albert Chu  <chu11@llnl.gov>
+
+	* src/libgendersllnl/gendersllnl.h: Fix comment typo.
+	
 2005-05-13  Albert Chu  <chu11@llnl.gov>
 	 
         * src/Genders/Makefile.am, compat/Makefile.am: Cleanup and fix
