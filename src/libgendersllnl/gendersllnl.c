@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: gendersllnl.c,v 1.25 2005-05-07 05:28:54 achu Exp $
+ *  $Id: gendersllnl.c,v 1.26 2005-06-02 15:57:24 achu Exp $
  *****************************************************************************
  *  Copyright (C) 2001-2003 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -83,17 +83,22 @@ genders_altnodelist_create(genders_t handle, char ***altnodelist)
 
   if (numnodes > 0) 
     {
-      int i,j,maxvallen;
+      int i, j, maxnodelen, maxvallen, maxlen;
       char **nodelist;
 
-      if ((maxvallen = genders_getmaxvallen(handle)) < 0)
-	return -1;
-      
       if (!altnodelist) 
 	{
 	  genders_set_errnum(handle, GENDERS_ERR_PARAMETERS);
 	  return -1;
 	}
+
+      if ((maxnodelen = genders_getmaxnodelen(handle)) < 0)
+	return -1;
+
+      if ((maxvallen = genders_getmaxvallen(handle)) < 0)
+	return -1;
+      
+      maxlen = (maxnodelen > maxvallen) ? maxnodelen : maxvallen;
 
       if (!(nodelist = (char **)malloc(sizeof(char *) * numnodes))) 
 	{
@@ -103,7 +108,7 @@ genders_altnodelist_create(genders_t handle, char ***altnodelist)
     
       for (i = 0; i < numnodes; i++) 
 	{
-	  if (!(nodelist[i] = (char *)malloc(maxvallen+1))) 
+	  if (!(nodelist[i] = (char *)malloc(maxlen+1))) 
 	    {
 	      
 	      for (j = 0; j < i; j++)
@@ -113,7 +118,7 @@ genders_altnodelist_create(genders_t handle, char ***altnodelist)
 	      genders_set_errnum(handle, GENDERS_ERR_OUTMEM);
 	      return -1;
 	    }
-	  memset(nodelist[i], '\0', maxvallen+1);
+	  memset(nodelist[i], '\0', maxlen+1);
 	}
 
       *altnodelist = nodelist;
@@ -133,17 +138,22 @@ genders_altnodelist_clear(genders_t handle, char **altnodelist)
 
   if (numnodes > 0) 
     {
-      int i, maxvallen;
+      int i, maxnodelen, maxvallen, maxlen;
 
-      if ((maxvallen = genders_getmaxvallen(handle)) < 0)
-	return -1;
-      
       if (!altnodelist) 
 	{
 	  genders_set_errnum(handle, GENDERS_ERR_PARAMETERS);
 	  return -1;
 	}
-      
+
+      if ((maxnodelen = genders_getmaxnodelen(handle)) < 0)
+	return -1;
+
+      if ((maxvallen = genders_getmaxvallen(handle)) < 0)
+	return -1;
+
+      maxlen = (maxnodelen > maxvallen) ? maxnodelen : maxvallen;
+     
       for (i = 0; i < numnodes; i++) 
 	{
 	  if (!altnodelist[i]) 
@@ -151,7 +161,7 @@ genders_altnodelist_clear(genders_t handle, char **altnodelist)
 	      genders_set_errnum(handle, GENDERS_ERR_NULLPTR);
 	      return -1;
 	    }
-	  memset(altnodelist[i], '\0', maxvallen + 1);
+	  memset(altnodelist[i], '\0', maxlen + 1);
 	}
     }
   

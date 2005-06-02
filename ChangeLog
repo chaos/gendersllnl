@@ -1,6 +1,9 @@
 2005-06-02  Albert Chu  <chu11@llnl.gov>
 
 	* src/libgendersllnl/gendersllnl.h: Fix comment typo.
+
+	* src/libgendersllnl/gendersllnl.c (genders_altnodelist_create,
+	genders_altnodelist_clear): Fix buffer length corner case.
 	
 2005-05-13  Albert Chu  <chu11@llnl.gov>
 	 
