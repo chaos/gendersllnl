@@ -1,3 +1,8 @@
+2005-06-05  Albert Chu  <chu11@llnl.gov>
+
+	* compat/Hostlist.pm (expand_quadrics_range): Apply patch by Py
+	Watson (watson30@llnl.gov) to fix Hostlist expansion corner cases.
+	
 2005-06-02  Albert Chu  <chu11@llnl.gov>
 
 	* src/libgendersllnl/gendersllnl.h: Fix comment typo.
