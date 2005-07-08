@@ -1,4 +1,10 @@
-2005-06-05  Albert Chu  <chu11@llnl.gov>
+2005-07-08  Albert Chu  <chu11@llnl.gov>
+
+	* META: Updated release.
+
+	* tagged gendersllnl-1-6-0-pre4
+	
+2005-07-05  Albert Chu  <chu11@llnl.gov>
 
 	* compat/Hostlist.pm (expand_quadrics_range): Apply patch by Py
 	Watson (watson30@llnl.gov) to fix Hostlist expansion corner cases.
