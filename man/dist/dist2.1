@@ -1,5 +1,5 @@
 \."##########################################################################
-\."  $Id: dist2.1,v 1.9 2005-01-05 17:18:34 achu Exp $
+\."  $Id: dist2.1,v 1.10 2005-08-03 23:04:00 achu Exp $
 \."##########################################################################
 \."  Copyright (C) 2001-2003 The Regents of the University of California.
 \."  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -35,10 +35,10 @@
 dist2 \- rdist wrapper
 .SH SYNOPSIS
 .B dist2
-.I "[-o rdist_opts] [-V] [-c cluster] [-d [-n]] [-i] [-v] [node spec] [package.[fileset]...]"
+.I "[-o rdist_opts] [-V] [-c cluster] [-P transport_program] [-d [-n]] [-i] [-v] [node spec] [package.[fileset]...]"
 .br
 .B dist2
-.I "[-o rdist_opts] [-V] [-c cluster] [-d [-n]] [-i] [-v] [node spec] -f Distfile"
+.I "[-o rdist_opts] [-V] [-c cluster] [-P transport_program] [-d [-n]] [-i] [-v] [node spec] -f Distfile"
 .br
 .SH DESCRIPTION
 .B Dist2
@@ -166,8 +166,24 @@ The
 option can be used to pass options to
 .B rdist.
 The 
+.I -o 
+option's arguments are identical to those specified in the
+.B rdist(1)
+manpage.
+The 
 .I -V
-option passes the "verify" option to rdist.
+option can be used as shorthand to pass the "verify" option to rdist.
+.LP
+The 
+.I -P 
+option can be used to pass an alternate transport program to rdist, so
+that rdist may use it rather than the default of
+.B rsh(1).  
+The 
+.I -P 
+option's argument should be specified just as it is specified in the
+.B rdist
+manpage.
 .LP
 .I -d
 is used for debugging Distfile problems.  When

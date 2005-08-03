@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.23 2005-02-03 21:20:11 achu Exp $
+#  $Id: dist2,v 1.24 2005-08-03 23:04:00 achu Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -82,6 +82,7 @@ $path_postp_closed =	"/usr/local.scf/admin/dist/postp";
 $local_cluster = 	"";
 @limit_nodes =		();
 $rdist_passthru_opts = 	"";
+$rdist_transport_program =    "";
 
 $line_no = 		1;
 
@@ -97,7 +98,7 @@ if ($< != 0) {
 }
 
 # read arguments from command line
-if (!getopts("o:c:FdVinlLH:w:x:g:f:v")) { 		
+if (!getopts("o:c:FdVinlLH:w:x:g:f:vP:")) { 		
 	usage();
 }					
 
@@ -163,6 +164,10 @@ elsif ($main::opt_o) {
 }
 elsif ($main::opt_V) {
         $main::rdist_passthru_opts = "-o verify";
+}
+
+if ($main::opt_P) {
+        $main::rdist_transport_program = $main::opt_P;
 }
 
 # quit if /var/dist isn't mounted
@@ -671,8 +676,15 @@ sub dist_file
 	my ($cmd);
 
 	if (!$main::opt_d) {
-		$cmd = sprintf("%s %s -f-", $main::path_rdist, 
-				$main::rdist_passthru_opts);
+                if ($main::opt_P) {
+			$cmd = sprintf("%s -P %s %s -f-", $main::path_rdist, 
+					$main::rdist_transport_program,
+					$main::rdist_passthru_opts);
+		}
+		else {
+			$cmd = sprintf("%s %s -f-", $main::path_rdist, 
+					$main::rdist_passthru_opts);
+		}
 		if (!open(PIPE, "|$cmd")) {
 			print STDERR ("Couldn't fork rdist: cmd=$cmd: $!\n");
 			return 0;
@@ -701,9 +713,18 @@ sub dist_pkg
                         printf STDERR ("Couldn't chdir: dir=$main::path_vardist: $!\n");
                         return 0;
 		}
-		$cmd = sprintf("%s %s -f- %s", 
-				$main::path_rdist, $main::rdist_passthru_opts,
-				join(" ", @{$labels}));
+		if ($main::opt_P) {
+			$cmd = sprintf("%s -P %s %s -f- %s", 
+					$main::path_rdist, 
+					$main::rdist_transport_program,
+					$main::rdist_passthru_opts,
+					join(" ", @{$labels}));
+		}
+		else {
+			$cmd = sprintf("%s %s -f- %s", 
+					$main::path_rdist, $main::rdist_passthru_opts,
+					join(" ", @{$labels}));
+		}
 		if (!open(PIPE, "|$cmd")) {
 			print STDERR ("Couldn't fork rdist: cmd=$cmd: $!\n");
 			return 0;
