@@ -1,3 +1,15 @@
+2005-08-03  Albert Chu  <chu11@llnl.gov>
+
+	* dist/dist2: Added -P option.
+
+	* man/dist/dist2.1: Added -P option and cleaned up some wording.
+	
+	* NEWS: Updated with -P option information.
+
+	* META: Updated release.
+
+	* tagged gendersllnl-1-6-0-pre5
+	
 2005-07-08  Albert Chu  <chu11@llnl.gov>
 
 	* NEWS: Updated for future release of gendersllnl-1.6-1.
