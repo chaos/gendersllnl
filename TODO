@@ -1,3 +1,5 @@
+Jim Garlick:
+
 - Consider migrating some dist2 code into rdist, linked with genders API e.g.
   o natively expand ${cluster!attr_host} macros (modify yacc grammar)
   o select from multiple (configurable) remote shell services
@@ -6,5 +8,18 @@
     attributes and convert between primary and alternate hostnames
   o add options for setting permissions/ownership in Distfiles, eliminating
     the need for the root install from package source into /var/dist.
-- Add regular expression matching to dist2
+
+Albert Chu:
+
+dist2 Feature Requests
+
+- Add regular expression matching (from Py Watson)
+
+- More advanced handling of the genders logic, allowing for multiple
+operators and negation (from John Westlund)
+
+- Support for genders set operations (from John Westlund)
+
+- Basic if/else logic of genders attributes (from John Westlund)
+
 - Add thorough example Distfile to dist2 manpage 
