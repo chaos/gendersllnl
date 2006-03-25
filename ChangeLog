@@ -1,3 +1,8 @@
+2006-03-24  Albert Chu  <chu11@llnl.gov>
+
+        * configure.ac: Remove AC_FUNC_MALLOC check for portability to
+        AIX (from Py Watson, watson30 at llnl dot gov).
+	
 2005-08-18  Albert Chu  <chu11@llnl.gov>
 
 	* tagged gendersllnl-1-6-1
