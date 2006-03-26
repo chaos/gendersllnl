@@ -1,6 +1,6 @@
 #!/bin/sh
 #############################################################################
-#  $Id: dist_all,v 1.7 2004-04-30 23:56:37 achu Exp $
+#  $Id: dist_all,v 1.8 2006-03-26 21:46:53 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -46,6 +46,10 @@ while [ $# -gt 0 ]; do
 			WOPT="-w$2"
 			shift
                         ;;
+                -f)
+			FANOUT=$2
+			shift
+			;;
                 *)
 			ARGS="$ARGS $1"
 			;;
