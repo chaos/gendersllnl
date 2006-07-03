@@ -1,3 +1,7 @@
+2006-07-03  Albert Chu  <chu11@llnl.gov>
+
+	* man/genders_getaltnodes.3: Fix typo.
+	
 2006-03-26  Albert Chu  <chu11@llnl.gov>
 
 	* dist/dist_all: Add -f option from John Westlund's (westlund2 at
