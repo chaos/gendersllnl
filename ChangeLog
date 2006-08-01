@@ -1,3 +1,7 @@
+2006-08-01  Albert Chu  <chu11@llnl.gov>
+
+	* src/Libgendersllnl/Makefile.am: Fix file include bug.
+	
 2006-07-17  Albert Chu  <chu11@llnl.gov>
 
 	Changes to make perl extensions build correctly on FC5.

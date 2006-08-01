@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.15 2006-07-21 22:20:27 chu11 Exp $
+## $Id: Makefile.am,v 1.16 2006-08-01 17:12:10 chu11 Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -13,7 +13,7 @@
 
 PERL_DESTDIR = @PERL_DESTDIR@
 
-PERL_INC = "-I../../config -I$(srcdir)/../libgenders"
+PERL_INC = "-I../../config -I$(srcdir)/../libgendersllnl"
 
 PERL_LIBS = "-L../libgenders/.libs -lgenders"
 
