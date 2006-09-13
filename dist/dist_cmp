@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist_cmp,v 1.5 2004-02-04 22:44:52 achu Exp $
+#  $Id: dist_cmp,v 1.6 2006-09-13 05:42:30 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -109,7 +109,7 @@ sub printit
 
         foreach $lines (keys %{$xoutput}) {
                 @nodes = sort {$a cmp $b} @{$xoutput{$lines}};
-                @nodes = Hostlist::compress(uniq(@nodes));
+                @nodes = Hostlist::compress_to_quadrics(uniq(@nodes));
                 printf("%s:\n", join(",", @nodes));
                 foreach $line (split(/\n/, $lines)) {
                         print("\t$line\n");
