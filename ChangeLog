@@ -1,3 +1,7 @@
+2006-12-15  Albert Chu  <chu11@llnl.gov>
+
+	* tagged gendersllnl-1-6-2
+
 2006-09-12  Albert Chu  <chu11@llnl.gov>
 
 	* dist/dist_cmp (printit): Output ranged string with brackets
