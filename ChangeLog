@@ -1,3 +1,7 @@
+2007-01-08  Albert Chu  <chu11@llnl.gov>
+
+	* configure.ac: Fix for Solaris build.
+	
 2006-12-15  Albert Chu  <chu11@llnl.gov>
 
 	* tagged gendersllnl-1-6-2

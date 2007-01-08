@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.24 2006-07-21 22:20:24 chu11 Exp $
+## $Id: configure.ac,v 1.25 2007-01-08 17:34:11 chu11 Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -54,7 +54,7 @@ AC_PROG_LIBTOOL
 AC_PROG_MAKE_SET
 AM_CONDITIONAL(WITH_GNU_LD, test "$with_gnu_ld" = "yes")
 AC_PATH_PROG(PERL, perl)
-AC_PATH_PROG(POD2MAN, pod2man)
+AC_PATH_PROG([POD2MAN], [pod2man], [/usr/bin/pod2man], [$PATH:/usr/perl5/bin/])
 AC_DEBUG
 
 ##
