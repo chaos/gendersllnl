@@ -1,3 +1,7 @@
+2007-01-12  Albert Chu  <chu11@llnl.gov>
+
+	* compat/Hostlist.pm: Added forgotten function to perl doc.
+	
 2007-01-08  Albert Chu  <chu11@llnl.gov>
 
 	* configure.ac: Fix for Solaris build.

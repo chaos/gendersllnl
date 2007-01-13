@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Hostlist.pm,v 1.13 2005-07-05 15:16:23 achu Exp $
+#  $Id: Hostlist.pm,v 1.14 2007-01-13 00:16:04 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -414,6 +414,7 @@ Hostlist - Routines for operating on lists of hosts.
  Hostlist::detect_metachar($entry)
  Hostlist::expand($hostList)
  Hostlist::compress(@inList)
+ Hostlist::compress_to_quadrics(@inList) 
 
  Hostlist::intersect(\@a, \@b)
  Hostlist::union(\@a, \@b)
@@ -467,6 +468,11 @@ Return a list of hostnames based on the specified hostrange.
 
 Return a hostrange based on a list of hostnames with identical
 prefixes.
+
+=item B<Hostlist::compress_to_quadrics(@inList)>
+
+Return a hostrange based on a list of hostnames with identical
+prefixes using quadrics style ranges.
 
 =item B<Hostlist::intersect(\@a, \@b)>
 
