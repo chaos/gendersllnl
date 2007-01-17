@@ -30,6 +30,8 @@
 	genders library in the source directory.
 	
 	* src/libgendersllnl/Makefile.am: Correct CFLAGS variable name.
+
+	* tagged post_aix_patches.
 	
 2007-01-12  Albert Chu  <chu11@llnl.gov>
 
