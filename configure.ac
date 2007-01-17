@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.25 2007-01-08 17:34:11 chu11 Exp $
+## $Id: configure.ac,v 1.26 2007-01-17 00:52:09 chu11 Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -58,19 +58,31 @@ AC_PATH_PROG([POD2MAN], [pod2man], [/usr/bin/pod2man], [$PATH:/usr/perl5/bin/])
 AC_DEBUG
 
 ##
+# Optional genders include and library directories.
+# Tests that required header and library are usable.
+##
+AC_GENDERS_INCLUDEDIR
+AC_GENDERS_LIBDIR
+
+##
 # Checks for header files.
 ##
 AC_HEADER_STDC
 AC_CHECK_HEADERS( \
   fcntl.h \
   unistd.h \
-  genders.h \
 )
 
 #
 # Check for perl destdir
 #
 AC_PERL_DESTDIR
+
+#
+# Determine Perl section-3 man page extension
+#
+PERLMAN3EXT=`$PERL -MConfig -e 'print $Config{man3ext}'`
+AC_SUBST([PERLMAN3EXT])
 
 ##
 # Checks for typedefs, structures, and compiler characteristics.
@@ -91,12 +103,6 @@ AC_CHECK_FUNCS( \
   strspn \
   strtok_r \
 )
-
-##
-# Check for genders library that we need
-##
-AC_CHECK_LIB(genders, genders_handle_create, ,
-             AC_MSG_ERROR([libgenders must be installed]))
 
 ##
 # Epilogue.

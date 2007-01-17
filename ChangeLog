@@ -1,3 +1,36 @@
+2007-01-16  Albert Chu  <chu11@llnl.gov>
+
+	* tagged pre_aix_patches.
+
+	Apply AIX port patches by Py Watson (watson30 at llnl dot gov)
+
+	* configure.ac, compat/Makefile.am, src/Genders/Makefile.am:
+	Determine and use correct extension for Perl's section-3 man
+	pages.
+
+        * compat/Makefile.am, src/Genders/Makefile.am: Correct calculation
+	of where perl expects to put site architecture specific files.  As
+	part of this, make the perl install directory consistent with what
+	is used for Libgendersllnl.  Use $PERL instead of perl, so that
+	correct perl version is used.
+	
+        * src/Libgendersllnl/Makefile.am: Override the install location
+	for the Libgendersllnl man page, since the perl default is not
+	based off of the install prefix.
+
+        * Makefile.am: Replace --with-perl-install-destdir with
+        --with-perl-destdir.
+
+	* config/ac_genders_includedir.m4, config/ac_genders_libdir.m4: New files.
+
+	* src/Libgendersllnl/Makefile.PL, src/libgendersllnl/Makefile.am:
+	On AIX, set the compiled-in library path for dynamic libraries to
+	the path where the C library is installed plus the default library
+	path. Otherwise, the library path contains an entry for the
+	genders library in the source directory.
+	
+	* src/libgendersllnl/Makefile.am: Correct CFLAGS variable name.
+	
 2007-01-12  Albert Chu  <chu11@llnl.gov>
 
 	* compat/Hostlist.pm: Added forgotten function to perl doc.

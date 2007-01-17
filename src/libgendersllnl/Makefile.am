@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: Makefile.am,v 1.7 2005-01-10 23:42:25 achu Exp $
+## $Id: Makefile.am,v 1.8 2007-01-17 00:52:10 chu11 Exp $
 ##*****************************************************************************
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
@@ -12,7 +12,7 @@ endif
 include_HEADERS           = gendersllnl.h
 noinst_HEADERS            = hostlist.h
 lib_LTLIBRARIES           = libgendersllnl.la
-libgenders_la_CFLAGS      = -D_REENTRANT
+libgendersllnl_la_CFLAGS  = -D_REENTRANT @GENDERS_INCLUDEDIR@
 libgendersllnl_la_SOURCES = gendersllnl.c hostlist.c
-libgendersllnl_la_LDFLAGS = -version-info @LIBGENDERSLLNL_VERSION_INFO@ $(OTHER_FLAGS)
+libgendersllnl_la_LDFLAGS = -version-info @LIBGENDERSLLNL_VERSION_INFO@ $(OTHER_FLAGS) @GENDERS_LIBDIR@ -lgenders
 EXTRA_DIST                = gendersllnl.map
