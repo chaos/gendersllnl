@@ -1,3 +1,8 @@
+2007-03-13  Albert Chu  <chu11@llnl.gov>
+
+	* src/Gendersllnl/Gendersllnl.pm.in: Add return type info for
+	get_cluster().
+	
 2007-01-16  Albert Chu  <chu11@llnl.gov>
 
 	* tagged pre_aix_patches.
