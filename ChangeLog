@@ -1,3 +1,7 @@
+2007-04-17  Albert Chu  <chu11@llnl.gov>
+
+	* man/dist/dist2.1: Fix typo.
+	
 2007-03-13  Albert Chu  <chu11@llnl.gov>
 
 	* src/Gendersllnl/Gendersllnl.pm.in: Add return type info for

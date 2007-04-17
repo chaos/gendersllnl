@@ -1,5 +1,5 @@
 \."##########################################################################
-\."  $Id: dist2.1,v 1.10 2005-08-03 23:04:00 achu Exp $
+\."  $Id: dist2.1,v 1.11 2007-04-17 18:12:22 chu11 Exp $
 \."##########################################################################
 \."  Copyright (C) 2001-2003 The Regents of the University of California.
 \."  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -63,7 +63,7 @@ specified on the command line.  If packages are specified, select
 Distfile.{package list}, otherwise Distfile.{all packages}.
 .IP
 3) Scan the Distfiles for macro references of the form ${attr_attrname} 
-or ${attr_attrname_value} and
+or ${attr_attrname=value} and
 prepend macro definitions based on the content of the genders file.
 In the example above, all nodes carrying the genders attribute 
 .I attrname
