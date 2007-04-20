@@ -1,3 +1,14 @@
+2007-04-20 Mike Miller <miller87@llnl.gov>
+
+	* dist/dist2: Added ability to use genders values via
+	${attrval_[value]}.
+	
+	* dist/Tutorial: Added text and examples for new attrval
+	functionality.
+	
+	* man/dist/dist2.1: Added text and examples for new attrval
+	functionality.
+	
 2007-04-17  Albert Chu  <chu11@llnl.gov>
 
 	* man/dist/dist2.1: Fix typo.

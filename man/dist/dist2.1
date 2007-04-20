@@ -1,5 +1,5 @@
 \."##########################################################################
-\."  $Id: dist2.1,v 1.11 2007-04-17 18:12:22 chu11 Exp $
+\."  $Id: dist2.1,v 1.12 2007-04-20 23:27:34 chu11 Exp $
 \."##########################################################################
 \."  Copyright (C) 2001-2003 The Regents of the University of California.
 \."  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -226,6 +226,26 @@ with the
 attribute equal to
 .I value.
 .LP
+You can also substitute genders values using 
+.I ${attrval_[value]}.  
+For instance
+.I ${attrval_cluster} 
+would substitute the name of the cluster that dist2 was running on.
+This can be very useful.  Take for example the following case...
+
+genders/genders.${attrval_cluster} -> ${${attrval_cluster}!attr_all}
+     install /etc/genders
+
+The above example could be used to install a cluster specific genders
+file on any number of clusters.  This also make adding new clusters to
+your rdist scheme trivial as all you need to do is create a 
+genders.[clustername] file.
+
+Note that trying to reference a genders attribute that either doesn't
+have an associated value or does not exist will cause processing of 
+that file to abort.  The dist2 script will however continue processing
+with the next file.
+
 .SH "HOST RANGES"
 .B dist2
 accepts ranges of hostnames in the general form: prefix[n-m,l-k,...],
@@ -254,23 +274,6 @@ instead of the installed version, /etc/genders.  Since the genders file
 is under rdist control, referring directly to the source file eliminates a
 potential bootstrapping problem.  On the other hand, it's ugly to hardcode
 the source path, and we refer to other files in their installed location.
-.LP
-NFS mounting /var/dist simplifies our lives as long as the switch is up
-and the NFS servers are fast.  When one of these assumptions fails to be true,
-our old method of rsyncing /var/dist to head nodes, and dshing rdists on the
-head nodes to the frames is probably superior.  Even on a good day, sending
-out everything in /var/dist to all nodes of a 488-node SP is probably slower
-than the old method.  Updates of small parts of /var/dist, however, really
-scream now.
-.LP
-There should be some way to run 
-.B "dist2 -l"
-on  a node before the switch comes up.  Maybe a script that mounts /var/dist
-over the ethernet temporarily, performs the update, and then unmounts it?
-For this to work we would need a NetApp 100bT interface connected directly
-to the SP ethernet router.  If invoked from an rc file on reboot, care should
-be taken so it does not execute on a whole machine reboot to avoid saturating 
-the ethernet.
 .LP
 .SH "SEE ALSO"
 rdist(1), dist_all(1), dist_local(1), whatsup(1)

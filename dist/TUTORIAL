@@ -111,7 +111,7 @@ the same permissions they will have at their final installed destination.
 Distfile.misc contains the following:
 
      #
-     # $Id: TUTORIAL,v 1.1 2003-05-14 23:50:17 achu Exp $
+     # $Id: TUTORIAL,v 1.2 2007-04-20 23:27:33 chu11 Exp $
      # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/dist/TUTORIAL,v $
      #
 
@@ -266,6 +266,35 @@ script reads both local and NFS fstab files, merges them, and writes the
 result on /etc/fstab.  Similarly, the services: rule sends out
 /etc/services.add and runs updateservices to merge this with /etc/services.
 
+You could simplify the above example by using genders variable substitution.
+For example...
+
+     # machines with special aliases files for local delivery
+     MISC_ALIASES_HOME = (${attr_garlickhome})
+
+     aliases: misc/aliases.${attrval_cluster} -> ${${attrval_cluster}!attr_all} - ${MISC_ALIASES_HOME}
+             install /etc/aliases;
+             special "/usr/bin/newaliases";
+     aliases: misc/aliases.garlickhome -> ${attr_garlickhome}
+             install /etc/aliases;
+             special "/usr/bin/newaliases";
+
+Would replace the aliases portion of the previous example.  ${attrval_cluster} 
+would be replaced by the cluster name.  Note that this functionality is generic 
+to any genders attribute that has a value associated with it.  You could for 
+instance have a genders attribute called "nodetype" and assign it one of the 
+following values.
+
+   mgmt,compute,rps,login
+
+And then use the rule to install node type specific files.  Say for instance 
+a modprobe.conf
+   
+   modprobe.conf: kernel/modprobe.${attrval_nodetype}.${attrval_cluster} -> ${${attrval_cluster}!attr_nodetype=${attrval_nodetype}}
+      install /etc/modprobe.conf;
+      special "/sbin/depmod -a </dev/null";
+
+
 Example: Genders Package
 
 The genders and clusters files are excellent candidates for sending out with
@@ -287,7 +316,7 @@ be called genders.clustername:
 The Distfile.genders then contains:
 
      #
-     # $Id: TUTORIAL,v 1.1 2003-05-14 23:50:17 achu Exp $
+     # $Id: TUTORIAL,v 1.2 2007-04-20 23:27:33 chu11 Exp $
      # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/dist/TUTORIAL,v $
      #
      genders: genders/genders.auk -> ${auk!attr_all}
@@ -308,7 +337,7 @@ following script (written for linux) takes care of installing the minimum
 set of files onto the node:
 
      #
-     # $Id: TUTORIAL,v 1.1 2003-05-14 23:50:17 achu Exp $
+     # $Id: TUTORIAL,v 1.2 2007-04-20 23:27:33 chu11 Exp $
      # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/dist/TUTORIAL,v $
      #
      if [ $# -ne 1 ]; then
@@ -362,7 +391,7 @@ rdist repository.  The source files and this Makefile are kept in
 /usr/local/admin/genders:
 
      #
-     # $Id: TUTORIAL,v 1.1 2003-05-14 23:50:17 achu Exp $
+     # $Id: TUTORIAL,v 1.2 2007-04-20 23:27:33 chu11 Exp $
      # $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/dist/TUTORIAL,v $
      #
      PKG=    genders
@@ -407,5 +436,5 @@ without regard for whitespace.  This prevents triggering unnecsesary rdist
 updates when the sys admin makes the install target when not all files have
 changed.
 
-$Id: TUTORIAL,v 1.1 2003-05-14 23:50:17 achu Exp $
+$Id: TUTORIAL,v 1.2 2007-04-20 23:27:33 chu11 Exp $
 $Source: /g/g0/achu/temp/genders-cvsbackup-full/gendersllnl/dist/TUTORIAL,v $

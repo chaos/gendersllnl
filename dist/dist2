@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.24 2005-08-03 23:04:00 achu Exp $
+#  $Id: dist2,v 1.25 2007-04-20 23:27:33 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -408,10 +408,24 @@ sub find_attrs_in_file
 {
 	my ($file, $labels, $attrs) = @_;
 	my ($retval);
+	my($token);
+	my($value);
 
 	if (open(FILE, "< $file")) {
 		while (<FILE>) {
 			chomp;
+			if($_ =~ /\${attrval_(\w[\w\-\.]*)}/) { # Substitute Genders values
+
+				$token = $1;
+				if($gendobj->getattrval("$token")) {
+					$value = $gendobj->getattrval("$token");
+					$_ =~ s/\${attrval_$token}/$value/g;
+				} else {
+					print STDERR ("Couldn't find attr value for $1\n");
+					next; #Skip this file
+				}
+                        }
+
 			s/\#.*//;  		# delete comments
 			next if (/^\s*$/);	# skip blank lines
 			if (/^\s*(\w+):/) {	# label
@@ -475,15 +489,32 @@ sub cat_packages
 sub cat_file
 {
 	my ($fh, $file) = @_;
+	my($token);
+	my($value);
 
 	if (open(FILE, "< $file")) {
 		xprintf($fh, "# begin %s\n", $file);
+
 		while (<FILE>) {
-		        while (s/(\w[\w\-\.]*)=(\w[\w\-\.]*)/$1$main::equal_sign_key$2/) {
-			        # do nothing
+
+			if($_ =~ /\${attrval_(\w[\w\-\.]*)}/) { # Substitute Genders values
+				$token = $1;
+				if($gendobj->getattrval("$token")) {
+					$value = $gendobj->getattrval("$token");
+					$_ =~ s/\${attrval_$token}/$value/g;
+				} else {
+					print STDERR ("Couldn't find attr value for $1\n");
+					next; #Skip this file
+				}
 			}
+
+			while (s/(\w[\w\-\.]*)=(\w[\w\-\.]*)/$1$main::equal_sign_key$2/) {
+				# do nothing
+			}
+
 			xprint($fh, $_);
 		}
+
 		xprintf($fh, "# end %s\n", $file);
 		close(FILE);
 	}
