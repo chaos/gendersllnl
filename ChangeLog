@@ -2,6 +2,8 @@
 
 	* META: Updated release.
 
+	* Makefile.am: Add gendersllnl.spec to dist.
+
 	* tagged gendersllnl-1-7-1
 
 2007-04-20 Mike Miller <miller87@llnl.gov>
