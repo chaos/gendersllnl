@@ -2,7 +2,7 @@
 
 	* META: Updated release.
 
-	* gendersllnl.spec: Fix build.
+	* gendersllnl.spec.in: Fix build.
 	
 	* config/Make-rpm.mk: Remove localism.
 
