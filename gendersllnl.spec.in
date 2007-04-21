@@ -4,7 +4,7 @@ Release: @RELEASE@
 Summary: LLNL site specific genders libraries
 Group: System Environment/Base
 License: GPL
-Source: %{name}-%{version}.tgz
+Source: %{name}-%{version}.tar.gz
 Requires: genders >= 1.2
 BuildRoot: %{_tmppath}/%{name}-%{version}
 
