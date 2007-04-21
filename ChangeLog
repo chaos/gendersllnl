@@ -1,3 +1,9 @@
+2007-04-21 Albert Chu  <chu11@llnl.gov>
+
+	* META: Updated release.
+
+	* tagged gendersllnl-1-7-1
+
 2007-04-20 Mike Miller <miller87@llnl.gov>
 
 	* dist/dist2: Added ability to use genders values via
@@ -9,7 +15,7 @@
 	* man/dist/dist2.1: Added text and examples for new attrval
 	functionality.
 	
-2007-04-17  Albert Chu  <chu11@llnl.gov>
+2007-04-17 Albert Chu  <chu11@llnl.gov>
 
 	* man/dist/dist2.1: Fix typo.
 	
