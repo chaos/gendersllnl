@@ -2,7 +2,11 @@
 
 	* META: Updated release.
 
-	* Makefile.am: Add gendersllnl.spec to dist.
+	* gendersllnl.spec: Fix build.
+	
+	* config/Make-rpm.mk: Remove localism.
+
+	* Makefile.am: Add gendersllnl.spec to dist. Remove localisms.
 
 	* tagged gendersllnl-1-7-1
 
