@@ -1,3 +1,9 @@
+2007-05-23 Albert Chu  <chu11@llnl.gov>
+
+	* compat/Hostlist.pm: Default compress() to use quadrics style
+	ranges.  Document that quadrics style ranges can be changed by
+	setting the global Hostlist::quadrics_ranges
+	
 2007-04-21 Albert Chu  <chu11@llnl.gov>
 
 	* META: Updated release.

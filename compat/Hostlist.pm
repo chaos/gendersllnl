@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Hostlist.pm,v 1.14 2007-01-13 00:16:04 chu11 Exp $
+#  $Id: Hostlist.pm,v 1.15 2007-05-23 18:34:43 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -61,7 +61,7 @@ if (!$Hostlist::included) {
 $Hostlist::included = 1;
 
 # compress will generate a quadrics-style range if this is > 0
-$Hostlist::quadrics_ranges = 0;
+$Hostlist::quadrics_ranges = 1;
 
 # Construct node list from hostlist file
 #   $fileName (IN)      hostlist filename
@@ -414,7 +414,6 @@ Hostlist - Routines for operating on lists of hosts.
  Hostlist::detect_metachar($entry)
  Hostlist::expand($hostList)
  Hostlist::compress(@inList)
- Hostlist::compress_to_quadrics(@inList) 
 
  Hostlist::intersect(\@a, \@b)
  Hostlist::union(\@a, \@b)
@@ -422,6 +421,8 @@ Hostlist - Routines for operating on lists of hosts.
  Hostlist::xor(\@a, \@b)
  Hostlist::within(\@a, \@b)
  Hostlist::same(\@a, \@b)
+
+ $Hostlist::quadrics_ranges
 
 =head1 DESCRIPTION
 
@@ -469,11 +470,6 @@ Return a list of hostnames based on the specified hostrange.
 Return a hostrange based on a list of hostnames with identical
 prefixes.
 
-=item B<Hostlist::compress_to_quadrics(@inList)>
-
-Return a hostrange based on a list of hostnames with identical
-prefixes using quadrics style ranges.
-
 =item B<Hostlist::intersect(\@a, \@b)>
 
 Returns the intersection of two lists.
@@ -497,6 +493,10 @@ Returns true if all hosts in @a are in @b.
 =item B<Hostlist::same(\@a, \@b)>
 
 Returns true if @a and @b contain the exact same hosts.
+
+=item B<$Hostlist::quadrics_ranges>
+
+If set to 0, quadrics style host ranges will not be used.
 
 =back
 
