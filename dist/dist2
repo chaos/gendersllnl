@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.25 2007-04-20 23:27:33 chu11 Exp $
+#  $Id: dist2,v 1.26 2007-05-30 01:47:45 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -83,6 +83,7 @@ $local_cluster = 	"";
 @limit_nodes =		();
 $rdist_passthru_opts = 	"";
 $rdist_transport_program =    "";
+$use_alt_transport = 0;
 
 $line_no = 		1;
 
@@ -164,6 +165,12 @@ elsif ($main::opt_o) {
 }
 elsif ($main::opt_V) {
         $main::rdist_passthru_opts = "-o verify";
+}
+
+# Check for rsh_alt_path before opt_P
+if ($gendobj->getattrval("rsh_alt_path")) {
+        $main::rdist_transport_program = $gendobj->getattrval("rsh_alt_path");
+        $main::use_alt_transport = 1;
 }
 
 if ($main::opt_P) {
@@ -707,7 +714,7 @@ sub dist_file
 	my ($cmd);
 
 	if (!$main::opt_d) {
-                if ($main::opt_P) {
+                if ($main::opt_P || $main::use_alt_transport) {
 			$cmd = sprintf("%s -P %s %s -f-", $main::path_rdist, 
 					$main::rdist_transport_program,
 					$main::rdist_passthru_opts);
@@ -744,7 +751,7 @@ sub dist_pkg
                         printf STDERR ("Couldn't chdir: dir=$main::path_vardist: $!\n");
                         return 0;
 		}
-		if ($main::opt_P) {
+                if ($main::opt_P || $main::use_alt_transport) {
 			$cmd = sprintf("%s -P %s %s -f- %s", 
 					$main::path_rdist, 
 					$main::rdist_transport_program,

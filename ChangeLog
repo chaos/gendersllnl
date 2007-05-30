@@ -1,3 +1,7 @@
+2007-05-29 Dave Fox <foxd@llnl.gov>
+
+	* dist2, man/dist/dist2.1: Add 'rsh_alt_path' genders support.
+	
 2007-05-23 Albert Chu  <chu11@llnl.gov>
 
 	* compat/Hostlist.pm: Default compress() to use quadrics style
