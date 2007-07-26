@@ -6,6 +6,7 @@ Group: System Environment/Base
 License: GPL
 Source: %{name}-%{version}.tar.gz
 Requires: genders >= 1.2
+BuildRequires: genders >= 1.2
 BuildRoot: %{_tmppath}/%{name}-%{version}
 
 %description
