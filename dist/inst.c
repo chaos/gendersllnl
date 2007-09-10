@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: inst.c,v 1.6 2007-09-05 17:49:18 chu11 Exp $
+ *  $Id: inst.c,v 1.7 2007-09-10 22:30:44 chu11 Exp $
  *****************************************************************************
  *  Copyright (C) 2001-2003 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -225,7 +225,7 @@ int main(int argc, char *argv[])
                     }
                     dup2(dev_null_fd, 1);
                     dup2(dev_null_fd, 2);
-                    if (execl(_PATH_CMP, "cmp", src_file, dst_file, 0) < 0)
+                    if (execl(_PATH_CMP, "cmp", src_file, dst_file, (char *)0) < 0)
                         exit(1);
                 default:
                     rv = waitpid(pid, &st, 0);
@@ -253,7 +253,7 @@ int main(int argc, char *argv[])
                     }
                     dup2(dev_null_fd, 1);
                     dup2(dev_null_fd, 2);
-                    if (execl(_PATH_DIFF, "diff", "-b", src_file, dst_file, 0) < 0)
+                    if (execl(_PATH_DIFF, "diff", "-b", src_file, dst_file, (char *)0) < 0)
                         exit(1);
                 default:
                     rv = waitpid(pid, &st, 0);

@@ -1,3 +1,7 @@
+2007-09-10  Albert Chu  <chu11@llnl.gov>
+
+	* dist/inst.c (main): Fix compiler warnings.
+	
 2007-09-05  Albert Chu  <chu11@llnl.gov>
 
         * Fix FSF address throughout.
