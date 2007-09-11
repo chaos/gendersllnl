@@ -2,6 +2,10 @@ This file describes changes in recent versions of gendersllnl. It
 primarily documents those changes that are of interest to users and
 admins.
 
+Changes in gendersllnl-1.8-1
+============================
+  -- Support rsh_alt_path genders support in dist2.
+
 Changes in gendersllnl-1.7-1
 ============================
   -- Support variable substitution in dist2.
@@ -57,4 +61,4 @@ Changes in gendersllnl-1.0-1
 ============================
  -- Fixed bug regarding timestamps in inst.  (gnats/214)
 
-$Id: NEWS,v 1.18 2007-04-21 14:30:39 chu11 Exp $
+$Id: NEWS,v 1.19 2007-09-11 21:40:20 chu11 Exp $
