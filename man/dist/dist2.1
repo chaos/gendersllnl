@@ -1,5 +1,5 @@
 \."##########################################################################
-\."  $Id: dist2.1,v 1.14 2007-09-05 17:49:18 chu11 Exp $
+\."  $Id: dist2.1,v 1.15 2007-09-28 02:12:09 chu11 Exp $
 \."##########################################################################
 \."  Copyright (C) 2001-2003 The Regents of the University of California.
 \."  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -35,10 +35,10 @@
 dist2 \- rdist wrapper
 .SH SYNOPSIS
 .B dist2
-.I "[-o rdist_opts] [-V] [-c cluster] [-P transport_program] [-d [-n]] [-i] [-v] [node spec] [package.[fileset]...]"
+.I "[-o rdist_opts] [-V] [-c cluster] [-P transport_program] [-F genders-file] [-d [-n]] [-i] [-v] [node spec] [package.[fileset]...]"
 .br
 .B dist2
-.I "[-o rdist_opts] [-V] [-c cluster] [-P transport_program] [-d [-n]] [-i] [-v] [node spec] -f Distfile"
+.I "[-o rdist_opts] [-V] [-c cluster] [-P transport_program] [-F genders-file] [-d [-n]] [-i] [-v] [node spec] -f Distfile"
 .br
 .SH DESCRIPTION
 .B Dist2
@@ -200,6 +200,11 @@ The
 option can be used to specify an alternate cluster to the one
 .B dist2
 is run on.
+.LP
+The
+.I -F
+option can be used to specify a specific genders file to use rather
+than the default found for a cluster.
 .LP
 /var/dist is actually used to manage rdisted files across several MPP
 systems.  Distfile macros of the form ${attr_attrname} or

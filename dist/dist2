@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.27 2007-09-05 17:49:18 chu11 Exp $
+#  $Id: dist2,v 1.28 2007-09-28 02:12:09 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2001-2003 The Regents of the University of California.
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -49,6 +49,7 @@
 #   support
 # - can update all nodes in a cluster or a subset
 #
+use File::Basename;
 use Gendersllnl;
 use Hostlist;
 
@@ -99,16 +100,34 @@ if ($< != 0) {
 }
 
 # read arguments from command line
-if (!getopts("o:c:FdVinlLH:w:x:g:f:vP:")) { 		
+if (!getopts("o:c:F:dVinlLH:w:x:g:f:vP:")) { 		
 	usage();
 }					
 
-# initialize Genders with proper genders file (use the one in /var/dist)
-if ($main::opt_c) {
+# initialize Gendersllnl with proper genders file
+# (use the one in /var/dist unless explicitly directed otherwise)
+if (defined($main::opt_F)) {
+	$gendobj = Gendersllnl->new($main::opt_F);
+	if (!defined $gendobj) {
+		print STDERR ("Error loading given genders file $main::opt_F\n");
+		exit(1);
+	}
+	if (defined($main::opt_c)) {
+		$main::local_cluster = $main::opt_c;
+	}
+	else {
+		$main::local_cluster = $gendobj->get_cluster();
+		if ($main::local_cluster eq "") {
+			print STDERR ("Error retrieving cluster name from $main::opt_F\n");
+			exit(1);
+		} 
+	}
+} elsif (defined($main::opt_c)) {
 	$main::local_cluster = $main::opt_c;
 	$gendobj = Gendersllnl->new(sprintf($main::path_genders, $main::local_cluster));
 	if (!defined $gendobj) {
-		print STDERR ("Error loading specified genders file\n");
+		print STDERR ("Error loading genders file with cluster ",
+			"$main::local_cluster\n");
 		exit(1);
 	}
 } else {
@@ -135,8 +154,7 @@ if ($main::opt_c) {
 }
 
 # quit if args make no sense
-if (defined($main::opt_l) + defined($main::opt_w) + defined($main::opt_g) 
-    + defined($main::opt_F) > 1) {
+if (defined($main::opt_l) + defined($main::opt_w) + defined($main::opt_g) > 1) {
 	usage();
 }
 
@@ -148,7 +166,7 @@ if ((defined($main::opt_H) + !defined($main::opt_L)) > 1) {
         usage();
 }
 
-if ($main::opt_f && @ARGV) {
+if (defined($main::opt_f) && @ARGV) {
 	usage();
 }
 
@@ -157,10 +175,10 @@ if ($main::opt_n) {
 	$main::opt_d = 1;
 }
 
-if ($main::opt_o && $main::opt_V) {
+if (defined($main::opt_o) && $main::opt_V) {
 	$main::rdist_passthru_opts = "-o verify,$main::opt_o";
 }
-elsif ($main::opt_o) {
+elsif (defined($main::opt_o)) {
         $main::rdist_passthru_opts = "-o $main::opt_o";
 }
 elsif ($main::opt_V) {
@@ -173,8 +191,9 @@ if ($gendobj->getattrval("rsh_alt_path")) {
         $main::use_alt_transport = 1;
 }
 
-if ($main::opt_P) {
+if (defined($main::opt_P)) {
         $main::rdist_transport_program = $main::opt_P;
+        $main::use_alt_transport = 1;
 }
 
 # quit if /var/dist isn't mounted
@@ -200,7 +219,7 @@ if (!@main::limit_nodes) {
 	exit(0);
 }
 
-if ($main::opt_f) {
+if (defined($main::opt_f)) {
 	#
 	# -f Distfile
 	#
@@ -532,7 +551,14 @@ sub cat_file
 
 sub usage
 {
-	print STDERR ("Usage: dist2 [-o rdist_opts] [-c cluster] [-v [-n]] [-i] [-F | -l [-L [-H altlocalhost]] | -w host,host,host | -g attr] [pkg.[fs]] ...\n");
+	my $prog = basename($0);
+	my $common_opts =
+		"$prog [-o rdist_opts] [-V] [-F genders_file] [-c cluster] " .
+		"[-P transport_program] [-d [-n]] [-i] " .
+		"[-l [-L [-H altlocalhost]] | " .
+		"[-w host,host,... | -g attr] [-v] [-x host,host,...]]";
+	print STDERR "Usage: $common_opts [package.[fileset]...]\n";
+	print STDERR "       $common_opts -f Distfile\n";
 	exit(1);
 }
 
@@ -553,15 +579,6 @@ sub participating_nodes
                 @allnodes = Hostlist::expand($main::opt_w);
         } elsif (defined($main::opt_g)) {
                 @allnodes = $gendobj->getnodes($main::opt_g);
-        } elsif (defined($main::opt_F)) {
-                $myframe = $gendobj->getattrval("frame");
-                # If no frame attr (i.e. CWS) just act like -l 
-                if ($myframe eq "") {
-                        $hname = $gendobj->getnodename();
-                        @allnodes = ($hname);
-                } else {
-                        @allnodes = $gendobj->getnodes("frame","$myframe");
-                }
         } else {
                 @allnodes = $gendobj->getnodes();
         }
@@ -714,7 +731,7 @@ sub dist_file
 	my ($cmd);
 
 	if (!$main::opt_d) {
-                if ($main::opt_P || $main::use_alt_transport) {
+                if ($main::use_alt_transport) {
 			$cmd = sprintf("%s -P %s %s -f-", $main::path_rdist, 
 					$main::rdist_transport_program,
 					$main::rdist_passthru_opts);
@@ -751,7 +768,7 @@ sub dist_pkg
                         printf STDERR ("Couldn't chdir: dir=$main::path_vardist: $!\n");
                         return 0;
 		}
-                if ($main::opt_P || $main::use_alt_transport) {
+                if ($main::use_alt_transport) {
 			$cmd = sprintf("%s -P %s %s -f- %s", 
 					$main::path_rdist, 
 					$main::rdist_transport_program,
