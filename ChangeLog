@@ -1,3 +1,9 @@
+2007-10-01  Albert Chu  <chu11@llnl.gov>
+
+	* META, NEWS: Update for release.
+
+	* tagged gendersllnl-1-9-1
+	
 2007-09-27  Albert Chu  <chu11@llnl.gov>
 
 	* man/dist/dist2.1: Update with -F information.
