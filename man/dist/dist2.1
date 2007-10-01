@@ -1,5 +1,5 @@
 \."##########################################################################
-\."  $Id: dist2.1,v 1.15 2007-09-28 02:12:09 chu11 Exp $
+\."  $Id: dist2.1,v 1.16 2007-10-01 22:39:50 chu11 Exp $
 \."##########################################################################
 \."  Copyright (C) 2001-2003 The Regents of the University of California.
 \."  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -79,12 +79,16 @@ program.
 Node specification options are
 .I -w node1,node2,node3,
 .I -w node[X-Y],
-.I -g genders_attribute
+.I -g genders_query
 or
 .I -l.
 In the absense of these options,
 all nodes targeted by the preprocessed Distfile (potentially all nodes 
-appearing in the genders file) are updated.
+appearing in the genders file) are updated.  
+.LP
+Please see
+.B nodeattr(1)
+for more information on the format of a genders_query.
 .LP
 .I -w
 limits the update to the listed nodes.  Nodes can be specified in a
@@ -282,4 +286,4 @@ potential bootstrapping problem.  On the other hand, it's ugly to hardcode
 the source path, and we refer to other files in their installed location.
 .LP
 .SH "SEE ALSO"
-rdist(1), dist_all(1), dist_local(1), whatsup(1)
+rdist(1), dist_all(1), dist_local(1), nodeattr(1), whatsup(1)

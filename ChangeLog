@@ -1,5 +1,12 @@
 2007-10-01  Albert Chu  <chu11@llnl.gov>
 
+	* dist/dist2 (participating_nodes): Use genders query instead of
+	getnodes for opt_g option.
+
+	* man/dist/dist2.1: Update appropriately.
+	
+2007-10-01  Albert Chu  <chu11@llnl.gov>
+
 	* META, NEWS: Update for release.
 
 	* tagged gendersllnl-1-9-1
