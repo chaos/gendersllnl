@@ -2,6 +2,10 @@ This file describes changes in recent versions of gendersllnl. It
 primarily documents those changes that are of interest to users and
 admins.
 
+Changes in gendersllnl-1.10-1
+============================
+  -- Support query support with -g option in dist2.
+
 Changes in gendersllnl-1.9-1
 ============================
   -- Support -F alternate genders file option in dist2.
@@ -65,4 +69,4 @@ Changes in gendersllnl-1.0-1
 ============================
  -- Fixed bug regarding timestamps in inst.  (gnats/214)
 
-$Id: NEWS,v 1.20 2007-10-01 20:30:19 chu11 Exp $
+$Id: NEWS,v 1.21 2007-10-02 20:41:46 chu11 Exp $
