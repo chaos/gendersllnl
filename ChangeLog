@@ -5,6 +5,8 @@
 	* DISCALIMER: Updated with new disclaimer.
 
 	* Makefile.am, gendersllnl.spec.in: Add DISCLAIMER.UC.
+
+	* Globally update fsf address.
 	
 2007-10-02  Albert Chu  <chu11@llnl.gov>
 

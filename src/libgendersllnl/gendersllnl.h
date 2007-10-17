@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: gendersllnl.h,v 1.10 2007-10-17 18:09:15 chu11 Exp $
+ *  $Id: gendersllnl.h,v 1.11 2007-10-17 18:34:15 chu11 Exp $
  *****************************************************************************
  *  Copyright (C) 2001-2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -23,8 +23,7 @@
  *  General Public License for more information.
  *
  *  You should have received a copy of the GNU General Public License along
- *  with Gendersllnl; if not, write to the Free Software Foundation, Inc.,
- *  51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA.
+ *  with Gendersllnl.  If not, see <http://www.gnu.org/licenses/>.
 \*****************************************************************************/
 
 #ifndef _GENDERSLLNL_H
