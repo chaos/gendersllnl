@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: gendersllnl.c,v 1.30 2007-10-17 18:45:32 chu11 Exp $
+ *  $Id: gendersllnl.c,v 1.31 2008-01-29 05:27:53 chu11 Exp $
  *****************************************************************************
  *  Copyright (C) 2007 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2001-2007 The Regents of the University of California.
@@ -63,7 +63,7 @@ genders_get_cluster(genders_t handle, const char *node, char *buf, int buflen)
       genders_set_errnum(handle, GENDERS_ERR_PARSE);
       return -1;
     }
-  else if (rv) 
+  else
     {
       genders_set_errnum(handle, GENDERS_ERR_SUCCESS);
       return 0;
@@ -263,10 +263,10 @@ _getaltnodes(genders_t handle,
 	goto cleanup;
       
       if (!altnodes[i]) 
-	{
-	  errnum = GENDERS_ERR_NULLPTR;
-	  goto cleanup;
-	}
+        {
+          errnum = GENDERS_ERR_NULLPTR;
+          goto cleanup;
+        }
       strcpy(altnodes[i], buf);
     }
   

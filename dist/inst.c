@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: inst.c,v 1.10 2007-10-17 18:45:28 chu11 Exp $
+ *  $Id: inst.c,v 1.11 2008-01-29 05:27:53 chu11 Exp $
  *****************************************************************************
  *  Copyright (C) 2007 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2001-2007 The Regents of the University of California.
@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
             break;
         case 'm':
             if (sscanf(optarg, "%o", &dst_mode) != 1
-                || (dst_mode < 0 || dst_mode > 07777)) {
+                || dst_mode > 07777) {
                 fprintf(stderr, "bad mode: %s\n", optarg);
                 exit(1);
             }
