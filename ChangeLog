@@ -1,3 +1,11 @@
+2008-04-02  Py Watson <watson30@llnl.gov>
+
+	* dist/dist2 (get_all_packages): More accurately match Distfiles
+	under the dist directory (e.g. will not attempt to use a distfile
+	named "Distfile-foo").  Sort list of packages when none are
+	explicitly given so as to have deterministic behaviour as to the
+	order the distfiles are used.
+
 2008-03-28  Albert Chu  <chu11@llnl.gov>
 
         * man/: Fix nroff syntax errors.
