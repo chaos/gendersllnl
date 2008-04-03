@@ -2,6 +2,12 @@ This file describes changes in recent versions of gendersllnl. It
 primarily documents those changes that are of interest to users and
 admins.
 
+Changes in gendersllnl-1.11-1
+============================
+  -- More accurately match Distfiles under dist directly.
+  -- Sort packages when none are explicitly given in dist2.
+  -- Minor bug fixes.
+
 Changes in gendersllnl-1.10-1
 ============================
   -- Support genders queries with -g option in dist2.
@@ -69,4 +75,4 @@ Changes in gendersllnl-1.0-1
 ============================
  -- Fixed bug regarding timestamps in inst.  (gnats/214)
 
-$Id: NEWS,v 1.22 2007-10-02 22:29:47 chu11 Exp $
+$Id: NEWS,v 1.23 2008-04-03 18:09:19 chu11 Exp $

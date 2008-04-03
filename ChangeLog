@@ -1,3 +1,9 @@
+2008-04-03  Albert Chu  <chu11@llnl.gov>
+
+	* META, NEWS: Update for release.
+
+	* tagged gendersllnl-1-11-1
+
 2008-04-02  Py Watson <watson30@llnl.gov>
 
 	* dist/dist2 (get_all_packages): More accurately match Distfiles
