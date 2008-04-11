@@ -1,3 +1,15 @@
+2008-04-11  Py Watson <watson30@llnl.gov>
+
+	* dist/dist2 (altname_preserve, emit_definition, getnodes,
+	participating_nodes): To improve lookup speed, cache the alternate
+	node names in a hash.
+
+	* dist/dist2 (participating_nodes): Fix indentation.
+
+	* dist/dist2 (getnodes, participating_nodes): To improve lookup
+	speed, save the list of possible target nodes as a hash rather
+	than an array.
+	
 2008-04-03  Albert Chu  <chu11@llnl.gov>
 
 	* META, NEWS: Update for release.
