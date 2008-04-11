@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.34 2008-04-02 21:12:39 chu11 Exp $
+#  $Id: dist2,v 1.35 2008-04-11 16:09:06 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2007-2008 Lawrence Livermore National Security, LLC.
 #  Copyright (C) 2001-2007 The Regents of the University of California.
@@ -82,6 +82,7 @@ if ($havePSSP) {
 $path_postp_closed =	"/usr/local.scf/admin/dist/postp";
 $local_cluster = 	"";
 @limit_nodes =		();
+%altnames_cache =	();
 $rdist_passthru_opts = 	"";
 $rdist_transport_program =    "";
 $use_alt_transport = 0;
@@ -266,6 +267,17 @@ if (defined($main::opt_f)) {
 
 exit(0);
 
+sub altname_preserve
+{
+	my ($name) = @_;
+
+	if (! exists($main::altnames_cache{$name})) {
+		$main::altnames_cache{$name} = $gendobj->to_altname_preserve($name);
+	}
+
+	return $main::altnames_cache{$name};
+}
+
 sub emit_definition
 {
 	my ($fh, $attr, $cluster) = @_;
@@ -282,7 +294,7 @@ sub emit_definition
 			$hname = $gendobj->getnodename();
 		}	
                 if (! $main::opt_i) {
-                       	$hname = $gendobj->to_altname_preserve($hname);
+                       	$hname = altname_preserve($hname);
                 }
 		foreach $node (@node_list) {
 			if ($node eq $hname) {
@@ -351,7 +363,9 @@ sub getnodes
                 # Unique to LLNL, convert node names to 
                 # "alternate" node names.
 
-		@allnodes = $gendobj->to_altnames_preserve(@allnodes);
+		foreach (@allnodes) {
+			$_ = altname_preserve($_);
+		}
 	}
 
 	foreach $node (@allnodes) {
@@ -619,7 +633,9 @@ sub participating_nodes
         }
 
         if (!$main::opt_i) {
-                @nodes = $gendobj->to_altnames_preserve(@nodes);
+                foreach (@nodes) {
+                        $_ = altname_preserve($_);
+                }
         }
 
         return @nodes;
