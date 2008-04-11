@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.36 2008-04-11 16:09:21 chu11 Exp $
+#  $Id: dist2,v 1.37 2008-04-11 16:09:45 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2007-2008 Lawrence Livermore National Security, LLC.
 #  Copyright (C) 2001-2007 The Regents of the University of California.
@@ -212,10 +212,10 @@ if (-f $main::path_openfile && -x $main::path_postp_closed) {
 	unlink($main::path_openfile);
 }
 
-# @main::limit_nodes will contain the list of possible target nodes
-@main::limit_nodes = participating_nodes();
+# %main::limit_nodes will contain the list of possible target nodes as keys
+%main::limit_nodes = participating_nodes();
 
-if (!@main::limit_nodes) {
+if (!keys(%main::limit_nodes)) {
 	printf STDERR ("No target nodes specified\n");
 	exit(0);
 }
@@ -369,7 +369,7 @@ sub getnodes
 	}
 
 	foreach $node (@allnodes) {
-		if (grep(/^$node$/, @main::limit_nodes)){
+		if (exists($main::limit_nodes{$node})){
 			push(@nodes, $node);
 		}
 	}
@@ -638,7 +638,7 @@ sub participating_nodes
                 }
         }
 
-        return @nodes;
+        return map({$_ => 1} @nodes);
 }
 
 sub get_upnodes 
