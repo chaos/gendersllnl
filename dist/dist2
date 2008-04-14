@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.37 2008-04-11 16:09:45 chu11 Exp $
+#  $Id: dist2,v 1.38 2008-04-14 17:13:12 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2007-2008 Lawrence Livermore National Security, LLC.
 #  Copyright (C) 2001-2007 The Regents of the University of California.
@@ -81,7 +81,7 @@ if ($havePSSP) {
 }
 $path_postp_closed =	"/usr/local.scf/admin/dist/postp";
 $local_cluster = 	"";
-@limit_nodes =		();
+%limit_nodes =		();
 %altnames_cache =	();
 $rdist_passthru_opts = 	"";
 $rdist_transport_program =    "";
