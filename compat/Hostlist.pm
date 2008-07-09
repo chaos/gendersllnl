@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Hostlist.pm,v 1.19 2007-10-17 18:45:27 chu11 Exp $
+#  $Id: Hostlist.pm,v 1.20 2008-07-09 22:14:31 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2007 Lawrence Livermore National Security, LLC.
 #  Copyright (C) 2001-2007 The Regents of the University of California.
@@ -168,12 +168,17 @@ sub expand
 {
         my ($list) = @_;
 
+		if ($list =~ /\[/ && $list !~ /[^[]*\[.+\]/) {
+            # Handle case of no closing bracket - just return
+            return ($list);
+		}
+
         # matching "[" "]" pair with stuff inside will be considered a quadrics
         # range:
         if ($list =~ /[^[]*\[.+\]/) {
                 # quadrics ranges are separated by whitespace in RMS -
                 # try to support that here
-		$list =~ s/\s+/,/g;
+                $list =~ s/\s+/,/g;
 
                 # 
                 # Replace ',' chars internal to "[]" with ':"
@@ -200,7 +205,7 @@ sub expand
 sub expand_quadrics_range 
 {
         my ($list) = @_;
-        my ($pfx, $ranges, $suffix) = split(/[\[\]]/, $list);
+        my ($pfx, $ranges, $suffix) = split(/[\[\]]/, $list, 3);
 
         return $list if (!defined $ranges);
 
