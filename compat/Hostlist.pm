@@ -1,5 +1,5 @@
 #############################################################################
-#  $Id: Hostlist.pm,v 1.20 2008-07-09 22:14:31 chu11 Exp $
+#  $Id: Hostlist.pm,v 1.21 2008-07-09 22:53:41 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2007 Lawrence Livermore National Security, LLC.
 #  Copyright (C) 2001-2007 The Regents of the University of California.
@@ -168,10 +168,10 @@ sub expand
 {
         my ($list) = @_;
 
-		if ($list =~ /\[/ && $list !~ /[^[]*\[.+\]/) {
+        if ($list =~ /\[/ && $list !~ /[^[]*\[.+\]/) {
             # Handle case of no closing bracket - just return
             return ($list);
-		}
+        }
 
         # matching "[" "]" pair with stuff inside will be considered a quadrics
         # range:
