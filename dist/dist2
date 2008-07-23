@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.38 2008-04-14 17:13:12 chu11 Exp $
+#  $Id: dist2,v 1.39 2008-07-23 23:51:39 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2007-2008 Lawrence Livermore National Security, LLC.
 #  Copyright (C) 2001-2007 The Regents of the University of California.
@@ -749,12 +749,12 @@ sub dist_file
 
 	if (!$main::opt_d) {
                 if ($main::use_alt_transport) {
-			$cmd = sprintf("%s -P %s %s -f-", $main::path_rdist, 
+			$cmd = sprintf("%s -P %s %s -f -", $main::path_rdist, 
 					$main::rdist_transport_program,
 					$main::rdist_passthru_opts);
 		}
 		else {
-			$cmd = sprintf("%s %s -f-", $main::path_rdist, 
+			$cmd = sprintf("%s %s -f -", $main::path_rdist, 
 					$main::rdist_passthru_opts);
 		}
 		if (!open(PIPE, "|$cmd")) {
@@ -786,14 +786,14 @@ sub dist_pkg
                         return 0;
 		}
                 if ($main::use_alt_transport) {
-			$cmd = sprintf("%s -P %s %s -f- %s", 
+			$cmd = sprintf("%s -P %s %s -f - %s", 
 					$main::path_rdist, 
 					$main::rdist_transport_program,
 					$main::rdist_passthru_opts,
 					join(" ", @{$labels}));
 		}
 		else {
-			$cmd = sprintf("%s %s -f- %s", 
+			$cmd = sprintf("%s %s -f - %s", 
 					$main::path_rdist, $main::rdist_passthru_opts,
 					join(" ", @{$labels}));
 		}

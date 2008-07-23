@@ -2,6 +2,10 @@ This file describes changes in recent versions of gendersllnl. It
 primarily documents those changes that are of interest to users and
 admins.
 
+Changes in gendersllnl-1.15-1
+=============================
+  -- Fix porting issue in dist2 for Solaris.
+
 Changes in gendersllnl-1.14-1
 =============================
   -- Remove unnecessary "unitialized use" messages from Hostlist.pm.
@@ -88,4 +92,4 @@ Changes in gendersllnl-1.0-1
 ============================
  -- Fixed bug regarding timestamps in inst.  (gnats/214)
 
-$Id: NEWS,v 1.26 2008-07-09 22:53:40 chu11 Exp $
+$Id: NEWS,v 1.27 2008-07-23 23:51:39 chu11 Exp $
