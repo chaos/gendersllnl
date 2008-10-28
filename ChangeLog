@@ -1,3 +1,7 @@
+2008-10-28  Albert Chu  <chu11@llnl.gov>
+
+	* gendersllnl.spec.in: Fix sles10 rpmbuild issue.
+
 2008-07-23  Albert Chu  <chu11@llnl.gov>
 
 	* dist/dist2: Fix porting issue for Solaris.
