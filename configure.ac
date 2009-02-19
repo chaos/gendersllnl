@@ -1,5 +1,5 @@
 ##*****************************************************************************
-## $Id: configure.ac,v 1.27 2009-02-19 01:06:31 chu11 Exp $
+## $Id: configure.ac,v 1.28 2009-02-19 01:07:51 chu11 Exp $
 ##*****************************************************************************
 ## Process this file with autoconf to produce a configure script.
 ##*****************************************************************************
@@ -74,7 +74,7 @@ AC_CHECK_HEADERS( \
 )
 
 #
-# Check for perl destdir
+# Check for perl stuff
 #
 AC_PERL_DESTDIR
 AC_PERL_EXTENSIONS
