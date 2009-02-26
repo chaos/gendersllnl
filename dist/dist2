@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #############################################################################
-#  $Id: dist2,v 1.39 2008-07-23 23:51:39 chu11 Exp $
+#  $Id: dist2,v 1.40 2009-02-26 22:16:46 chu11 Exp $
 #############################################################################
 #  Copyright (C) 2007-2008 Lawrence Livermore National Security, LLC.
 #  Copyright (C) 2001-2007 The Regents of the University of California.
@@ -762,11 +762,15 @@ sub dist_file
 			return 0;
 		}
 	}
+
 	emit_distfile_defs($main::opt_d ? \*STDOUT : \*PIPE, $attrpairs);
 	cat_file($main::opt_d ? \*STDOUT : \*PIPE, $file);
 
 	if (!$main::opt_d) {
-		close(PIPE);
+		if (!close(PIPE)) {
+			print STDERR ("rdist exited non-zero ($?): cmd=$cmd: $!\n");
+			return 0;
+		}
 	}
 	return 1;
 }
@@ -807,7 +811,10 @@ sub dist_pkg
 	cat_packages($main::opt_d ? \*STDOUT : \*PIPE, @{$packages});
 
 	if (!$main::opt_d) {
-		close(PIPE);
+		if (!close(PIPE)) {
+			print STDERR ("rdist exited non-zero ($?): cmd=$cmd: $!\n");
+			return 0;
+		}
 	}
 
 	return 1;
