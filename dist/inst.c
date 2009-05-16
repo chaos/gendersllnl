@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: inst.c,v 1.12 2008-03-28 16:57:15 chu11 Exp $
+ *  $Id: inst.c,v 1.13 2009-05-16 01:06:15 chu11 Exp $
  *****************************************************************************
  *  Copyright (C) 2007-2008 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2001-2007 The Regents of the University of California.
@@ -308,7 +308,16 @@ int main(int argc, char *argv[])
                 exit(1);
             }
         close(src_fd);
-        close(dst_fd);
+        if (fsync(dst_fd) < 0) {
+            perror("fsync");
+            unlink(dst_file);
+            exit(1);
+        }
+        if (close(dst_fd) < 0) {
+            perror("close");
+            unlink(dst_file);
+            exit(1);
+        }
 
         /* touch date to be the same as source file */
         times[0].tv_sec = sb_src.st_mtime;

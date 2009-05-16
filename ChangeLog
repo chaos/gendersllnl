@@ -1,3 +1,8 @@
+2009-05-15  Albert Chu  <chu11@llnl.gov>
+
+	* dist/inst.c: Check return code on close.  fsync before calling
+	close.
+	
 2009-02-26  Albert Chu  <chu11@llnl.gov>
 
 	* META, NEWS: Update for release.
