@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: inst.c,v 1.13 2009-05-16 01:06:15 chu11 Exp $
+ *  $Id: inst.c,v 1.14 2009-05-16 01:16:18 chu11 Exp $
  *****************************************************************************
  *  Copyright (C) 2007-2008 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2001-2007 The Regents of the University of California.
@@ -307,7 +307,8 @@ int main(int argc, char *argv[])
                 unlink(dst_file);
                 exit(1);
             }
-        close(src_fd);
+        if (close(src_fd) < 0)
+            perror("close");
         if (fsync(dst_fd) < 0) {
             perror("fsync");
             unlink(dst_file);
