@@ -1,3 +1,7 @@
+2009-08-11  Albert Chu  <chu11@llnl.gov>
+
+        * src/Genders/Makefile.am: Fix portability bug.
+	
 2009-05-15  Albert Chu  <chu11@llnl.gov>
 
 	* dist/inst.c: Check return code on close.  fsync before calling
