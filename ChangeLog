@@ -1,10 +1,13 @@
+2009-08-12  Albert Chu  <chu11@llnl.gov>
+
+        * compat/Makefile.am, src/Gendersllnl/Makefile.am: Revert
+	portability fixes.
+
 2009-08-11  Albert Chu  <chu11@llnl.gov>
 
         * compat/Makefile.am, src/Gendersllnl/Makefile.am: Fix portability
 	bug.
 	
-	* tagged gendersllnl-1-16-2
-
 2009-05-15  Albert Chu  <chu11@llnl.gov>
 
 	* dist/inst.c: Check return code on close.  fsync before calling
