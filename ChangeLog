@@ -2,6 +2,8 @@
 
 	* gendersllnl.spec.in: Add appropriate build requires.
 
+	* dist/inst.c: Add mode to open call w/ O_CREAT.
+
 	* tagged gendersllnl-1-17-1
 	
 2009-08-12  Albert Chu  <chu11@llnl.gov>

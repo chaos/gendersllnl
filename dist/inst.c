@@ -1,5 +1,5 @@
 /*****************************************************************************\
- *  $Id: inst.c,v 1.14 2009-05-16 01:16:18 chu11 Exp $
+ *  $Id: inst.c,v 1.15 2009-10-09 21:28:24 chu11 Exp $
  *****************************************************************************
  *  Copyright (C) 2007-2008 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2001-2007 The Regents of the University of California.
@@ -293,7 +293,7 @@ int main(int argc, char *argv[])
 #endif
     if (do_copy) {
         /* copy the file */
-        if ((dst_fd = open(dst_file, O_CREAT | O_TRUNC | O_WRONLY)) == -1) {
+        if ((dst_fd = open(dst_file, O_CREAT | O_TRUNC | O_WRONLY, dst_mode)) == -1) {
             perror(dst_file);
             exit(1);
         }

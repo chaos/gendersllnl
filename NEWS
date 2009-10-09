@@ -4,7 +4,7 @@ admins.
 
 Changes in gendersllnl-1.17-1
 =============================
- -- Fix inst corner case.
+ -- Fix inst corner cases.
  -- Fix FC11/RHEL6 portability bugs.
 
 Changes in gendersllnl-1.16-1
@@ -105,4 +105,4 @@ Changes in gendersllnl-1.0-1
 ============================
  -- Fixed bug regarding timestamps in inst.  (gnats/214)
 
-$Id: NEWS,v 1.32 2009-10-09 17:56:39 chu11 Exp $
+$Id: NEWS,v 1.33 2009-10-09 21:28:24 chu11 Exp $
