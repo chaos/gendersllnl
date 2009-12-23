@@ -19,6 +19,7 @@ specifically for LLNL tools.
 Summary: LLNL file distribution tools
 Group: System Environment/Base
 Requires: pdsh >= 2.0-0.pre18
+Requires: rdist
 %description dist
 Sets of file distribution tools used specifically by LLNL.  The tools
 will most likely not work by default in a non-LLNL environment.
