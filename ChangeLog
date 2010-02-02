@@ -1,3 +1,7 @@
+2010-02-01  Albert Chu  <chu11@llnl.gov>
+
+	* Update copyrights globally.
+	
 2009-12-23  Albert Chu  <chu11@llnl.gov>
 
 	* gendersllnl.spec.in: Add rdist requirement for dist subpackage.
