@@ -1,3 +1,9 @@
+2010-07-23  Albert Chu  <chu11@llnl.gov>
+
+	* META: Update appropriately for invalid versioning during last tag.
+
+	* tagged gendersllnl-1-17-3
+	
 2010-02-01  Albert Chu  <chu11@llnl.gov>
 
 	* Update copyrights globally.
