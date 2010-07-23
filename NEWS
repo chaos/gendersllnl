@@ -2,6 +2,10 @@ This file describes changes in recent versions of gendersllnl. It
 primarily documents those changes that are of interest to users and
 admins.
 
+Changes in gendersllnl-1.17-3
+=============================
+ -- Update Minor Version Number (improperly versioned/tagged previous release).
+
 Changes in gendersllnl-1.17-2
 =============================
  -- Fix dist subpackage requirements.
