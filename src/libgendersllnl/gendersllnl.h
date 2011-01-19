@@ -30,6 +30,10 @@
 #ifndef _GENDERSLLNL_H
 #define _GENDERSLLNL_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <genders.h>
 
 #define GENDERS_ALTNAME_ATTRIBUTE      "altname"
@@ -244,6 +248,10 @@ int genders_string_to_altnames_preserve(genders_t handle,
 					const char *str,
                                         char *buf, 
 					int buflen);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _GENDERSLLNL_H */
 
