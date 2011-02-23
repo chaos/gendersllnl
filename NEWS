@@ -2,7 +2,7 @@ This file describes changes in recent versions of gendersllnl. It
 primarily documents those changes that are of interest to users and
 admins.
 
-Changes in gendersllnl-1.18-3
+Changes in gendersllnl-1.18-1
 =============================
  -- Support C++ linking.
 
