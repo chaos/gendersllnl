@@ -4,11 +4,13 @@
 ## Process this file with automake to produce Makefile.in.
 ##*****************************************************************************
 
-INSTALLSITEARCH=`$(PERL) -e 'use Config; $$T=$$Config{installsitearch}; $$T=~/^\Q$$Config{siteprefix}\E\/(.+)/; print $$1;'`
+INSTALLXARCH="install${PERL_ARCH_INSTALL}arch"
+XPREFIX="${PERL_ARCH_INSTALL}prefix"
+INSTALLARCH=`$(PERL) -e 'use Config; $$T=$$Config{$(INSTALLXARCH)}; $$T=~/^\Q$$Config{$(XPREFIX)}\E\/(.+)/; print $$1;'`
 
 if WITH_PERL_EXTENSIONS
 HOSTLISTPMFILES = Hostlist.pm
-HOSTLISTPMFILESdir = $(prefix)/$(INSTALLSITEARCH)
+HOSTLISTPMFILESdir = $(prefix)/$(INSTALLARCH)
 HOSTLISTPMFILES_DATA = $(HOSTLISTPMFILES)
 
 Hostlist.$(PERLMAN3EXT):
@@ -21,7 +23,7 @@ Hostlist.$(PERLMAN3EXT):
 man3_MANS = Hostlist.$(PERLMAN3EXT)
 
 install-data-hook:
-	chmod 444 $(DESTDIR)/$(prefix)/$(INSTALLSITEARCH)/Hostlist.pm
+	chmod 444 $(DESTDIR)/$(prefix)/$(INSTALLARCH)/Hostlist.pm
 endif
 
 EXTRA_DIST = Hostlist.pm

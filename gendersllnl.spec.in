@@ -26,6 +26,9 @@ will most likely not work by default in a non-LLNL environment.
 
 %{!?_with_perl_extensions: %{!?_without_perl_extensions: %define _with_perl_extensions --with-perl-extensions}}
 
+# choose site arch by default
+%{!?_with_perl_site_arch: %{!?_with_perl_vendor_arch: %define _with_perl_site_arch --with-perl-site-arch}}
+
 %prep
 %setup  -q -n %{name}-%{version}
 
@@ -33,7 +36,11 @@ will most likely not work by default in a non-LLNL environment.
 %configure --program-prefix=%{?_program_prefix:%{_program_prefix}} \
     --with-perl-destdir="$RPM_BUILD_ROOT" \
     %{?_with_perl_extensions} \
-    %{?_without_perl_extensions}
+    %{?_without_perl_extensions} \
+    %{?_with_perl_site_arch} \
+    %{?_without_perl_site_arch} \
+    %{?_with_perl_vendor_arch} \
+    %{?_without_perl_vendor_arch}
 make 
 
 %install
@@ -45,7 +52,12 @@ DESTDIR="$RPM_BUILD_ROOT" make install
 %doc README ChangeLog COPYING NEWS DISCLAIMER DISCLAIMER.UC
 # It doesn't matter if the user chooses a 32bit or 64bit target.  The
 # packaging must work off whatever Perl is installed.
+%if %{?_with_perl_site_arch:1}%{!?_with_perl_site_arch:0}
 %define _perldir %(perl -e 'use Config; $T=$Config{installsitearch}; $P=$Config{siteprefix}; $T=~/$P\\/(.*)/; print "%{_prefix}/$1\\n"')
+%endif
+%if %{?_with_perl_vendor_arch:1}%{!?_with_perl_vendor_arch:0}
+%define _perldir %(perl -e 'use Config; $T=$Config{installvendorarch}; $P=$Config{vendorprefix}; $T=~/$P\\/(.*)/; print "%{_prefix}/$1\\n"')
+%endif
 %{_mandir}/man3/*
 %{_includedir}/*
 %{_libdir}/libgendersllnl.*

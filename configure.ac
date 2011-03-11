@@ -80,12 +80,28 @@ AC_PERL_DESTDIR
 AC_PERL_EXTENSIONS
 AM_CONDITIONAL(WITH_PERL_EXTENSIONS, [test "$ac_with_perl_extensions" = "yes"])
 
-
 #
 # Determine Perl section-3 man page extension
 #
 PERLMAN3EXT=`$PERL -MConfig -e 'print $Config{man3ext}'`
 AC_SUBST([PERLMAN3EXT])
+
+#
+# Determine Perl Install Location
+#
+AC_PERL_SITE_ARCH
+AC_PERL_VENDOR_ARCH
+if test "$ac_with_perl_site_arch" = yes && \
+   test "$ac_with_perl_vendor_arch" = yes ; then
+   AC_MSG_ERROR([cannot specify both perl site arch and vendor arch])
+elif test "$ac_with_perl_site_arch" = yes; then
+   PERL_ARCH_INSTALL=site
+elif test "$ac_with_perl_vendor_arch" = yes; then
+   PERL_ARCH_INSTALL=vendor
+else
+   PERL_ARCH_INSTALL=site
+fi
+AC_SUBST(PERL_ARCH_INSTALL)
 
 ##
 # Checks for typedefs, structures, and compiler characteristics.

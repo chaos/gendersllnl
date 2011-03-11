@@ -17,7 +17,7 @@ PERL_INC = "-I../../config -I$(srcdir)/../libgendersllnl @GENDERS_INCLUDEDIR@"
 
 PERL_LIBS = "-L../libgendersllnl/.libs -lgendersllnl @GENDERS_LIBDIR@ -lgenders"
 
-MAKEMAKERFLAGS = INSTALLDIRS=site \
+MAKEMAKERFLAGS = INSTALLDIRS=$(PERL_ARCH_INSTALL) \
 		 DESTDIR=$(PERL_DESTDIR) \
 		 PREFIX=$(prefix) \
 		 INC=$(PERL_INC) \
