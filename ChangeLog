@@ -3,6 +3,8 @@
 	* configure.ac: Change default install to vendorarch instead of
 	sitearch.
 
+	* gendersllnl.spec.in: Update for change appropriately.
+
 2011-03-14  Albert Chu  <chu11@llnl.gov>
 
 	* tagged gendersllnl-1-19-1
