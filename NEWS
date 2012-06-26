@@ -2,6 +2,10 @@ This file describes changes in recent versions of gendersllnl. It
 primarily documents those changes that are of interest to users and
 admins.
 
+Changes in gendersllnl-1.20-1
+=============================
+ -- By default install perl to vendorarch instead of sitearch.
+
 Changes in gendersllnl-1.19-1
 =============================
  -- Support --with-perl-vendor-arch and --with-perl-site-arch
