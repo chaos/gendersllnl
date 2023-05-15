@@ -17,7 +17,7 @@ input a Distfile which describes how and where files are to be installed.
 Rdist has been enhanced with some wrapper scripts to allow the lists of
 target nodes to come from genders.  The wrapper scripts scan the Distfile for
 references to specially formatted variables in which an attribute name has
-been embeded.  The special formats are:
+been embedded.  The special formats are:
 
      ${attr_xyz}
      ${cluster!attr_xyz}
@@ -372,7 +372,7 @@ To bring up a new cluster, the following tasks must be completed:
      modify dist2 to force rdist to use the kerberized rsh).  Rdist should
      already be installed on all the nodes.
   4.  Run the bootstrap script and dist2 -l on the repository node.
-  5.  Run dist2 on the respository node to update the other nodes.
+  5.  Run dist2 on the repository node to update the other nodes.
 
 Change Control
 

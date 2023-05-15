@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
                 why = WHY_DESTNEWER;
             }
 
-            /* src newer than dest: probably install; not neccessarily */
+            /* src newer than dest: probably install; not necessarily */
         } else if (sb_dst.st_mtime < sb_src.st_mtime) {
 
             /* compare binary files */
