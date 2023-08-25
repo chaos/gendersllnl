@@ -245,13 +245,13 @@ if (defined($main::opt_f)) {
 		get_all_packages(\@packages);
 	}
 
-	# read Distfiles for specified packages and retrive attributes and labels
+	# read Distfiles for specified packages and retrieve attributes and labels
 	if (!findattrs_pkg(\@packages, \@found_labels, \@attrpairs)) {
-		# a package doesn't have correspoding Distfile (function emits error)
+		# a package doesn't have corresponding Distfile (function emits error)
 		exit(1);
 	}
 
-	# did we ask for nonexistant labels?
+	# did we ask for nonexistent labels?
 	if (!verify_labels(\@want_labels, \@found_labels)) {
 		# label not found in Distfile scan (function emits error)
 		exit(1);
