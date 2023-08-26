@@ -1,0 +1,23 @@
+name: build CI
+
+on:
+  push:
+      branches: [ master ]
+  pull_request:
+      branches: [ master ]
+
+jobs:
+  build:
+      runs-on: ubuntu-22.04
+      steps:
+      - uses: actions/checkout@v2
+      - name: clone genders
+        run: git clone https://github.com/chaos/genders.git
+      - name: build genders
+        run: cd genders && ./configure --prefix=/usr && make
+      - name: install genders
+        run: cd genders && sudo make install
+      - name: configure
+        run: ./configure
+      - name: make
+        run: make
