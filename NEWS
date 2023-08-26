@@ -30,7 +30,7 @@ Changes in gendersllnl-1.17-1
 
 Changes in gendersllnl-1.16-1
 =============================
- -- Exit dist2 non-zero if rdist exitted non-zero.
+ -- Exit dist2 non-zero if rdist exited non-zero.
 
 Changes in gendersllnl-1.15-2
 =============================
@@ -42,7 +42,7 @@ Changes in gendersllnl-1.15-1
 
 Changes in gendersllnl-1.14-1
 =============================
-  -- Remove unnecessary "unitialized use" messages from Hostlist.pm.
+  -- Remove unnecessary "uninitialized use" messages from Hostlist.pm.
 
 Changes in gendersllnl-1.13-1
 =============================
