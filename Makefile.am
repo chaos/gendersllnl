@@ -8,4 +8,4 @@ DISTCHECK_CONFIGURE_FLAGS = --with-perl-destdir=$$dc_install_base
 
 SUBDIRS = src man dist compat
 
-EXTRA_DIST = META DISCLAIMER DISCLAIMER.UC gendersllnl.spec
+EXTRA_DIST = DISCLAIMER DISCLAIMER.UC gendersllnl.spec
