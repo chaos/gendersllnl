@@ -12,12 +12,12 @@
 #  was originally a part of the Genders package, but has now been
 #  split off into a separate package.  For details, see
 #  <http://www.llnl.gov/linux/genders/>.
-#  
+#
 #  Gendersllnl is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 2 of the License, or (at
 #  your option) any later version.
-#   
+#
 #  Gendersllnl is distributed in the hope that it will be useful, but
 #  WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -67,12 +67,12 @@ Libgendersllnl - Perl extension for libgendersllnl
 
  $handle->gender_get_cluster([$node])
  $handle->genders_getaltnodes([$attr, [$val]])
- $handle->genders_getaltnodes_preserve([$attr, [$val]])   
- 
+ $handle->genders_getaltnodes_preserve([$attr, [$val]])
+
  $handle->genders_isaltnode($altnode)
  $handle->genders_isnode_or_altnode($nodename)
 
- $handle->genders_to_gendname($altnode)   
+ $handle->genders_to_gendname($altnode)
  $handle->genders_to_gendname_preserve($altnode)
  $handle->genders_to_altname($node)
  $handle->genders_to_altname_preserve($node)
@@ -128,7 +128,7 @@ on error.
 
 =over 4
 
-=item B<$handle-E<gt>genders_to_gendname($altnode)>   
+=item B<$handle-E<gt>genders_to_gendname($altnode)>
 
 Converts the alternate node name to a genders node name.  If $altnode
 is not found, will return an error.  Returns undef on error.

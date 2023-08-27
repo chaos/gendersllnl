@@ -6,18 +6,18 @@
 #  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
 #  Written by Jim Garlick <garlick@llnl.gov> and Albert Chu <chu11@llnl.gov>.
 #  UCRL-CODE-2003-004.
-#  
+#
 #  This file is part of Gendersllnl, a cluster configuration database
 #  and rdist preprocessor for LLNL site specific needs.  This package
 #  was originally a part of the Genders package, but has now been
 #  split off into a separate package.  For details, see
 #  <http://www.llnl.gov/linux/genders/>.
-#  
+#
 #  Gendersllnl is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 2 of the License, or (at
 #  your option) any later version.
-#   
+#
 #  Gendersllnl is distributed in the hope that it will be useful, but
 #  WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -44,9 +44,9 @@ sub new {
     my $self = {};
     my $handle;
     my $rv;
-    
+
     $self->{$debugkey} = 0;
-    
+
     $handle = Libgendersllnl->genders_handle_create();
     if (!defined($handle)) {
         _errormsg($self, "genders_handle_create()");
@@ -59,7 +59,7 @@ sub new {
     if ($rv < 0) {
         _errormsg($self, "genders_load_data()");
         return undef;
-    } 
+    }
 
     bless ($self, $class);
     return $self;
@@ -109,13 +109,13 @@ sub getaltnodes_preserve {
     my $altnodes;
 
     if (ref($self)) {
-        $altnodes = $self->{$handlekey}->genders_getaltnodes_preserve($attr, 
+        $altnodes = $self->{$handlekey}->genders_getaltnodes_preserve($attr,
                                                                       $val);
         if (!defined($altnodes)) {
             _errormsg($self, "genders_getaltnodes_preserve()");
             return ();
         }
-        
+
         return @$altnodes;
     }
     else {
@@ -134,7 +134,7 @@ sub isaltnode {
             _errormsg($self, "genders_isaltnode()");
             return 0;
         }
-        return $rv; 
+        return $rv;
     }
     else {
         return 0;
@@ -152,7 +152,7 @@ sub isnode_or_altnode {
             _errormsg($self, "genders_isnode_or_altnode()");
             return 0;
         }
-        return $rv; 
+        return $rv;
     }
     else {
         return 0;
@@ -170,7 +170,7 @@ sub to_gendname {
             _errormsg($self, "genders_to_gendname()");
             return "";
         }
-        return $gendname; 
+        return $gendname;
     }
     else {
         return "";
@@ -188,7 +188,7 @@ sub to_gendname_preserve {
             _errormsg($self, "genders_to_gendname_preserve()");
             return "";
         }
-        return $gendname; 
+        return $gendname;
     }
     else {
         return "";
@@ -206,7 +206,7 @@ sub to_altname {
             _errormsg($self, "genders_to_altname()");
             return "";
         }
-        return $altname; 
+        return $altname;
     }
     else {
         return "";
@@ -224,7 +224,7 @@ sub to_altname_preserve {
             _errormsg($self, "genders_to_altname_preserve()");
             return "";
         }
-        return $altname; 
+        return $altname;
     }
     else {
         return "";
@@ -290,7 +290,7 @@ sub to_altnames {
             }
             push(@altnames, $altname);
         }
-        return @altnames; 
+        return @altnames;
     }
     else {
         return ();
@@ -312,7 +312,7 @@ sub to_altnames_preserve {
             }
             push(@altnames, $altname);
         }
-        return @altnames; 
+        return @altnames;
     }
     else {
         return ();
@@ -403,7 +403,7 @@ a genders node or an alternate node name, 0 if it is not.
 =item B<$obj-E<gt>to_gendname($altnode)>
 
 Returns the genders node name of the specified alternate node name.
-Returns an empty string if the alternate node name is not found in 
+Returns an empty string if the alternate node name is not found in
 the genders file.
 
 =item B<$obj-E<gt>to_gendname_preserve($altnode)>
@@ -415,7 +415,7 @@ genders file.
 =item B<$obj-E<gt>to_altname($node)>
 
 Returns the alternate node name of the specified genders node name.
-Returns an empty string if the genders node name is not found in 
+Returns an empty string if the genders node name is not found in
 the genders file.
 
 =item B<$obj-E<gt>to_altname_preserve($node)>
@@ -448,7 +448,7 @@ Returns a list of alternate node names for each genders node name
 listed in the specified list.  Preserves the genders node name if it
 is not found in the genders file.
 
-=back 
+=back
 
 =head1 AUTHOR
 

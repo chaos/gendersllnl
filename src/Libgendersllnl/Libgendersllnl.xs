@@ -12,12 +12,12 @@
  *  was originally a part of the Genders package, but has now been
  *  split off into a separate package.  For details, see
  *  <http://www.llnl.gov/linux/genders/>.
- *  
+ *
  *  Gendersllnl is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
  *  published by the Free Software Foundation; either version 2 of the
  *  License, or (at your option) any later version.
- *  
+ *
  *  Gendersllnl is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -36,52 +36,52 @@
 #include <genders.h>
 #include "gendersllnl.h"
 
-MODULE = Libgendersllnl         PACKAGE = Libgendersllnl                
+MODULE = Libgendersllnl         PACKAGE = Libgendersllnl
 
 PROTOTYPES: ENABLE
 
 SV *
 GENDERS_ALTNAME_ATTRIBUTE (sv=&PL_sv_undef)
-    SV *sv    
+    SV *sv
     CODE:
         RETVAL = newSVpv(GENDERS_ALTNAME_ATTRIBUTE, 0);
     OUTPUT:
-        RETVAL    
+        RETVAL
 
 SV *
 GENDERS_CLUSTER_ATTRIBUTE (sv=&PL_sv_undef)
-    SV *sv    
+    SV *sv
     CODE:
         RETVAL = newSVpv(GENDERS_CLUSTER_ATTRIBUTE, 0);
     OUTPUT:
-        RETVAL    
+        RETVAL
 
 SV *
 GENDERS_ALL_ATTRIBUTE (sv=&PL_sv_undef)
-    SV *sv    
+    SV *sv
     CODE:
         RETVAL = newSVpv(GENDERS_ALL_ATTRIBUTE, 0);
     OUTPUT:
-        RETVAL    
+        RETVAL
 
-SV * 
+SV *
 genders_get_cluster (handle, node=NULL)
     genders_t handle
-    char *node    
+    char *node
     PREINIT:
         int maxvallen;
         char *buf = NULL;
     CODE:
-        if ((maxvallen = genders_getmaxvallen(handle)) < 0) 
+        if ((maxvallen = genders_getmaxvallen(handle)) < 0)
             goto handle_error;
 
-        if (!(buf = (char *)malloc(maxvallen+1))) 
+        if (!(buf = (char *)malloc(maxvallen+1)))
             goto handle_error;
 
         memset(buf, '\0', maxvallen+1);
 
         if (genders_get_cluster(handle, node, buf, maxvallen + 1) < 0)
-            goto handle_error;            
+            goto handle_error;
 
         RETVAL = newSVpv(buf, 0);
         free(buf);
@@ -89,15 +89,15 @@ genders_get_cluster (handle, node=NULL)
 
         handle_error:
 
-            free(buf);    
-            XSRETURN_UNDEF;    
+            free(buf);
+            XSRETURN_UNDEF;
 
         the_end:
     OUTPUT:
-        RETVAL           
+        RETVAL
 
 AV *
-genders_getaltnodes (handle, attr=NULL, val=NULL)  
+genders_getaltnodes (handle, attr=NULL, val=NULL)
     genders_t handle
     char *attr
     char *val
@@ -121,11 +121,11 @@ genders_getaltnodes (handle, attr=NULL, val=NULL)
         goto the_end;
 
         handle_error:
-        
+
             errnum = genders_errnum(handle);
-           
+
             (void)genders_altnodelist_destroy(handle, altlist);
-        
+
             genders_set_errnum(handle, errnum);
 
             XSRETURN_UNDEF;
@@ -165,9 +165,9 @@ genders_getaltnodes_preserve (handle, attr=NULL, val=NULL)
         handle_error:
 
             errnum = genders_errnum(handle);
-           
+
             (void)genders_altnodelist_destroy(handle, altlist);
-        
+
             genders_set_errnum(handle, errnum);
 
             XSRETURN_UNDEF;
@@ -182,7 +182,7 @@ genders_isaltnode (handle, altnode)
     char *altnode
     CODE:
         RETVAL = genders_isaltnode(handle, altnode);
-    OUTPUT:    
+    OUTPUT:
         RETVAL
 
 int
@@ -191,13 +191,13 @@ genders_isnode_or_altnode (handle, nodename)
     char *nodename
     CODE:
         RETVAL = genders_isnode_or_altnode(handle, nodename);
-    OUTPUT:    
+    OUTPUT:
         RETVAL
 
 SV *
 genders_to_gendname (handle, altnode)
     genders_t handle
-    char *altnode    
+    char *altnode
     PREINIT:
         int maxnodelen;
         char *buf = NULL;
@@ -218,18 +218,18 @@ genders_to_gendname (handle, altnode)
         goto the_end;
 
         handle_error:
-        
-            free(buf);    
+
+            free(buf);
             XSRETURN_UNDEF;
 
         the_end:
     OUTPUT:
-        RETVAL        
+        RETVAL
 
 SV *
 genders_to_gendname_preserve (handle, altnode)
     genders_t handle
-    char *altnode    
+    char *altnode
     PREINIT:
         int maxnodelen;
         char *buf = NULL;
@@ -245,9 +245,9 @@ genders_to_gendname_preserve (handle, altnode)
 
         memset(buf, '\0', maxnodelen+1);
 
-        if (genders_to_gendname_preserve(handle, 
-                                         altnode, 
-                                         buf, 
+        if (genders_to_gendname_preserve(handle,
+                                         altnode,
+                                         buf,
                                          maxnodelen + 1) < 0)
             goto handle_error;
 
@@ -256,19 +256,19 @@ genders_to_gendname_preserve (handle, altnode)
         goto the_end;
 
         handle_error:
-        
-            free(buf);    
+
+            free(buf);
             XSRETURN_UNDEF;
 
         the_end:
     OUTPUT:
-        RETVAL        
+        RETVAL
 
 
 SV *
 genders_to_altname (handle, node)
     genders_t handle
-    char *node    
+    char *node
     PREINIT:
         int maxvallen;
         char *buf = NULL;
@@ -289,18 +289,18 @@ genders_to_altname (handle, node)
         goto the_end;
 
         handle_error:
-        
-            free(buf);    
+
+            free(buf);
             XSRETURN_UNDEF;
 
         the_end:
     OUTPUT:
-        RETVAL        
+        RETVAL
 
 SV *
 genders_to_altname_preserve (handle, node)
     genders_t handle
-    char *node    
+    char *node
     PREINIT:
         int maxvallen;
         char *buf = NULL;
@@ -316,7 +316,7 @@ genders_to_altname_preserve (handle, node)
 
         memset(buf, '\0', maxvallen+1);
 
-        if (genders_to_altname_preserve(handle, 
+        if (genders_to_altname_preserve(handle,
                                         node,
                                         buf,
                                         maxvallen + 1) < 0)
@@ -327,10 +327,10 @@ genders_to_altname_preserve (handle, node)
         goto the_end;
 
         handle_error:
-        
-            free(buf);    
+
+            free(buf);
             XSRETURN_UNDEF;
 
         the_end:
     OUTPUT:
-        RETVAL        
+        RETVAL
