@@ -12,12 +12,12 @@
  *  was originally a part of the Genders package, but has now been
  *  split off into a separate package.  For details, see
  *  <http://www.llnl.gov/linux/genders/>.
- *  
+ *
  *  Gendersllnl is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
  *  published by the Free Software Foundation; either version 2 of the
  *  License, or (at your option) any later version.
- *  
+ *
  *  Gendersllnl is distributed in the hope that it will be useful, but
  *  WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -29,21 +29,21 @@
 
 /*
  * install program with the following features
- * - if -q specified, we are verbose about installing, quiet about not 
+ * - if -q specified, we are verbose about installing, quiet about not
  *   installing (install command is probably @prefixed in Makefile)
  * - if dest exists and is older than source:
  *   -c  install only if a cmp fails
  *   -C  install only if a normalized diff fails
  * - if dest exists and is newer than source
  *   -f  force install (default is to abort)
- * 
+ *
  * Intended to be used in conjunction with rdist.  Files that are to be
  * rdisted should not be updated lightly as broadcasting an identical file
  * is costly and pointless.
- * 
+ *
  * This script was inst.pl, but perl startup was too slow when checking lots
  * of files.
- * 
+ *
  * Created 10/8/97 by Jim Garlick <garlick@llnl.gov>
  */
 
@@ -217,9 +217,9 @@ int main(int argc, char *argv[])
                     exit(1);
                 case 0:
                     /* cannot close stdout, cmp will fail if it cannot
-                     * write to stdout.  We must redirect instead.  
+                     * write to stdout.  We must redirect instead.
                      */
-                    if ((dev_null_fd = open(_PATH_DEV_NULL, O_RDWR)) < 0) { 
+                    if ((dev_null_fd = open(_PATH_DEV_NULL, O_RDWR)) < 0) {
                         perror("open");
                         exit(1);
                     }
@@ -247,7 +247,7 @@ int main(int argc, char *argv[])
                     /* cannot close stdout, diff will fail if it cannot
                      * write to stdout.  We must redirect instead.
                      */
-                    if ((dev_null_fd = open(_PATH_DEV_NULL, O_RDWR)) < 0) { 
+                    if ((dev_null_fd = open(_PATH_DEV_NULL, O_RDWR)) < 0) {
                         perror("open");
                         exit(1);
                     }

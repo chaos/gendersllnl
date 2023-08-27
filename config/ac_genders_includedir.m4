@@ -8,7 +8,7 @@ AC_DEFUN([AC_GENDERS_INCLUDEDIR],
 [
   AC_MSG_CHECKING(for --with-genders-includedir)
   AC_ARG_WITH(genders-includedir,
-     AS_HELP_STRING([--with-genders-includedir=path], 
+     AS_HELP_STRING([--with-genders-includedir=path],
                     [define directory for genders header file]),
      [ case "$withval" in
      yes)
