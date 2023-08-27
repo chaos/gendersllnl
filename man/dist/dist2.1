@@ -42,13 +42,13 @@ dist2 \- rdist wrapper
 .br
 .SH DESCRIPTION
 .B Dist2
-is a wrapper for USC 
+is a wrapper for USC
 .B rdist
 which adds a powerful macro capability based on the
 .I "genders file,"
 and abstracts a collection of Distfiles into an
 .I "rdist repository"
-made up of 
+made up of
 .I "packages"
 and
 .I "filesets."
@@ -62,13 +62,13 @@ VAR_DIST_IS_MOUNTED exists.
 specified on the command line.  If packages are specified, select
 Distfile.{package list}, otherwise Distfile.{all packages}.
 .IP
-3) Scan the Distfiles for macro references of the form ${attr_attrname} 
+3) Scan the Distfiles for macro references of the form ${attr_attrname}
 or ${attr_attrname=value} and
 prepend macro definitions based on the content of the genders file.
-In the example above, all nodes carrying the genders attribute 
+In the example above, all nodes carrying the genders attribute
 .I attrname
 or attribute and value
-.I attrname=value 
+.I attrname=value
 would be listed in the definition.
 .IP
 4) Send the resulting concatenation of Distfiles and macro definitions to
@@ -83,8 +83,8 @@ Node specification options are
 or
 .I -l.
 In the absence of these options,
-all nodes targeted by the preprocessed Distfile (potentially all nodes 
-appearing in the genders file) are updated.  
+all nodes targeted by the preprocessed Distfile (potentially all nodes
+appearing in the genders file) are updated.
 .LP
 Please see
 .B nodeattr(1)
@@ -103,64 +103,64 @@ command.
 similarly selects the set of nodes that have the specified genders attribute.
 .LP
 .I -l
-selects the local hostname (through genders).  
+selects the local hostname (through genders).
 .LP
 When the
 .I -l
 option is not used, the -x and -v options can be used to exclude a set of
-nodes.  
+nodes.
 The
 .I -x
 option can be used similarly to the
-.I -w 
+.I -w
 option to explicitly list a set of nodes to exclude.  The nodes should
 be specified as it appears in the genders file.  The
 .I -v
 option exclude nodes that
 .B whatsup(1)
-determines are down.  When both of the options are used, 
+determines are down.  When both of the options are used,
 .B dist2
-will first eliminate those nodes specified with the 
+will first eliminate those nodes specified with the
 .I -x
-option.  If 
+option.  If
 .B whatsup(1)
-is not installed, the 
-.I -v 
+is not installed, the
+.I -v
 option will fail.
 .LP
-When the -l option is specified, 
+When the -l option is specified,
 .B rdist
 will typically start the
 .B rdist
 server through a network connection, even though the server will run
 on the local machine.  In order to avoid this network connection, the
 .I -L
-option can be specified.  When the 
+option can be specified.  When the
 .I -L
 option is specified, each occurrence of the local hostname in the
 Distfiles is replaced with the string "localhost".  This forces
 .B rdist
-to run the 
+to run the
 .B rdist
-server locally in a shell. The 
+server locally in a shell. The
 .I -H
 option can be used to specify an alternate hostname to replace with
 the "localhost" string.
-The 
+The
 .I -L
-option can only be used when the 
-.I -l 
+option can only be used when the
+.I -l
 option is specified.  Similarly, the
 .I -H
-option can only be used when the 
-.I -l 
-and 
-.I -L 
+option can only be used when the
+.I -l
+and
+.I -L
 options are specified.
 .LP
 .I -i
 selects canonical hostnames (the left hand side of a genders file entry).
-The default on the SP is to convert these "initial_hostname" values to 
+The default on the SP is to convert these "initial_hostname" values to
 "reliable_hostname" via the SDR.  Elsewhere, the conversion is based on
 taking the value of an "altname" genders attribute, if any.  This option
 defeats this conversion.
@@ -169,22 +169,22 @@ The
 .I -o
 option can be used to pass options to
 .B rdist.
-The 
-.I -o 
+The
+.I -o
 option's arguments are identical to those specified in the
 .B rdist(1)
 manpage.
-The 
+The
 .I -V
 option can be used as shorthand to pass the "verify" option to rdist.
 .LP
-The 
-.I -P 
+The
+.I -P
 option can be used to pass an alternate transport program to rdist, so
 that rdist may use it rather than the default of
-.B rsh(1).  
-The 
-.I -P 
+.B rsh(1).
+The
+.I -P
 option's argument should be specified just as it is specified in the
 .B rdist
 manpage.  An alternate transport program can also be specified via the
@@ -195,11 +195,11 @@ is used for debugging Distfile problems.  When
 .B rdist
 reports a syntax error, it refers to line numbers in the preprocessed
 Distfile.  This option provides a means for the Distfile author to see
-the preprocessed version.  If 
-.I -n 
+the preprocessed version.  If
+.I -n
 is also specified, line numbers will be prepended to each line.
 .LP
-The 
+The
 .I -c
 option can be used to specify an alternate cluster to the one
 .B dist2
@@ -218,28 +218,28 @@ ${clustername!attr_attrname} or ${clustername!attr_attrname=value}.
 These definitions expand to empty lists on clusters other than the one
 specified.
 .LP
-Put another way, ${attr_attrname} refers to all nodes in all clusters with the 
+Put another way, ${attr_attrname} refers to all nodes in all clusters with the
 .I attrname
 attribute, ${attr_attrname=value} refers to all nodes in all clusters with
-the 
+the
 .I attrname
 attribute equal to
 .I value.
-${clustername!attr_attrname} only refers to the nodes in 
+${clustername!attr_attrname} only refers to the nodes in
 .I clustername
-with the 
+with the
 .I attrname
 attribute, and ${clustername!attr_attrname=value} only refers to the nodes in
 .I clustername
-with the 
+with the
 .I attrname
 attribute equal to
 .I value.
 .LP
-You can also substitute genders values using 
-.I ${attrval_[value]}.  
+You can also substitute genders values using
+.I ${attrval_[value]}.
 For instance
-.I ${attrval_cluster} 
+.I ${attrval_cluster}
 would substitute the name of the cluster that dist2 was running on.
 This can be very useful.  Take for example the following case...
 
@@ -248,11 +248,11 @@ genders/genders.${attrval_cluster} -> ${${attrval_cluster}!attr_all}
 
 The above example could be used to install a cluster specific genders
 file on any number of clusters.  This also make adding new clusters to
-your rdist scheme trivial as all you need to do is create a 
+your rdist scheme trivial as all you need to do is create a
 genders.[clustername] file.
 
 Note that trying to reference a genders attribute that either doesn't
-have an associated value or does not exist will cause processing of 
+have an associated value or does not exist will cause processing of
 that file to abort.  The dist2 script will however continue processing
 with the next file.
 
