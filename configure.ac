@@ -7,17 +7,16 @@
 ##
 # Prologue.
 ##
-AC_INIT([gendersllnl])
-AC_META
+AC_INIT([gendersllnl],[1.20.1])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([README])
-AC_CANONICAL_SYSTEM
+AC_CANONICAL_TARGET
 
 ##
 # Automake support.
 ##
-AM_INIT_AUTOMAKE($PROJECT, $VERSION)
-AM_CONFIG_HEADER([config/config.h])
+AM_INIT_AUTOMAKE([tar-ustar subdir-objects])
+AC_CONFIG_HEADERS([config/config.h])
 AM_MAINTAINER_MODE
 
 # Update this information before a public release only!
@@ -52,7 +51,7 @@ AC_SUBST([PERLGENDERSLLNL_VERSION])
 # Checks for programs.
 ##
 AC_PROG_CC
-AC_PROG_LIBTOOL
+LT_INIT
 AC_PROG_MAKE_SET
 AM_CONDITIONAL(WITH_GNU_LD, test "$with_gnu_ld" = "yes")
 AC_PATH_PROG(PERL, perl)

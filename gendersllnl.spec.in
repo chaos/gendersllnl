@@ -1,6 +1,6 @@
-Name:    @PROJECT@
+Name:    @PACKAGE@
 Version: @VERSION@
-Release: @RELEASE@
+Release: 1
 Summary: LLNL site specific genders libraries
 Group: System Environment/Base
 License: GPL
