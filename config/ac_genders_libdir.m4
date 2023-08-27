@@ -8,7 +8,7 @@ AC_DEFUN([AC_GENDERS_LIBDIR],
 [
   AC_MSG_CHECKING(for --with-genders-libdir)
   AC_ARG_WITH(genders-libdir,
-     AS_HELP_STRING([--with-genders-libdir=path], 
+     AS_HELP_STRING([--with-genders-libdir=path],
                     [define directory for genders library file]),
      [ case "$withval" in
      yes)

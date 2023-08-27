@@ -41,11 +41,11 @@ will most likely not work by default in a non-LLNL environment.
     %{?_without_perl_site_arch} \
     %{?_with_perl_vendor_arch} \
     %{?_without_perl_vendor_arch}
-make 
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-DESTDIR="$RPM_BUILD_ROOT" make install 
+DESTDIR="$RPM_BUILD_ROOT" make install
 
 %files
 %defattr(-,root,root)
