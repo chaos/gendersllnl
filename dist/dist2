@@ -12,7 +12,7 @@
 #  and rdist preprocessor for LLNL site specific needs.  This package
 #  was originally a part of the Genders package, but has now been
 #  split off into a separate package.  For details, see
-#  <http://www.llnl.gov/linux/genders/>.
+#  <https://github.com/chaos/gendersllnl>.
 #   
 #  Gendersllnl is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
