@@ -49,9 +49,9 @@ extern "C" {
  * Return 0 on success, -1 on error
  */
 int genders_get_cluster(genders_t handle,
-			const char *node,
+                        const char *node,
                         char *buf,
-			int buflen);
+                        int buflen);
 
 /*
  * genders_altnodelist_create
@@ -96,10 +96,10 @@ int genders_altnodelist_destroy(genders_t handle, char **altnodelist);
  * Returns number of matches on success, -1 on failure.
  */
 int genders_getaltnodes(genders_t handle,
-			char *altnodes[],
-			int len,
+                        char *altnodes[],
+                        int len,
                         const char *attr,
-			const char *val);
+                        const char *val);
 
 /*
  * genders_getaltnodes_preserve
@@ -117,10 +117,10 @@ int genders_getaltnodes(genders_t handle,
  * Returns number of matches on success, -1 on failure.
  */
 int genders_getaltnodes_preserve(genders_t handle,
-				 char *altnodes[],
-				 int len,
+                                 char *altnodes[],
+                                 int len,
                                  const char *attr,
-				 const char *val);
+                                 const char *val);
 
 /*
  * genders_isaltnode
@@ -151,9 +151,9 @@ int genders_isnode_or_altnode(genders_t handle, const char *nodename);
  * Returns 0 on success, -1 on failure
  */
 int genders_to_gendname(genders_t handle,
-			const char *altnode,
+                        const char *altnode,
                         char *buf,
-			int buflen);
+                        int buflen);
 
 /*
  * genders_to_gendname_preserve
@@ -165,9 +165,9 @@ int genders_to_gendname(genders_t handle,
  * Returns 0 on success, -1 on failure
  */
 int genders_to_gendname_preserve(genders_t handle,
-				 const char *altnode,
+                                 const char *altnode,
                                  char *buf,
-				 int buflen);
+                                 int buflen);
 
 /*
  * genders_to_altname
@@ -179,9 +179,9 @@ int genders_to_gendname_preserve(genders_t handle,
  * Returns 0 on success, -1 on failure
  */
 int genders_to_altname(genders_t handle,
-		       const char *node,
+                       const char *node,
                        char *buf,
-		       int buflen);
+                       int buflen);
 
 /*
  * genders_to_altname_preserve
@@ -193,9 +193,9 @@ int genders_to_altname(genders_t handle,
  * Returns 0 on success, -1 on failure
  */
 int genders_to_altname_preserve(genders_t handle,
-				const char *node,
+                                const char *node,
                                 char *buf,
-				int buflen);
+                                int buflen);
 
 /*
  * genders_string_to_gendnames
@@ -206,9 +206,9 @@ int genders_to_altname_preserve(genders_t handle,
  * Returns 0 on success, -1 on failure
  */
 int genders_string_to_gendnames(genders_t handle,
-				const char *str,
+                                const char *str,
                                 char *buf,
-				int buflen);
+                                int buflen);
 
 /*
  * genders_string_to_gendnames_preserve
@@ -219,9 +219,9 @@ int genders_string_to_gendnames(genders_t handle,
  * Returns 0 on success, -1 on failure
  */
 int genders_string_to_gendnames_preserve(genders_t handle,
-					 const char *str,
+                                         const char *str,
                                          char *buf,
-					 int buflen);
+                                         int buflen);
 
 /*
  * genders_string_to_altnames
@@ -232,9 +232,9 @@ int genders_string_to_gendnames_preserve(genders_t handle,
  * Returns 0 on success, -1 on failure
  */
 int genders_string_to_altnames(genders_t handle,
-			       const char *str,
+                               const char *str,
                                char *buf,
-			       int buflen);
+                               int buflen);
 
 /*
  * genders_string_to_altnames_preserve
@@ -245,9 +245,9 @@ int genders_string_to_altnames(genders_t handle,
  * Returns 0 on success, -1 on failure
  */
 int genders_string_to_altnames_preserve(genders_t handle,
-					const char *str,
+                                        const char *str,
                                         char *buf,
-					int buflen);
+                                        int buflen);
 
 #ifdef __cplusplus
 }
