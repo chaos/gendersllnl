@@ -274,6 +274,9 @@ _getaltnodes(genders_t handle,
   rv = numnodes;
 
  cleanup:
+  if (rv < 0 && errnum == GENDERS_ERR_SUCCESS)
+    errnum = genders_errnum(handle);
+
   free(buf);
   (void)genders_nodelist_destroy(handle, nodes);
   genders_set_errnum(handle, errnum); /* must be after genders_nodelist_destroy */
